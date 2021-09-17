@@ -4,7 +4,6 @@ using ApplicationRegistry.Application.QueryDecorators;
 using ApplicationRegistry.Application.Services;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
-using ApplicationRegistry.Database.DbContextExtensions;
 using ApplicationRegistry.Infrastructure;
 using ApplicationRegistry.Infrastructure.HangfireExtensions;
 using ApplicationRegistry.Web.Areas.Api.Models;
@@ -32,13 +31,12 @@ namespace ApplicationRegistry.Web
 
         private IWebHostEnvironment Env { get; }
 
-        private readonly bool _useSampleData;
+
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             Env = env;
-            _useSampleData = configuration.GetValue<bool>("UseSampleData", false);
         }
 
         public void ConfigureServices(IServiceCollection services)

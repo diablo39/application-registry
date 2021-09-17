@@ -1,14 +1,10 @@
 ﻿using ApplicationRegistry.Application.CommandHandlers;
 using ApplicationRegistry.Application.Commands;
-using ApplicationRegistry.Database;
-using ApplicationRegistry.Database.DbContextExtensions;
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Infrastructure.Abstractions.Scheduler;
 using ApplicationRegistry.UnitTests.TestInfrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,4 @@
-﻿using ApplicationRegistry.Database.DbContextExtensions;
-using ApplicationRegistry.Database.Entities;
-using ApplicationRegistry.Database.EntityConfigurators;
+﻿using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Entities;
 using ApplicationRegistry.Domain.Entities.Applications;
 using ApplicationRegistry.Domain.Entities.Network;
@@ -12,8 +10,6 @@ using ApplicationRegistry.Infrastructure.Properties;
 using ApplicationRegistry.Infrastructure.Repositories.Network;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace ApplicationRegistry.Database
 {
@@ -103,12 +99,6 @@ namespace ApplicationRegistry.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationRegistryDatabaseContext).Assembly);
-
-
-            foreach (var sampleDataProvider in _options.Extensions.OfType<ISampleDataProvider>())
-            {
-                sampleDataProvider.SeedSampleData(modelBuilder);
-            }
         }
     }
 }
