@@ -16,5 +16,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'valid-v-slot': 'off',
     'vue/valid-v-slot': 'off',
+    "@typescript-eslint/no-explicit-any": "off",
   }
 }
