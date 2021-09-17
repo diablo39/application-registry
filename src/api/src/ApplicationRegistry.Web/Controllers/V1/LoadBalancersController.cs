@@ -18,6 +18,29 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
     public class LoadBalancersController : ControllerBase
     {
         // GET: api/<ApplicationsController>
+        /*
+         {
+            "name": "test-lb",
+            "port": 443,
+            "description": "some description",
+            "ip-v4": "192.168.1.1",
+            "member-pools": [
+                {
+                    "name": "main pool",
+                    "description": "generated",
+                    "port": 80,
+                    "balancing": "round-robin",
+                    "monitor": "tcp",
+                    "members": [
+                        {
+                            "name": "my-host",
+                            "ip-v4": "10.168.152.25"
+                        }
+                    ]
+                }
+            ]
+        }
+        */
         [HttpGet]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<LoadBalancerListQuery, LoadBalancerListQueryResult> handler,
