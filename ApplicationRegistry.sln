@@ -14,8 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{D9446D45-4915-4118-8655-DB69CBE97E3F}"
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
-		global.json = global.json
-		Tasks.md = Tasks.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationRegistry.Application", "src\api\src\ApplicationRegistry.Application\ApplicationRegistry.Application.csproj", "{A27EB1E5-B9B1-4776-8EF7-2AF56935810A}"
