@@ -1,0 +1,1 @@
+dotnet ef migrations add -s ..\src\ApplicationRegistry.Web --context ApplicationRegistryDatabaseContext %1

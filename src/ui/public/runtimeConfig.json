@@ -1,0 +1,14 @@
+{
+  "authentication": {
+    "enabled": true,
+    "mode": "oidc",
+    "oidc": {
+      "authority": "https://dev-hdra111x.eu.auth0.com",
+      "client_id": "aYShM55OuISFiQVIBBIq3CdxHza66MzZ",
+      "redirect_uri": "http://localhost:10000/oidc/callback",
+      "response_type": "id_token token",
+      "scope": "openid profile",
+      "post_logout_redirect_uri": "https://localhost:10000/"
+    }
+  }
+}

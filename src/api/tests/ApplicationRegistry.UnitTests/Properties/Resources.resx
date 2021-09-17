@@ -1,0 +1,1711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Swagger_Yaml_Correct" xml:space="preserve">
+    <value>swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: BN.App.PSD2.Attack
+  contact:
+    email: "roman.glogowski@bankmillennium.pl"
+basePath: "/"
+consumes:
+- "application/json"
+schemes:
+- "https"
+tags: 
+- name: authentication
+- name: Partners
+paths:
+  /commands/start-authentication-process:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    post:
+      tags: [ authentication ]
+      summary: "Create new redirection URI"
+      description: |
+        Generates uri to APSPS where user should be redirected in order to authenticate and authorise.
+      operationId: "GetRedirectionUrl"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateRedirectionUriRequest"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/CreateRedirectUriResponse"
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /commands/process-temporary-credentials:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    post:
+      tags: [ authentication ]
+      summary: ""
+      description: ""
+      operationId: "ProcessTemporaryCredentials"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ProcessTemporaryCredentialsRequest"
+      responses:
+        200:
+          description: "Invalid input"
+          schema:
+            $ref: '#/definitions/ProcessTemporaryCredentialsResponse'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /state/{stateId}:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [ authentication ]
+      summary: ""
+      description: ""
+      operationId: "GetSavedState"
+      parameters:
+      - in: "path"
+        name: "stateId"
+        type: string
+        required: true
+      responses:
+        200:
+          description: "Saved state"
+          schema:
+            type: string     
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /partners:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [Partners]
+      operationId: "GetPartners"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Partner'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /partners/{id}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: id
+      in: path
+      required: true
+      type: integer
+      format: int64
+      description: id of the partner
+    get:
+      tags: [Partners]
+      operationId: "GetPartner"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Partner'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'  
+  
+  /partners/findByServiceType:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [Partners]
+      operationId: "GetPartnersByServiceType"
+      parameters:
+      - in: query
+        name: serviceType
+        type: string
+        required: true
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PartnerWithConsentDefinitionId'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'      
+  /consentDefinitions/{id}:
+    get:
+      tags: [ConsentDefinitions]
+      operationId: GetConsentDefinition
+      parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: id of the partner
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/ConsentDefinition'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse' 
+  /consentDefinitions/{id}/agreement:
+    get:
+      tags: [ConsentDefinitions]
+      operationId: GetConsentDefinitionAgreement
+      parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: id of the partner
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: string
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /ais/accounts:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: serviceType
+      in: query
+      type: string
+      required: true
+    - name: mode
+      type: string
+      in: query
+      required: true
+      enum:
+      - online
+      - offline
+      x-ms-enum: 
+        name: AisMode
+    - name: cif
+      in: query
+      type: string
+    - name: userId
+      in: query
+      type: string
+    - name: partnerId
+      type: integer
+      format: int64
+      in: query
+    get:
+      tags: [AIS]
+      operationId: "GetAccounts"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountListItem'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /ais/accounts/{number}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: number
+      in: path
+      required: true
+      type: string
+    get:
+      parameters:
+      - name: consentId
+        in: query
+        type: integer
+        format: int64
+        required: true
+      tags: [AIS]
+      operationId: "GetAccountDetails"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AccountDetails'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /ais/transactions/done:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [AIS]
+      description: |
+        requires cif or userid
+      operationId: "GetTransactionsDone" 
+      parameters:
+      - name: cif
+        type: string
+        in: query
+        required: false
+      - name: userId
+        type: string
+        in: query
+        required: false
+      - name: consentId
+        type: string
+        in: query
+        required: false
+      - name: startDate
+        type: string
+        format: date-time
+        in: query
+        required: true
+      - name: endDate
+        type: string
+        format: date-time
+        in: query
+        required: true
+      - name: account
+        type: string
+        in: query
+        required: false
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse' 
+  /ais/transactions/done/{id}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [AIS]
+      description: |
+        requires cif or userid
+      operationId: "GetTransactionsDoneDetails" 
+      parameters:
+      - name: id
+        type: string
+        in: path
+        required: true
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Transaction'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+parameters:
+  AuthorizationInputHeader:
+    name: Authorization
+    in: header
+    type: string
+    required: true
+  LanguageInputHeader:
+    name: Accept-Language
+    in: header
+    type: string
+    required: true
+
+responses:
+  DefaultErrorResponse:
+    description: |
+      Error occured. Supported http status codes:
+        * 400 - The request is malformed, such as if the body does not parse
+        * 401 - Unauthorized - When no or invalid authentication details are provided.
+        * 403 - Forbidden - When authentication succeeded but authenticated user doesn't have access to the resource
+        * 404 - Not Found - When a non-existent resource is requested
+        * 405 - Method Not Allowed - When an HTTP method is being requested that isn't allowed for the authenticated user
+        * 406 - Not Acceptable  - If incorrect accept header was provided as part of the request
+        * 410 - Gone - Indicates that the resource at this end point is no longer available. Useful as a blanket response for old API versions
+        * 415 - Unsupported Media Type - If incorrect content type was provided as part of the request
+        * 422 - Unprocessable Entity - Used for validation errors
+        * 429 - Too Many Requests - When a request is rejected due to rate limiting
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+
+definitions:
+  Partner:
+    type: object
+    required:
+    - Id
+    - Name
+    - Description
+    - CreateDate
+    - IsEnabled
+    - ConnectorName
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Name:
+        type: string
+      LogoUrl:
+        type: string
+      Description:
+        type: string
+      CreateDate:
+        type: string
+        format: datetime
+      IsEnabled:
+        type: boolean
+      ConnectorName:
+        type: string
+  PartnerWithConsentDefinitionId:
+    allOf:
+      - $ref: '#/definitions/Partner'
+      - type: object
+        properties:
+          consentDefinitionId:
+            type: string
+  CreateRedirectionUriRequest:
+    type: object
+    required:
+    - state
+    - cif
+    - redirectUri
+    - partnerId
+    - consentDefinitionId
+    properties:
+      cif:
+        type: string
+        description: cif of the user with leading 0
+      state:
+        type: string
+        description: |
+          When application that orders authorisation is stateless service application can store serialised state.
+        maxLength: 8000
+      redirectUri:
+        type: string
+        description: address where user should be redirected after authorisation in external partned is done
+      partnerId:
+        type: string
+        description: id of the partner / aspsp
+      consentDefinitionId:
+        type: integer
+        format: int64
+        description: type of the consent that will be used during authorisation
+          
+  CreateRedirectUriResponse:
+    type: object
+    properties:
+      redirectUri:
+        type: string
+      parameters:
+        type: object
+        additionalProperties:
+          type: string
+      httpMethod:
+        type: string
+        enum:
+          - POST
+          - GET
+
+  ProcessTemporaryCredentialsRequest:
+    type: object
+    required:
+    - partnerId
+    properties:
+      partnerId:
+        type: integer
+        format: int64
+      querystring_parameters:
+        type: object
+        additionalProperties:
+          type: string
+      header_parameters:
+        type: object
+        additionalProperties:
+          type: string
+      body:
+        type: string
+        
+  ProcessTemporaryCredentialsResponse:
+    type: object
+    required:
+    - credentials
+    - accounts
+    - redirectUri
+    - stateId
+    - result
+    properties:
+      credentials:
+        type: string
+      credentialsExpirationDate:
+        type: string
+        format: date-time
+      accounts:
+        type: array
+        items:
+          type: string
+      redirectUri:
+        type: string
+      stateId:
+        type: string
+      result:
+        type: string
+        enum:
+        - Success
+        - Failed    
+      errorMessage:
+        type: string
+        
+  ErrorResponse:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      errorDescription:
+        type: string
+      errorMessage:
+        type: string
+      httpStatusCode:
+        type: integer
+      errors:
+        type: array
+        items:
+          title: ErrorDetail
+          type: object
+          properties:
+            errorCode:
+              type: string
+            validationErrorField:
+              type: string
+            validationErrorMessage:
+              type: string    
+  ConsentDefinition:
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      PartnerId:
+        type: integer
+        format: int64
+      ConsentTypeCode:
+        type: string
+      ConsentDefinitionStatusCode:
+        type: string
+      ServiceTypeCode:
+        type: string
+      PSD2ServiceTypeCode:
+        type: string
+      CreateDate:
+        type: string
+        format: date-time
+      CreatedBy:
+        type: string
+  AccountListItem:
+    type: object    
+    required:
+      - accountNumber
+      - availableBalance
+      - bookingBalance
+      - currency
+      - accountType
+    properties:
+      accountNumber:
+        type: string
+        description: "Numer rachunku / Account number"
+      accountType:
+        type: string
+      accountTypeName:
+        type: string
+        maxLength: 32
+        description: "Nazwa typu rachunku (definiowana przez ASPSP) / Account's type name (defined by ASPSP)"
+      accountNameClient:
+        type: string
+        maxLength: 32
+        description: "Nazwa konta ustawiona przez klienta / Account name set by the client"
+      currency:
+        type: string
+        maxLength: 3
+        description: "Waluta rachunku / Currency"
+      availableBalance:
+        type: number
+        format: decimal
+        description: "Dostępne środki - po wykonaniu transakcji / Available funds"
+      bookingBalance:
+        type: number
+        format: decimal
+        description: "Saldo księgowe rachunku - po wykonaniu transakcji / Book balance of the account" 
+      consentId:
+        type: integer
+        format: int64
+        description: Id of the consent
+  AccountDetails:
+    type: object
+    required:
+      - accountNumber
+      - nameAddress
+      - availableBalance
+      - bookingBalance
+      - currency
+      - accountType
+      - accountHolderType
+    properties:
+      accountNumber:
+        type: string
+        description: "Numer rachunku / Account number"
+      nameAddress:
+        type: array
+        minItems: 1
+        maxItems: 4
+        items:
+          type: string
+          maxLength: 35
+      accountType:
+        type: string
+      accountTypeName:
+        type: string
+        maxLength: 32
+        description: "Nazwa typu rachunku (definiowana przez ASPSP) / Account's type name (defined by ASPSP)"
+      accountHolderType:
+        type: string
+        enum:
+          - individual
+          - corporation
+        description: "Rodzaj posiadacza rachunku: osoba fizyczna lub osoba prawna / Account holder type: individual person or corporation"
+      accountNameClient:
+        type: string
+        maxLength: 32
+        description: "Nazwa konta ustawiona przez klienta / Account name set by the client"
+      currency:
+        type: string
+        maxLength: 3
+        description: "Waluta rachunku / Currency"
+      availableBalance:
+        type: number
+        format: decimal
+        description: "Dostępne środki - po wykonaniu transakcji / Available funds"
+      bookingBalance:
+        type: number
+        format: decimal
+        description: "Saldo księgowe rachunku - po wykonaniu transakcji / Book balance of the account"
+      bank:
+        properties:
+          bicOrSwift:
+            type: string
+            maxLength: 8
+            description: "Numer BIC/SWIFT Banku / BIC/SWIFT number"
+          name:
+            type: string
+            maxLength: 70
+            description: "Nazwa Banku / Bank's name"
+          address:
+            type: array
+            minItems: 1
+            maxItems: 4
+            items:
+              type: string
+              maxLength: 35 
+      consentId:
+        type: integer
+        format: int64
+        description: Id of the consent
+
+  Transaction:
+    type: object
+    properties:
+      Id:
+        type: string
+      Account:
+        type: string
+      ConsentId:
+        type: number
+        format: int64
+      Cif:
+        type: string
+      UserId:
+        type: string
+      PartnerId:
+        type: number
+        format: int64
+      IsEOF:
+        type: boolean
+      ItemId:
+        type: string
+      Amount:
+        type: number
+        format: decimal
+      Currency:
+        type: string
+      Description:
+        type: string
+      TransactionType:
+        type: string
+      TradeDate:
+        type: string
+        format: date-time
+      MMC:
+        type: string
+      TransactionCategory :
+        type: string
+        enum:
+        - DEBIT
+        - CREDIT
+      TransactionStatusCode:
+        type: string
+      TransactionStatusDescription:
+        type: string
+      BookingDate:
+        type: string
+        format: date-time
+      PostTransactionBalance:
+        type: string
+      BaseCurrency:
+        type: string
+      AmountBaseCurrency:
+        type: string
+      UsedPaymentInstrumentId:
+        type: string
+      TppTransactionId:
+        type: string
+      TppName:
+        type: string
+      RejectionReason:
+        type: string
+      HoldExpirationDate:
+        type: string
+        format: date-time
+      CurrencyDate:
+        type: string
+        format: date-time
+
+      Sender:
+        "$ref": "#/definitions/TransactionParty"
+      TransactionParty Recipient:
+        "$ref": "#/definitions/TransactionParty"
+      TransactionRate:
+        type: array
+        items:
+          "$ref": "#/definitions/TransactionRate"
+      ZusInfo:
+        "$ref": "#/definitions/ZusInfo"
+      UsInfo:
+        "$ref": "#/definitions/UsInfo"
+      CardInfo:
+        "$ref": "#/definitions/CardInfo"
+      Initiator:
+        type: array
+        items:
+          type: string
+
+
+  TransactionParty:
+    type: object
+    properties:
+      AccountNumber:
+        type: string
+      AccountMassPayment:
+        type: string
+      Bank:
+        "$ref": "#/definitions/BankInfo"
+      NameAddress:
+        type: array
+        items:
+          type: string
+
+  BankInfo:
+    type: object
+    properties:
+      BicOrSwift:
+        type: string
+      Name:
+        type: string
+      Code:
+        type: string
+      CountryCode:
+        type: string
+      Address:
+        type: string
+
+  ZusInfo:
+    type: object
+    properties:
+      Nip:
+        type: string
+      AdditionalPayorId:
+        type: string
+      AdditionalPayorIdType:
+        type: string
+      ContributionType:
+        type: string
+      ContributionId:
+        type: string
+      ContributionPeriod:
+        type: string
+      PaymentTypeId:
+        type: string
+      ObligationId:
+        type: string
+
+  UsInfo: 
+    type: object
+    properties:
+      PayorId:
+        type: string
+      PayorIdType:
+        type: string
+      FormCode:
+        type: string
+      PeriodId:
+        type: string
+      PeriodType:
+        type: string
+      Year:
+        type: string
+      ObligationId:
+        type: string
+
+  CardInfo:
+    type: object
+    properties:
+      CardHolder:
+        type: string
+      CardNumber:
+        type: string
+
+  TransactionRate:
+    type: object 
+    properties:
+      Rate:
+        type: number
+        format: decimal
+      FromCurrency:
+        type: string
+      ToCurrency:
+        type: string</value>
+  </data>
+  <data name="Swagger_Yaml_Invalid" xml:space="preserve">
+    <value>swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: BN.App.PSD2.Attack
+  contact:
+    email: "roman.glogowski@bankmillennium.pl"
+basePath: "/"
+fdsfds
+consumes:
+- "application/json"
+schemes:
+- "https"
+tags: 
+- name: authentication
+- name: Partners
+paths:
+  /commands/start-authentication-process:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    post:
+      tags: [ authentication ]
+      summary: "Create new redirection URI"
+      description: |
+        Generates uri to APSPS where user should be redirected in order to authenticate and authorise.
+      operationId: "GetRedirectionUrl"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateRedirectionUriRequest"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/CreateRedirectUriResponse"
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /commands/process-temporary-credentials:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    post:
+      tags: [ authentication ]
+      summary: ""
+      description: ""
+      operationId: "ProcessTemporaryCredentials"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/ProcessTemporaryCredentialsRequest"
+      responses:
+        200:
+          description: "Invalid input"
+          schema:
+            $ref: '#/definitions/ProcessTemporaryCredentialsResponse'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /state/{stateId}:
+    parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [ authentication ]
+      summary: ""
+      description: ""
+      operationId: "GetSavedState"
+      parameters:
+      - in: "path"
+        name: "stateId"
+        type: string
+        required: true
+      responses:
+        200:
+          description: "Saved state"
+          schema:
+            type: string     
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /partners:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [Partners]
+      operationId: "GetPartners"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Partner'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /partners/{id}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: id
+      in: path
+      required: true
+      type: integer
+      format: int64
+      description: id of the partner
+    get:
+      tags: [Partners]
+      operationId: "GetPartner"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Partner'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'  
+  
+  /partners/findByServiceType:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [Partners]
+      operationId: "GetPartnersByServiceType"
+      parameters:
+      - in: query
+        name: serviceType
+        type: string
+        required: true
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PartnerWithConsentDefinitionId'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'      
+  /consentDefinitions/{id}:
+    get:
+      tags: [ConsentDefinitions]
+      operationId: GetConsentDefinition
+      parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: id of the partner
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/ConsentDefinition'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse' 
+  /consentDefinitions/{id}/agreement:
+    get:
+      tags: [ConsentDefinitions]
+      operationId: GetConsentDefinitionAgreement
+      parameters:
+      - $ref: '#/parameters/AuthorizationInputHeader'
+      - $ref: '#/parameters/LanguageInputHeader'
+      - name: id
+        in: path
+        required: true
+        type: integer
+        format: int64
+        description: id of the partner
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: string
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /ais/accounts:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: serviceType
+      in: query
+      type: string
+      required: true
+    - name: mode
+      type: string
+      in: query
+      required: true
+      enum:
+      - online
+      - offline
+      x-ms-enum: 
+        name: AisMode
+    - name: cif
+      in: query
+      type: string
+    - name: userId
+      in: query
+      type: string
+    - name: partnerId
+      type: integer
+      format: int64
+      in: query
+    get:
+      tags: [AIS]
+      operationId: "GetAccounts"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountListItem'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+  /ais/accounts/{number}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    - name: number
+      in: path
+      required: true
+      type: string
+    get:
+      parameters:
+      - name: consentId
+        in: query
+        type: integer
+        format: int64
+        required: true
+      tags: [AIS]
+      operationId: "GetAccountDetails"
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/AccountDetails'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+
+  /ais/transactions/done:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [AIS]
+      description: |
+        requires cif or userid
+      operationId: "GetTransactionsDone" 
+      parameters:
+      - name: cif
+        type: string
+        in: query
+        required: false
+      - name: userId
+        type: string
+        in: query
+        required: false
+      - name: consentId
+        type: string
+        in: query
+        required: false
+      - name: startDate
+        type: string
+        format: date-time
+        in: query
+        required: true
+      - name: endDate
+        type: string
+        format: date-time
+        in: query
+        required: true
+      - name: account
+        type: string
+        in: query
+        required: false
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse' 
+  /ais/transactions/done/{id}:
+    parameters:
+    - $ref: '#/parameters/AuthorizationInputHeader'
+    - $ref: '#/parameters/LanguageInputHeader'
+    get:
+      tags: [AIS]
+      description: |
+        requires cif or userid
+      operationId: "GetTransactionsDoneDetails" 
+      parameters:
+      - name: id
+        type: string
+        in: path
+        required: true
+      responses: 
+        200:
+          description: "OK"
+          schema:
+            $ref: '#/definitions/Transaction'
+        'default':
+          $ref: '#/responses/DefaultErrorResponse'
+parameters:
+  AuthorizationInputHeader:
+    name: Authorization
+    in: header
+    type: string
+    required: true
+  LanguageInputHeader:
+    name: Accept-Language
+    in: header
+    type: string
+    required: true
+
+responses:
+  DefaultErrorResponse:
+    description: |
+      Error occured. Supported http status codes:
+        * 400 - The request is malformed, such as if the body does not parse
+        * 401 - Unauthorized - When no or invalid authentication details are provided.
+        * 403 - Forbidden - When authentication succeeded but authenticated user doesn't have access to the resource
+        * 404 - Not Found - When a non-existent resource is requested
+        * 405 - Method Not Allowed - When an HTTP method is being requested that isn't allowed for the authenticated user
+        * 406 - Not Acceptable  - If incorrect accept header was provided as part of the request
+        * 410 - Gone - Indicates that the resource at this end point is no longer available. Useful as a blanket response for old API versions
+        * 415 - Unsupported Media Type - If incorrect content type was provided as part of the request
+        * 422 - Unprocessable Entity - Used for validation errors
+        * 429 - Too Many Requests - When a request is rejected due to rate limiting
+    schema:
+      $ref: '#/definitions/ErrorResponse'
+
+definitions:
+  Partner:
+    type: object
+    required:
+    - Id
+    - Name
+    - Description
+    - CreateDate
+    - IsEnabled
+    - ConnectorName
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Name:
+        type: string
+      LogoUrl:
+        type: string
+      Description:
+        type: string
+      CreateDate:
+        type: string
+        format: datetime
+      IsEnabled:
+        type: boolean
+      ConnectorName:
+        type: string
+  PartnerWithConsentDefinitionId:
+    allOf:
+      - $ref: '#/definitions/Partner'
+      - type: object
+        properties:
+          consentDefinitionId:
+            type: string
+  CreateRedirectionUriRequest:
+    type: object
+    required:
+    - state
+    - cif
+    - redirectUri
+    - partnerId
+    - consentDefinitionId
+    properties:
+      cif:
+        type: string
+        description: cif of the user with leading 0
+      state:
+        type: string
+        description: |
+          When application that orders authorisation is stateless service application can store serialised state.
+        maxLength: 8000
+      redirectUri:
+        type: string
+        description: address where user should be redirected after authorisation in external partned is done
+      partnerId:
+        type: string
+        description: id of the partner / aspsp
+      consentDefinitionId:
+        type: integer
+        format: int64
+        description: type of the consent that will be used during authorisation
+          
+  CreateRedirectUriResponse:
+    type: object
+    properties:
+      redirectUri:
+        type: string
+      parameters:
+        type: object
+        additionalProperties:
+          type: string
+      httpMethod:
+        type: string
+        enum:
+          - POST
+          - GET
+
+  ProcessTemporaryCredentialsRequest:
+    type: object
+    required:
+    - partnerId
+    properties:
+      partnerId:
+        type: integer
+        format: int64
+      querystring_parameters:
+        type: object
+        additionalProperties:
+          type: string
+      header_parameters:
+        type: object
+        additionalProperties:
+          type: string
+      body:
+        type: string
+        
+  ProcessTemporaryCredentialsResponse:
+    type: object
+    required:
+    - credentials
+    - accounts
+    - redirectUri
+    - stateId
+    - result
+    properties:
+      credentials:
+        type: string
+      credentialsExpirationDate:
+        type: string
+        format: date-time
+      accounts:
+        type: array
+        items:
+          type: string
+      redirectUri:
+        type: string
+      stateId:
+        type: string
+      result:
+        type: string
+        enum:
+        - Success
+        - Failed    
+      errorMessage:
+        type: string
+        
+  ErrorResponse:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      errorDescription:
+        type: string
+      errorMessage:
+        type: string
+      httpStatusCode:
+        type: integer
+      errors:
+        type: array
+        items:
+          title: ErrorDetail
+          type: object
+          properties:
+            errorCode:
+              type: string
+            validationErrorField:
+              type: string
+            validationErrorMessage:
+              type: string    
+  ConsentDefinition:
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      PartnerId:
+        type: integer
+        format: int64
+      ConsentTypeCode:
+        type: string
+      ConsentDefinitionStatusCode:
+        type: string
+      ServiceTypeCode:
+        type: string
+      PSD2ServiceTypeCode:
+        type: string
+      CreateDate:
+        type: string
+        format: date-time
+      CreatedBy:
+        type: string
+  AccountListItem:
+    type: object    
+    required:
+      - accountNumber
+      - availableBalance
+      - bookingBalance
+      - currency
+      - accountType
+    properties:
+      accountNumber:
+        type: string
+        description: "Numer rachunku / Account number"
+      accountType:
+        type: string
+      accountTypeName:
+        type: string
+        maxLength: 32
+        description: "Nazwa typu rachunku (definiowana przez ASPSP) / Account's type name (defined by ASPSP)"
+      accountNameClient:
+        type: string
+        maxLength: 32
+        description: "Nazwa konta ustawiona przez klienta / Account name set by the client"
+      currency:
+        type: string
+        maxLength: 3
+        description: "Waluta rachunku / Currency"
+      availableBalance:
+        type: number
+        format: decimal
+        description: "Dostępne środki - po wykonaniu transakcji / Available funds"
+      bookingBalance:
+        type: number
+        format: decimal
+        description: "Saldo księgowe rachunku - po wykonaniu transakcji / Book balance of the account" 
+      consentId:
+        type: integer
+        format: int64
+        description: Id of the consent
+  AccountDetails:
+    type: object
+    required:
+      - accountNumber
+      - nameAddress
+      - availableBalance
+      - bookingBalance
+      - currency
+      - accountType
+      - accountHolderType
+    properties:
+      accountNumber:
+        type: string
+        description: "Numer rachunku / Account number"
+      nameAddress:
+        type: array
+        minItems: 1
+        maxItems: 4
+        items:
+          type: string
+          maxLength: 35
+      accountType:
+        type: string
+      accountTypeName:
+        type: string
+        maxLength: 32
+        description: "Nazwa typu rachunku (definiowana przez ASPSP) / Account's type name (defined by ASPSP)"
+      accountHolderType:
+        type: string
+        enum:
+          - individual
+          - corporation
+        description: "Rodzaj posiadacza rachunku: osoba fizyczna lub osoba prawna / Account holder type: individual person or corporation"
+      accountNameClient:
+        type: string
+        maxLength: 32
+        description: "Nazwa konta ustawiona przez klienta / Account name set by the client"
+      currency:
+        type: string
+        maxLength: 3
+        description: "Waluta rachunku / Currency"
+      availableBalance:
+        type: number
+        format: decimal
+        description: "Dostępne środki - po wykonaniu transakcji / Available funds"
+      bookingBalance:
+        type: number
+        format: decimal
+        description: "Saldo księgowe rachunku - po wykonaniu transakcji / Book balance of the account"
+      bank:
+        properties:
+          bicOrSwift:
+            type: string
+            maxLength: 8
+            description: "Numer BIC/SWIFT Banku / BIC/SWIFT number"
+          name:
+            type: string
+            maxLength: 70
+            description: "Nazwa Banku / Bank's name"
+          address:
+            type: array
+            minItems: 1
+            maxItems: 4
+            items:
+              type: string
+              maxLength: 35 
+      consentId:
+        type: integer
+        format: int64
+        description: Id of the consent
+
+  Transaction:
+    type: object
+    properties:
+      Id:
+        type: string
+      Account:
+        type: string
+      ConsentId:
+        type: number
+        format: int64
+      Cif:
+        type: string
+      UserId:
+        type: string
+      PartnerId:
+        type: number
+        format: int64
+      IsEOF:
+        type: boolean
+      ItemId:
+        type: string
+      Amount:
+        type: number
+        format: decimal
+      Currency:
+        type: string
+      Description:
+        type: string
+      TransactionType:
+        type: string
+      TradeDate:
+        type: string
+        format: date-time
+      MMC:
+        type: string
+      TransactionCategory :
+        type: string
+        enum:
+        - DEBIT
+        - CREDIT
+      TransactionStatusCode:
+        type: string
+      TransactionStatusDescription:
+        type: string
+      BookingDate:
+        type: string
+        format: date-time
+      PostTransactionBalance:
+        type: string
+      BaseCurrency:
+        type: string
+      AmountBaseCurrency:
+        type: string
+      UsedPaymentInstrumentId:
+        type: string
+      TppTransactionId:
+        type: string
+      TppName:
+        type: string
+      RejectionReason:
+        type: string
+      HoldExpirationDate:
+        type: string
+        format: date-time
+      CurrencyDate:
+        type: string
+        format: date-time
+
+      Sender:
+        "$ref": "#/definitions/TransactionParty"
+      TransactionParty Recipient:
+        "$ref": "#/definitions/TransactionParty"
+      TransactionRate:
+        type: array
+        items:
+          "$ref": "#/definitions/TransactionRate"
+      ZusInfo:
+        "$ref": "#/definitions/ZusInfo"
+      UsInfo:
+        "$ref": "#/definitions/UsInfo"
+      CardInfo:
+        "$ref": "#/definitions/CardInfo"
+      Initiator:
+        type: array
+        items:
+          type: string
+
+
+  TransactionParty:
+    type: object
+    properties:
+      AccountNumber:
+        type: string
+      AccountMassPayment:
+        type: string
+      Bank:
+        "$ref": "#/definitions/BankInfo"
+      NameAddress:
+        type: array
+        items:
+          type: string
+
+  BankInfo:
+    type: object
+    properties:
+      BicOrSwift:
+        type: string
+      Name:
+        type: string
+      Code:
+        type: string
+      CountryCode:
+        type: string
+      Address:
+        type: string
+
+  ZusInfo:
+    type: object
+    properties:
+      Nip:
+        type: string
+      AdditionalPayorId:
+        type: string
+      AdditionalPayorIdType:
+        type: string
+      ContributionType:
+        type: string
+      ContributionId:
+        type: string
+      ContributionPeriod:
+        type: string
+      PaymentTypeId:
+        type: string
+      ObligationId:
+        type: string
+
+  UsInfo: 
+    type: object
+    properties:
+      PayorId:
+        type: string
+      PayorIdType:
+        type: string
+      FormCode:
+        type: string
+      PeriodId:
+        type: string
+      PeriodType:
+        type: string
+      Year:
+        type: string
+      ObligationId:
+        type: string
+
+  CardInfo:
+    type: object
+    properties:
+      CardHolder:
+        type: string
+      CardNumber:
+        type: string
+
+  TransactionRate:
+    type: object 
+    properties:
+      Rate:
+        type: number
+        format: decimal
+      FromCurrency:
+        type: string
+      ToCurrency:
+        type: string</value>
+  </data>
+</root>

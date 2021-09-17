@@ -1,0 +1,55 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+  tags:
+    include:
+    - '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  apiImageName: 'diablo39/ApplicationRegistry-API'
+  uiImageName: 'diablo39/ApplicationRegistry-UI'
+  gatewayImageName: 'diablo39/ApplicationRegistry-GATEWAY'
+steps:
+
+- task: Docker@2
+  displayName: Build and publish an image for API
+  inputs:
+    containerRegistry: 'dockerHub'
+    repository: $(apiImageName)
+    tags: |
+        $(Build.SourceBranchName)
+        latest
+    command: buildAndPush
+    Dockerfile: src/api/src/ApplicationRegistry.Web/Dockerfile
+    buildContext: .
+
+- task: Docker@2
+  displayName: Build and publish an image for UI
+  inputs:
+    containerRegistry: 'dockerHub'
+    repository: $(uiImageName)
+    tags: |
+        $(Build.SourceBranchName)
+        latest
+    command: buildAndPush
+    Dockerfile: src/ui/Dockerfile
+    buildContext: src/ui
+
+- task: Docker@2
+  displayName: Build and publish an image for Gateway
+  inputs:
+    containerRegistry: 'dockerHub'
+    repository: $(gatewayImageName)
+    tags: |
+        $(Build.SourceBranchName)
+        latest
+    command: buildAndPush
+    Dockerfile: src/gateway/Dockerfile
+    buildContext: src/gateway
