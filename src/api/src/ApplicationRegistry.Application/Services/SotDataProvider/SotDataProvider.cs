@@ -26,7 +26,7 @@ namespace ApplicationRegistry.Application.Services
         private readonly IOptions<SotDataProviderConfiguration> _configuration;
 
 
-        private bool disposedValue;
+        private bool _disposedValue;
 
 
         private readonly ILogger<SotDataProvider> _logger;
@@ -206,7 +206,7 @@ namespace ApplicationRegistry.Application.Services
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposedValue)
             {
                 if (disposing)
                 {
@@ -216,7 +216,7 @@ namespace ApplicationRegistry.Application.Services
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
                 // TODO: set large fields to null
-                disposedValue = true;
+                _disposedValue = true;
             }
         }
 
