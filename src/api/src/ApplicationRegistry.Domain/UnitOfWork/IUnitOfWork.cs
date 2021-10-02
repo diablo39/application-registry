@@ -63,11 +63,12 @@ namespace ApplicationRegistry.Database
 
         #region Network
         DbSet<LoadBalancerEntity> LoadBalancers { get; }
+        DbSet<VlanEntity> Vlans { get; }
 
         #endregion
     }
 
-    public interface IUnitOfWork: IQueryDataModel
+    public interface IUnitOfWork : IQueryDataModel
     {
         IApplicationsRepository ApplicationsRepository { get; }
 
@@ -78,6 +79,8 @@ namespace ApplicationRegistry.Database
         IProjectsRepository ProjectsRepository { get; }
 
         ILoadBalancerRepository LoadBalancerRepository { get; }
+
+        IVlanRepository VlanRepository { get; }
 
         void FixApplicationVersion(Guid applicationId);
 
@@ -105,36 +108,32 @@ namespace ApplicationRegistry.Database
         //     This can be disabled via Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.AutoDetectChangesEnabled.
         int SaveChanges();
 
-        //
-        // Summary:
-        //     Asynchronously saves all changes made in this context to the database.
-        //
-        // Parameters:
-        //   cancellationToken:
-        //     A System.Threading.CancellationToken to observe while waiting for the task to
-        //     complete.
-        //
-        // Returns:
-        //     A task that represents the asynchronous save operation. The task result contains
-        //     the number of state entries written to the database.
-        //
-        // Exceptions:
-        //   T:Microsoft.EntityFrameworkCore.DbUpdateException:
-        //     An error is encountered while saving to the database.
-        //
-        //   T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException:
-        //     A concurrency violation is encountered while saving to the database. A concurrency
-        //     violation occurs when an unexpected number of rows are affected during save.
-        //     This is usually because the data in the database has been modified since it was
-        //     loaded into memory.
-        //
-        // Remarks:
-        //     This method will automatically call Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges
-        //     to discover any changes to entity instances before saving to the underlying database.
-        //     This can be disabled via Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.AutoDetectChangesEnabled.
-        //     Multiple active operations on the same context instance are not supported. Use
-        //     'await' to ensure that any asynchronous operations have completed before calling
-        //     another method on this context.
+        /// <summary>
+        ///     Asynchronously saves all changes made in this context to the database.
+        /// </summary>
+        /// <param name="cancellationToken">
+        ///     A System.Threading.CancellationToken to observe while waiting for the task to complete.</param>
+        /// <returns>
+        ///     A task that represents the asynchronous save operation. The task result contains
+        ///     the number of state entries written to the database.
+        /// </returns>
+        /// <remarks>
+        ///     This method will automatically call Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges
+        ///     to discover any changes to entity instances before saving to the underlying database.
+        ///     This can be disabled via Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.AutoDetectChangesEnabled.
+        ///     Multiple active operations on the same context instance are not supported. Use
+        ///     'await' to ensure that any asynchronous operations have completed before calling
+        ///     another method on this context.
+        /// </remarks>
+        /// <exception cref="Microsoft.EntityFrameworkCore.DbUpdateException">
+        ///     An error is encountered while saving to the database
+        /// </exception>
+        /// <exception cref="Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException">
+        ///     A concurrency violation is encountered while saving to the database. A concurrency
+        ///     violation occurs when an unexpected number of rows are affected during save.
+        ///     This is usually because the data in the database has been modified since it was
+        ///     loaded into memory.
+        /// </exception>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     }

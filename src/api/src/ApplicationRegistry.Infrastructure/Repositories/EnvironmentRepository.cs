@@ -1,6 +1,7 @@
 ﻿using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Persistency;
+using ApplicationRegistry.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

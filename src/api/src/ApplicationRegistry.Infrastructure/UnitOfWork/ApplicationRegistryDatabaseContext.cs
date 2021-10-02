@@ -1,22 +1,17 @@
-﻿using ApplicationRegistry.Database.Entities;
+﻿using ApplicationRegistry.Database;
+using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Entities;
 using ApplicationRegistry.Domain.Entities.Applications;
 using ApplicationRegistry.Domain.Entities.Network;
 using ApplicationRegistry.Domain.Entities.Redis;
-using ApplicationRegistry.Domain.Persistency;
-using ApplicationRegistry.Domain.Repositories.Network;
-using ApplicationRegistry.Infrastructure.Domain.Persistency;
 using ApplicationRegistry.Infrastructure.Properties;
-using ApplicationRegistry.Infrastructure.Repositories.Network;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace ApplicationRegistry.Database
+namespace ApplicationRegistry.Infrastructure.UnitOfWork
 {
-    public class ApplicationRegistryDatabaseContext : DbContext, IUnitOfWork, IQueryDataModel
+    public partial class ApplicationRegistryDatabaseContext : DbContext, IUnitOfWork, IQueryDataModel
     {
-        private readonly DbContextOptions<ApplicationRegistryDatabaseContext> _options;
-
         public DbSet<ApplicationEntity> Applications { get; set; }
 
         public DbSet<ApplicationVersionDependencyEntity> ApplicationVersionDependencies { get; set; }
@@ -41,17 +36,10 @@ namespace ApplicationRegistry.Database
 
         public DbSet<NugetPackageEntity> NugetPackages { get; set; }
 
-        public IApplicationsRepository ApplicationsRepository => new ApplicationsRepository(this);
-
-        public IEnvironmentRepository EnvironmentsRepository => new EnvironmentRepository(this);
-
-        public IProjectsRepository ProjectsRepository => new ProjectsRepository(this);
-
-        public INugetPackageRepository NugetPackageRepository => new NugetPackageRepository(this);
-
         public DbSet<ApplicationVersionNugetPackageDependency> ApplicationVersionNugetDependencies { get; set; }
 
         public DbSet<EndpointDependencies> EndpointDependencies { get; set; }
+
         public DbSet<CollectorLogEntity> CollectorLogs { get; set; }
 
         public DbSet<RedisEntity> Redis { get; set; }
@@ -62,14 +50,14 @@ namespace ApplicationRegistry.Database
 
         public DbSet<LoadBalancerEntity> LoadBalancers { get; set; }
 
-        public ILoadBalancerRepository LoadBalancerRepository => new LoadBalancerRepository(this);
+        public DbSet<VlanEntity> Vlans { get; set; }
 
         public ApplicationRegistryDatabaseContext() { }
 
         public ApplicationRegistryDatabaseContext(DbContextOptions<ApplicationRegistryDatabaseContext> options)
             : base(options)
         {
-            _options = options;
+
         }
 
         public void FixApplicationVersion(Guid applicationId)

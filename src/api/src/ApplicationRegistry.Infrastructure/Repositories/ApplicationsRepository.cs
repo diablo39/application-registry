@@ -2,6 +2,7 @@
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Exceptions;
 using ApplicationRegistry.Domain.Persistency;
+using ApplicationRegistry.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

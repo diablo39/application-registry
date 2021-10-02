@@ -22,7 +22,7 @@ namespace ApplicationRegistry.Application.Commands.Network
     public abstract class LoadBalancerCommandValidatorBase<T> : AbstractValidator<T>
         where T : LoadBalancerCommandBase
     {
-        public LoadBalancerCommandValidatorBase()
+        protected LoadBalancerCommandValidatorBase()
         {
             RuleFor(e => e.Name).NotNull().NotEmpty().MinimumLength(1).MaximumLength(250);
             RuleFor(e => e.Ip).NotNull().NotEmpty().MinimumLength(1).MaximumLength(250);

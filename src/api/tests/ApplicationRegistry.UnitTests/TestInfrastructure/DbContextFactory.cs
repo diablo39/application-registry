@@ -1,6 +1,7 @@
 ﻿using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Infrastructure.Properties;
+using ApplicationRegistry.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;

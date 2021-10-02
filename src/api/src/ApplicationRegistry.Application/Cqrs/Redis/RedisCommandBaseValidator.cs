@@ -8,7 +8,7 @@ namespace ApplicationRegistry.Application.Commands.Redis.Base
     public abstract class RedisCommandBaseValidator<T>: AbstractValidator<T>
         where T: RedisCreateCommand
     {
-        public RedisCommandBaseValidator()
+        protected RedisCommandBaseValidator()
         {
             RuleFor(e => e.Name).NotEmpty();
         }

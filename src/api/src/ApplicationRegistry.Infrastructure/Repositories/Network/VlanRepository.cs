@@ -3,19 +3,16 @@ using ApplicationRegistry.Domain.Entities.Network;
 using ApplicationRegistry.Domain.Repositories.Network;
 using ApplicationRegistry.Infrastructure.Domain.Persistency;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ApplicationRegistry.Infrastructure.Repositories.Network
 {
-    public class LoadBalancerRepository : RepositoryBase<LoadBalancerEntity>, ILoadBalancerRepository
+    public class VlanRepository : RepositoryBase<VlanEntity>, IVlanRepository
     {
 
-        public LoadBalancerRepository(ApplicationRegistryDatabaseContext context)
+        public VlanRepository(ApplicationRegistryDatabaseContext context)
             : base(context)
         {
 
         }
-    }    
+    }
 }

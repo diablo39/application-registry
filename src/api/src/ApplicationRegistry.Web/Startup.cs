@@ -6,6 +6,7 @@ using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Infrastructure;
 using ApplicationRegistry.Infrastructure.HangfireExtensions;
+using ApplicationRegistry.Infrastructure.UnitOfWork;
 using ApplicationRegistry.Web.Areas.Api.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;

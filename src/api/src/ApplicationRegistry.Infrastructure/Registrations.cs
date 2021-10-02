@@ -1,6 +1,7 @@
 ﻿using ApplicationRegistry.Database;
 using ApplicationRegistry.Infrastructure.Abstractions.Scheduler;
 using ApplicationRegistry.Infrastructure.Implementations.Scheduler;
+using ApplicationRegistry.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
