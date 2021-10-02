@@ -22,8 +22,4 @@
     <ProjectReference Include="..\ApplicationRegistry.Domain\ApplicationRegistry.Domain.csproj" />
     <ProjectReference Include="..\ApplicationRegistry.Tools.Cryptography\ApplicationRegistry.Tools.Cryptography.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
 </Project>
