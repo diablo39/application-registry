@@ -67,6 +67,7 @@ namespace ApplicationRegistry.Web
                 c.AddFluentValidationRules();
                 c.DescribeAllParametersInCamelCase();
                 c.SchemaFilter<SwaggerExcludePropertySchemaFilter>();
+                
             });
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Commands.Network;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
@@ -41,7 +42,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             ]
         }
         */
-        [HttpGet]
+        [HttpGet(Name = "GetLoadBalansers")]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<LoadBalancerListQuery, LoadBalancerListQueryResult> handler,
             [FromQuery] string sortBy = null,
@@ -56,7 +57,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetLoadBalancer")]
         public async Task<IActionResult> Get([FromRoute] string id, [FromServices] IQueryHandler<LoadBalancerDetailsQuery, object> handler)
         {
             var query = new LoadBalancerDetailsQuery() { Id = id };
@@ -72,6 +73,16 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             [FromBody] LoadBalancerCreateCommand command,
             [FromServices] ICommandHandler<LoadBalancerCreateCommand, LoadBalancerCreateCommandResult> handler)
         {
+            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+
+            return result;
+        }
+
+        [HttpPut("{id}", Name = "UpdateLoadBalancer")]
+        public async Task<IActionResult> Put(Guid? id, [FromBody] LoadBalancerUpdateCommand command, [FromServices] ICommandHandler<LoadBalancerUpdateCommand, LoadBalancerUpdateCommandResult> handler)
+        {
+            command.Id = id;
+
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
             return result;

@@ -9,26 +9,16 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Commands.Network
 {
-    public class LoadBalancerCreateCommand : ICommand
+    public class LoadBalancerCreateCommand : LoadBalancerCommandBase, ICommand
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; private set; }
-
-        public string Name { get; set; }
-
-        public string Ip { get; set; }
-
-        public string Port { get; set; }
-
-        public string Description { get; set; }
-
-        public string Fqdn { get; set; }
     }
 
-    public class LoadBalancerCreateCommandValidator : AbstractValidator<LoadBalancerCreateCommand>
+    public class LoadBalancerCreateCommandValidator : LoadBalancerCommandValidatorBase<LoadBalancerCreateCommand>
     {
         public LoadBalancerCreateCommandValidator()
+            :base()
         {
 
         }
@@ -50,17 +40,14 @@ namespace ApplicationRegistry.Application.Commands.Network
 
         public async Task<OperationResult<LoadBalancerCreateCommandResult>> ExecuteAsync(LoadBalancerCreateCommand command)
         {
-            var loadBalancer = new LoadBalancerEntity(command.Id, command.Name)
-            {
-                Description = command.Description,
-                Fqdn = command.Fqdn,
-                Ip = command.Ip,
-                Name = command.Name,
-                Port = command.Port                
-            };
+            var loadBalancer = new LoadBalancerEntity(command.Id, command.Name);
+
+            loadBalancer.CopyValuesFrom(command);
+
             _context.LoadBalancerRepository.Add(loadBalancer);
 
             await _context.SaveChangesAsync();
+
             var result = new LoadBalancerCreateCommandResult { Id = loadBalancer.Id };
 
             return OperationResult.Success(result);

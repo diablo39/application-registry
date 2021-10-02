@@ -16,7 +16,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
     [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status500InternalServerError)]
     public class VlansController : ControllerBase
     {
-        // GET: api/<ApplicationsController>
+        // GET: api/vlans
         [HttpGet]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<VlansListQuery, VlansListQueryResult> handler,
@@ -25,7 +25,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             [FromQuery] int page = 1,
             [FromQuery] int itemsPerPage = -1)
         {
-            VlansListQuery query = new VlansListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
+            var query = new VlansListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
 
             var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
@@ -41,5 +41,24 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
             return result;
         }
+
+        //// POST api/<vlans>
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] VlanCreateCommand command, [FromServices] ICommandHandler<VlanCreateCommand, VlanCreateCommandResult> handler)
+        //{
+        //    var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+
+        //    return result;
+        //}
+
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> Put(Guid? id, [FromBody] VlanUpdateCommand command, [FromServices] ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult> handler)
+        //{
+        //    command.Id = id;
+
+        //    var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+
+        //    return result;
+        //}
     }
 }
