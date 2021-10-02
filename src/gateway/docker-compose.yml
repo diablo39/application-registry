@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  dev-gateway:
+    image: ${DOCKER_REGISTRY-}applicationregistry-gateway:dev-${APPLICATIONREGISTRY_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        "CONFIGFILE": "envoy.dev.yaml" 
+    # network_mode: "host"
+    ports: 
+    - "10000:10000"
+    - "9903:9903"
