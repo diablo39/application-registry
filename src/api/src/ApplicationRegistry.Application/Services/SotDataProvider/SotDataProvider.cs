@@ -76,31 +76,6 @@ namespace ApplicationRegistry.Application.Services
             return GetDetailFileContent(id, dataDir);
         }
 
-        public Task<List<object>> GetLoadBalancersAsync()
-        {
-
-            var collectionName = "load-balancers";
-
-            return GetList<object>(collectionName);
-        }
-
-        public Task<object> GetLoadBalancerDetailsAsync(string id)
-        {
-            var cmdbFile = GetCmdbFile();
-            var collectionName = "load-balancers";
-
-            var loadBallancers = cmdbFile[collectionName];
-
-            foreach (var item in loadBallancers)
-            {
-                if (item["name"].ToString() == id)
-                    return Task.FromResult(item.ToObject<object>());
-            }
-
-            return Task.FromResult<object>(null);
-
-        }
-
         public Task<List<object>> GetFirewallRulesAsync()
         {
 
