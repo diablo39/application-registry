@@ -2,6 +2,7 @@
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
+using ApplicationRegistry.Domain.Entities.Network;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +28,9 @@ namespace ApplicationRegistry.Application.Queries
         }
     }
 
-    public class LoadBalancerListQueryResult : CollectionQueryResultBase<object>
+    public class LoadBalancerListQueryResult : CollectionQueryResultBase<LoadBalancerListQueryResultItem>
     {
-        public LoadBalancerListQueryResult(IEnumerable<object> items, int count)
+        public LoadBalancerListQueryResult(IEnumerable<LoadBalancerListQueryResultItem> items, int count)
             : base(items, count)
         {
 
@@ -37,26 +38,61 @@ namespace ApplicationRegistry.Application.Queries
 
     }
 
+    public class LoadBalancerListQueryResultItem
+    {
+        public Guid Id { get; set; }
+
+        public DateTime CreateDate { get; set; }
+
+        public string Name { get; set; }
+
+        public string Ip { get; set; }
+
+        public string Port { get; set; }
+
+        public string Description { get; set; }
+
+        public string Fqdn { get; set; }
+    }
 
     public class LoadBalancerListQueryHandler : IQueryHandler<LoadBalancerListQuery, LoadBalancerListQueryResult>
     {
-        readonly SotDataProvider _dataProvider;
+        readonly IQueryDataModel _queryModel;
 
-        public LoadBalancerListQueryHandler(SotDataProvider dataProvider)
+        public LoadBalancerListQueryHandler(IQueryDataModel queryModel)
         {
-            _dataProvider = dataProvider;
+            _queryModel = queryModel;
         }
 
         public async Task<OperationResult<LoadBalancerListQueryResult>> ExecuteAsync(LoadBalancerListQuery query)
         {
-            var items = await _dataProvider.GetLoadBalancersAsync();
+            var dbQuery = _queryModel
+                              .LoadBalancers
+                              .Select(MappingDomainToQueryResult());
 
-            var result = new LoadBalancerListQueryResult(items, items.Count);
+            var count = await dbQuery.CountAsync();
+
+            dbQuery = dbQuery.SortAndFilter(query);
+
+            var items = await dbQuery.ToArrayAsync();
+
+            var result = new LoadBalancerListQueryResult(items, count);
 
             return OperationResult.Success(result);
         }
 
+        internal static Expression<Func<LoadBalancerEntity, LoadBalancerListQueryResultItem>> MappingDomainToQueryResult()
+        {
+            return e => new LoadBalancerListQueryResultItem
+            {
+                CreateDate = e.CreateDate,
+                Description = e.Description,
+                Fqdn = e.Fqdn,
+                Id = e.Id,
+                Ip = e.Ip,
+                Name = e.Name,
+                Port = e.Port
+            };
+        }
     }
-
-
 }

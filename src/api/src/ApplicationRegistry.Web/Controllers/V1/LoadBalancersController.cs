@@ -58,7 +58,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetLoadBalancer")]
-        public async Task<IActionResult> Get([FromRoute] string id, [FromServices] IQueryHandler<LoadBalancerDetailsQuery, object> handler)
+        public async Task<IActionResult> Get([FromRoute] Guid? id, [FromServices] IQueryHandler<LoadBalancerDetailsQuery, LoadBalancerDetailsQueryResult> handler)
         {
             var query = new LoadBalancerDetailsQuery() { Id = id };
 

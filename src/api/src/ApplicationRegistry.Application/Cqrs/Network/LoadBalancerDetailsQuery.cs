@@ -1,13 +1,19 @@
 ﻿using ApplicationRegistry.Application.Services;
 using ApplicationRegistry.CQRS.Abstraction;
+using ApplicationRegistry.Database;
+using ApplicationRegistry.Domain.Entities.Network;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Queries
 {
     public class LoadBalancerDetailsQuery : IQuery
     {
-        public string Id { get; set; }
+        public Guid? Id { get; set; }
 
     }
 
@@ -19,22 +25,53 @@ namespace ApplicationRegistry.Application.Queries
         }
     }
 
-
-
-    public class LoadBalancerDetailsQueryHandler : IQueryHandler<LoadBalancerDetailsQuery, object>
+    public class LoadBalancerDetailsQueryResult
     {
-        readonly SotDataProvider _dataProvider;
+        public Guid Id { get; set; }
 
-        public LoadBalancerDetailsQueryHandler(SotDataProvider dataProvider)
+        public DateTime CreateDate { get; set; }
+
+        public string Name { get; set; }
+
+        public string Ip { get; set; }
+
+        public string Port { get; set; }
+
+        public string Description { get; set; }
+
+        public string Fqdn { get; set; }
+    }
+
+    public class LoadBalancerDetailsQueryHandler : IQueryHandler<LoadBalancerDetailsQuery, LoadBalancerDetailsQueryResult>
+    {
+        readonly IQueryDataModel _queryModel;
+
+        public LoadBalancerDetailsQueryHandler(IQueryDataModel queryModel)
         {
-            _dataProvider = dataProvider;
+            _queryModel = queryModel;
         }
 
-        public async Task<OperationResult<object>> ExecuteAsync(LoadBalancerDetailsQuery query)
+        public async Task<OperationResult<LoadBalancerDetailsQueryResult>> ExecuteAsync(LoadBalancerDetailsQuery query)
         {
-            var details = await _dataProvider.GetLoadBalancerDetailsAsync(query.Id);
+            LoadBalancerDetailsQueryResult result = null;
 
-            return OperationResult.Success(details);
+            result = await _queryModel.LoadBalancers.Where(e => e.Id == query.Id).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
+
+            return OperationResult.Success(result);
+        }
+
+        internal static Expression<Func<LoadBalancerEntity, LoadBalancerDetailsQueryResult>> MappingDomainToQueryResult()
+        {
+            return e => new LoadBalancerDetailsQueryResult
+            {
+                CreateDate = e.CreateDate,
+                Description = e.Description,
+                Fqdn = e.Fqdn,
+                Id = e.Id,
+                Ip = e.Ip,
+                Name = e.Name,
+                Port = e.Port
+            };
         }
     }
 }
