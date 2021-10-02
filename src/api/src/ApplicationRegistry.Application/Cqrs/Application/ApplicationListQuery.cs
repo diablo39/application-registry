@@ -75,21 +75,17 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
                 .Select(MappingDomainToQueryResult());
 
             var count = await applicationsQuery.CountAsync();
-            var items = await GetItems(query, applicationsQuery).ToArrayAsync();
+
+            applicationsQuery = applicationsQuery.SortAndFilter(query);
+
+            var items = await applicationsQuery.ToArrayAsync();
 
             var result = new ApplicationsListQueryResult(items, count);
 
             return OperationResult.Success(result);
         }
 
-        private static IQueryable<ApplicationsListQueryResultItem> GetItems(ApplicationsListQuery query, IQueryable<ApplicationsListQueryResultItem> applicationsQuery)
-        {
-            var sorted = (string.IsNullOrWhiteSpace(query.SortBy) ? applicationsQuery : applicationsQuery);
 
-            var paged = (query.ItemsPerPage == -1 ? applicationsQuery : applicationsQuery.Skip((query.Page - 1) * query.ItemsPerPage).Take(query.ItemsPerPage));
-
-            return paged;
-        }
 
         internal static Expression<Func<ApplicationEntity, ApplicationsListQueryResultItem>> MappingDomainToQueryResult()
         {
