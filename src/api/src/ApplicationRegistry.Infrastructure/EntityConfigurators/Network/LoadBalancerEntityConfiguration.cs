@@ -14,10 +14,20 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
         {
             builder.ToTable("LoadBalancer");
 
-            //builder.HasMany(e => e.Endpoints)
-            //    .WithOne(e => e.Application)
-            //    .HasForeignKey(e => e.ApplicationId);
+            builder.Property(e => e.Name)
+                .RulesForName();
 
+            builder.Property(e => e.Ip)
+                .HasMaxLength(40);
+
+            builder.Property(e => e.Port)
+                .HasMaxLength(40);
+
+            builder.Property(e => e.Description)
+                .RulesForDescription();
+
+            builder.Property(e => e.Fqdn)
+                .HasMaxLength(400);
         }
     }
 }

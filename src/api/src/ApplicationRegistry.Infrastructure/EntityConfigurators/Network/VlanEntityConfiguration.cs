@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
 {
+
     class VlanEntityConfiguration : EntityTypeConfigurationBase<VlanEntity>
     {
         public override void ConfigureEntity(EntityTypeBuilder<VlanEntity> builder)
@@ -12,8 +13,7 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.ToTable("Vlan");
 
             builder.Property(e => e.Name)
-                .HasMaxLength(400)
-                .IsRequired();
+                .RulesForName();
 
             builder.Property(e => e.Number);
 
@@ -25,7 +25,7 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
                 .HasMaxLength(40);
 
             builder.Property(e => e.Description)
-                .HasMaxLength(1200);
+                .RulesForDescription();
 
             builder.Property(e => e.RFC)
                 .HasMaxLength(400);
