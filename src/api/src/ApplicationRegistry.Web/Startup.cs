@@ -57,7 +57,7 @@ namespace ApplicationRegistry.Web
                     options.Filters.Add(new ProducesAttribute("application/json"));
                 })
                .AddFluentValidation(conf => { })
-               .AddNewtonsoftJson()
+               .AddNewtonsoftJson(e=> { })
                .ConfigureApiBehaviorOptions(options =>
                {
                    options.InvalidModelStateResponseFactory = context =>
@@ -150,7 +150,7 @@ namespace ApplicationRegistry.Web
 
             app.UseSwagger(c =>
             {
-                c.SerializeAsV2 = true;
+                //c.SerializeAsV2 = true;
             });
 
             app.UseSwaggerUI(c =>

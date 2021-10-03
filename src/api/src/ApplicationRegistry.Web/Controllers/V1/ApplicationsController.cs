@@ -85,14 +85,14 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         // PUT api/<ApplicationsController>/5
-        [HttpPut("{id}", Name = "UpdateApplication")]
+        [HttpPut("{idOrCode}", Name = "UpdateApplication")]
         [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Put(
-            [FromRoute] Guid id, 
+            [FromRoute] Guid idOrCode, 
             [FromBody] ApplicationUpdateCommand command, 
             [FromServices] ICommandHandler<ApplicationUpdateCommand, ApplicationUpdateCommandResult> handler)
         {
-            command.Id = id;
+            command.Id = idOrCode;
 
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
