@@ -10,7 +10,6 @@ namespace ApplicationRegistry.Application.Commands
 {
     public class VlanCreateCommand : VlanCommandBase, ICommand
     {
-        public Guid? Id { get; set; }
     }
 
     public class VlanCreateCommandValidator : VlanCommandValidatorBase<VlanCreateCommand>
@@ -18,7 +17,7 @@ namespace ApplicationRegistry.Application.Commands
         public VlanCreateCommandValidator()
             : base()
         {
-            RuleFor(e => e.Id).NotNull();
+            RuleFor(e => e.Id).NotEmpty();
         }
     }
 
@@ -38,7 +37,7 @@ namespace ApplicationRegistry.Application.Commands
 
         public async Task<OperationResult<VlanCreateCommandResult>> ExecuteAsync(VlanCreateCommand command)
         {
-            var item = new VlanEntity(command.Id.Value, command.Name);
+            var item = new VlanEntity(command.Id, command.Name);
 
             item.CopyValuesFrom(command);
 

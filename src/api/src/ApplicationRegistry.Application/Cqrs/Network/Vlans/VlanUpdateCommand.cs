@@ -10,7 +10,7 @@ namespace ApplicationRegistry.Application.Commands
 {
     public class VlanUpdateCommand : VlanCommandBase, ICommand
     {
-        public virtual Guid? Id { get; set; }
+        
     }
 
     public class VlanUpdateCommandValidator : VlanCommandValidatorBase<VlanUpdateCommand>
@@ -18,12 +18,13 @@ namespace ApplicationRegistry.Application.Commands
         public VlanUpdateCommandValidator()
             : base()
         {
-            RuleFor(e => e.Id).NotNull();
+
         }
     }
 
     public class VlanUpdateCommandResult
     {
+        public Guid Id { get; set; }
     }
 
     public class VlanUpdateCommandHandler : ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult>
@@ -48,7 +49,7 @@ namespace ApplicationRegistry.Application.Commands
 
             await _context.SaveChangesAsync();
 
-            var result = default(VlanUpdateCommandResult);
+            var result = new VlanUpdateCommandResult { Id = command.Id };
 
             return OperationResult.Success(result);
         }

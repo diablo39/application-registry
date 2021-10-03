@@ -19,7 +19,7 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public string Name { get; set; }
 
-        public int Number { get; set; }
+        public int? Number { get; set; }
 
         public string Alias { get; set; }
 

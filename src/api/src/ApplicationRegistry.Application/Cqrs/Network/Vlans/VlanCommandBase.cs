@@ -8,9 +8,11 @@ namespace ApplicationRegistry.Application.Cqrs.Network
 {
     public class VlanCommandBase
     {
+        public virtual Guid Id { get; set; }
+
         public string Name { get; set; }
 
-        public int Number { get; set; }
+        public int? Number { get; set; }
 
         public string Alias { get; set; }
 
@@ -26,7 +28,17 @@ namespace ApplicationRegistry.Application.Cqrs.Network
     {
         protected VlanCommandValidatorBase()
         {
-            
+            RuleFor(e => e.Name).NotNull().NotEmpty().MaximumLength(400);
+
+            RuleFor(e => e.Number).GreaterThan(0);
+
+            RuleFor(e => e.Alias).MaximumLength(400);
+
+            RuleFor(e => e.Cidr).NotNull().NotEmpty().MaximumLength(40);
+
+            RuleFor(e => e.Description).MaximumLength(1600);
+
+            RuleFor(e => e.RFC).MaximumLength(400);
         }
     }
 

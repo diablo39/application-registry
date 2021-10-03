@@ -12,6 +12,7 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.ToTable("Vlan");
 
             builder.Property(e => e.Name)
+                .HasMaxLength(400)
                 .IsRequired();
 
             builder.Property(e => e.Number);
@@ -19,8 +20,9 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.Property(e => e.Alias)
                 .HasMaxLength(400);
 
-            builder.Property(e => e.Cidr).IsRequired()
-                .HasMaxLength(400);
+            builder.Property(e => e.Cidr)
+                .IsRequired()
+                .HasMaxLength(40);
 
             builder.Property(e => e.Description)
                 .HasMaxLength(1200);

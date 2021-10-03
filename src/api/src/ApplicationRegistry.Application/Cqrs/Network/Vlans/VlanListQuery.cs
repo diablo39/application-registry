@@ -39,7 +39,21 @@ namespace ApplicationRegistry.Application.Queries
 
     public class VlanListQueryResultItem
     {
+        public Guid Id { get; set; }
 
+        public string Name { get; set; }
+
+        public int? Number { get; set; }
+
+        public string Alias { get; set; }
+
+        public string Cidr { get; set; }
+
+        public string Description { get; set; }
+
+        public string RFC { get; set; }
+
+        public DateTime CreateDate { get; set; }
     }
 
 
@@ -69,7 +83,14 @@ namespace ApplicationRegistry.Application.Queries
         {
             return e => new VlanListQueryResultItem
             {
-
+                Alias = e.Alias,
+                Cidr = e.Cidr,
+                CreateDate = e.CreateDate,
+                Description = e.Description,
+                Id = e.Id,
+                Name = e.Name,
+                Number = e.Number,
+                RFC = e.RFC
             };
         }
     }

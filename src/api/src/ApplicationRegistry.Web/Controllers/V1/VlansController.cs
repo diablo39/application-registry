@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ApplicationRegistry.Application.Attributes;
 using ApplicationRegistry.Application.Commands;
@@ -19,7 +21,8 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
     public class VlansController : ControllerBase
     {
         // GET: api/vlans
-        [HttpGet]
+        [HttpGet(Name ="GetVlanList")]
+        [ProducesResponseType(typeof(VlanListQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<VlanListQuery, VlanListQueryResult> handler,
             [FromQuery] string sortBy = null,
@@ -34,8 +37,9 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] string id, [FromServices] IQueryHandler<VlanDetailsQuery, object> handler)
+        [HttpGet("{id}", Name = "GetVlanDetails")]
+        [ProducesResponseType(typeof(VlanDetailsQueryResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get([FromRoute] Guid id, [FromServices] IQueryHandler<VlanDetailsQuery, VlanDetailsQueryResult> handler)
         {
             var query = new VlanDetailsQuery() { Id = id };
 
@@ -45,20 +49,22 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         // POST api/<vlans>
-        [HttpPost]
+        [HttpPost(Name = "CreateVlan")]
+        [ProducesResponseType(typeof(VlanCreateCommandResult), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] VlanCreateCommand command, [FromServices] ICommandHandler<VlanCreateCommand, VlanCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext, HttpStatusCode.Created);
 
             return result;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid? id, 
+        [HttpPut("{id}", Name = "UpdateVlan")]
+        [ProducesResponseType(typeof(VlanUpdateCommandResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Put([Required] Guid? id, 
             [FromBody][SwaggerIgnoreProperty("Id")] VlanUpdateCommand command, 
             [FromServices] ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult> handler)
         {
-            command.Id = id;
+            command.Id = id.Value;
 
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
