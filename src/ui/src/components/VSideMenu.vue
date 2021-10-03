@@ -45,20 +45,20 @@
         </v-list-item-icon>
         <v-list-item-title>Load balancers</v-list-item-title>
       </v-list-item>
-      <v-list-item link to="/firewall-rules">
-        <v-list-item-icon>
-          <v-icon>mdi-security-network</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Firewall rules</v-list-item-title>
-      </v-list-item>
+<!--      <v-list-item link to="/firewall-rules">-->
+<!--        <v-list-item-icon>-->
+<!--          <v-icon>mdi-security-network</v-icon>-->
+<!--        </v-list-item-icon>-->
+<!--        <v-list-item-title>Firewall rules</v-list-item-title>-->
+<!--      </v-list-item>-->
       <!-- Infrastructure -->
-      <v-subheader class="mt-4">Infrastructure</v-subheader>
-      <v-list-item link to="/machines">
-        <v-list-item-icon>
-          <v-icon>mdi-server</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Machines</v-list-item-title>
-      </v-list-item>
+<!--      <v-subheader class="mt-4">Infrastructure</v-subheader>-->
+<!--      <v-list-item link to="/machines">-->
+<!--        <v-list-item-icon>-->
+<!--          <v-icon>mdi-server</v-icon>-->
+<!--        </v-list-item-icon>-->
+<!--        <v-list-item-title>Machines</v-list-item-title>-->
+<!--      </v-list-item>-->
       <!-- Software -->
       <v-subheader class="mt-4">Software</v-subheader>
       <v-list-item link to="/systems">

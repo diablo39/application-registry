@@ -60,12 +60,13 @@ export default Vue.extend({
           width: 100,
         },
         {text: "CIDR", value: "cidr",},
-        {text: "Vlan", value: "vlan",},
         {text: "Name", value: "name",},
-        {text: "Environment", value: "env", groupable: true,},
-        
-        {text: "Machines count", value: "machines-count",},
-        {text: "Description", value: "description", groupable: true,},
+        {text: "Alias", value: "alias"},
+        {text: "Number", value: "number",},
+        // {text: "Environment", value: "env", groupable: true,},
+        //
+        // {text: "Machines count", value: "machines-count",},
+        // {text: "Description", value: "description", groupable: false,},
       ],
     };
   },

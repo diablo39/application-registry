@@ -52,7 +52,7 @@ const messages = {
         },
         vlans: {
             header: "Vlans",
-            detailsHeader: "{cidr} number: {vlan} ",
+            detailsHeader: "Vlan {cidr}",
             machinesHeader: "Machines",
         },
         machines: {

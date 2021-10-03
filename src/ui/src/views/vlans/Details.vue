@@ -9,50 +9,52 @@
         <v-card>
           <v-section-toolbar caption="common.sectionNames.general"></v-section-toolbar>
           <v-card-text>
-            <v-view-details-row label="Vlan" :value="item.vlan"></v-view-details-row>
-            <v-view-details-row label="Environment" :value="item.env" :to="getEnvDetailsUrl(item)"></v-view-details-row>
+            <v-view-details-row label="CIDR" :value="item.cidr"></v-view-details-row>
             <v-view-details-row label="Name" :value="item.name"></v-view-details-row>
             <v-view-details-row label="Alias" :value="item.alias"></v-view-details-row>
-            <v-view-details-row label="CIDR" :value="item.cidr"></v-view-details-row>
+            <v-view-details-row label="Number" :value="item.number"></v-view-details-row>
+<!--            <v-view-details-row label="Environment" :value="item.env" :to="getEnvDetailsUrl(item)"></v-view-details-row>-->
+
+
             <v-view-details-row label="Description" :value="item.description"></v-view-details-row>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-card>
-          <v-section-toolbar caption="vlans.machinesHeader"></v-section-toolbar>
-          <v-in-memory-list-data-source :items="item.machines" :is-error="isError" :is-loading="isLoading">
-            <template slot-scope="{ ds }">
-              <v-my-data-table
-                  :headers="headers"
-                  :items="ds.filteredItems"
-                  :loading="ds.isLoading"
-                  :server-items-length="ds.totalItems"
-                  :options.sync="ds.options"
-                  sort-by="name"
-              >
-                <template v-slot:body.prepend="{ headers }">
-                  <v-my-data-table-search-row :ds="ds" :headers="headers"/>
-                </template>
-                <template v-slot:item.actions="{ item }">
-                  <v-list-item-details-action-button :to="`/machines/${item.fqdn}`"></v-list-item-details-action-button>
-                </template>
-                <template v-slot:item.name="{ item }"><router-link :to="`/machines/${item.fqdn}`">{{ item.name }}</router-link></template>
-                <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>
-                <template v-slot:item.operatingSystem="{ item }">{{ item['operating-system-distribution'] }}
-                  {{ item['operating-system-version'] }}
-                </template>
-                <template v-slot:no-data v-if="isError">
-                  <div v-if="isError">{{ $t('common.errorMessage') }}</div>
-                </template>
-              </v-my-data-table>
-            </template>
-          </v-in-memory-list-data-source>
-        </v-card>
-      </v-col>
-    </v-row>
+<!--    <v-row>-->
+<!--      <v-col>-->
+<!--        <v-card>-->
+<!--          <v-section-toolbar caption="vlans.machinesHeader"></v-section-toolbar>-->
+<!--          <v-in-memory-list-data-source :items="item.machines" :is-error="isError" :is-loading="isLoading">-->
+<!--            <template slot-scope="{ ds }">-->
+<!--              <v-my-data-table-->
+<!--                  :headers="headers"-->
+<!--                  :items="ds.filteredItems"-->
+<!--                  :loading="ds.isLoading"-->
+<!--                  :server-items-length="ds.totalItems"-->
+<!--                  :options.sync="ds.options"-->
+<!--                  sort-by="name"-->
+<!--              >-->
+<!--                <template v-slot:body.prepend="{ headers }">-->
+<!--                  <v-my-data-table-search-row :ds="ds" :headers="headers"/>-->
+<!--                </template>-->
+<!--                <template v-slot:item.actions="{ item }">-->
+<!--                  <v-list-item-details-action-button :to="`/machines/${item.fqdn}`"></v-list-item-details-action-button>-->
+<!--                </template>-->
+<!--                <template v-slot:item.name="{ item }"><router-link :to="`/machines/${item.fqdn}`">{{ item.name }}</router-link></template>-->
+<!--                <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>-->
+<!--                <template v-slot:item.operatingSystem="{ item }">{{ item['operating-system-distribution'] }}-->
+<!--                  {{ item['operating-system-version'] }}-->
+<!--                </template>-->
+<!--                <template v-slot:no-data v-if="isError">-->
+<!--                  <div v-if="isError">{{ $t('common.errorMessage') }}</div>-->
+<!--                </template>-->
+<!--              </v-my-data-table>-->
+<!--            </template>-->
+<!--          </v-in-memory-list-data-source>-->
+<!--        </v-card>-->
+<!--      </v-col>-->
+<!--    </v-row>-->
   </v-container>
 </template>
 
