@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Queries
+namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
     public class VlanListQuery : ListQueryParameters, IQuery
     {

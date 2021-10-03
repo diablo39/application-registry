@@ -1,16 +1,15 @@
-﻿using ApplicationRegistry.Application.Cqrs.Network;
-using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Commands
+namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
     public class VlanUpdateCommand : VlanCommandBase, ICommand
     {
-        
+
     }
 
     public class VlanUpdateCommandValidator : VlanCommandValidatorBase<VlanUpdateCommand>

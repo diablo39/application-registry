@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationRegistry.Application.Cqrs.Network
+namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
     public class VlanCommandBase
     {
@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network
     {
         protected VlanCommandValidatorBase()
         {
-            RuleFor(e => e.Name).NotNull().NotEmpty().MaximumLength(400);
+            RuleFor(e => e.Name).IsName();
 
             RuleFor(e => e.Number).GreaterThan(0);
 
@@ -36,7 +36,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network
 
             RuleFor(e => e.Cidr).NotNull().NotEmpty().MaximumLength(40);
 
-            RuleFor(e => e.Description).MaximumLength(1600);
+            RuleFor(e => e.Description).IsDescription();
 
             RuleFor(e => e.RFC).MaximumLength(400);
         }
