@@ -68,8 +68,36 @@ namespace ApplicationRegistry.Database
         #endregion
     }
 
-    public interface IUnitOfWork : IQueryDataModel
+    public interface IUnitOfWork
     {
+        #region Leagacy DBSets
+        DbSet<CollectorLogEntity> CollectorLogs { get; }
+
+        DbSet<ApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
+
+        DbSet<ProjectEntity> Projects { get; }
+
+        DbSet<DependencyEntity> Dependencies { get; }
+
+        DbSet<DependencyVersionEntity> DependencyVersions { get; }
+
+        DbSet<ApplicationVersionSpecificationTextEntity> ApplicationVersionSpecificationTexts { get; }
+
+        DbSet<ApplicationVersionEntity> ApplicationVersions { get; }
+
+        DbSet<RedisEntity> Redis { get; }
+
+        DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; }
+
+        DbSet<ApplicationVersionDependencyEntity> ApplicationVersionDependencies { get; }
+
+        DbSet<ApplicationEntity> Applications { get; }
+
+        DbSet<ApplicationEndpointEntity> ApplicationEndpoints { get; }
+
+        DbSet<SwaggerSpecificationOperationEntity> SwaggerSpecificationOperations { get; }
+
+        #endregion
         IApplicationsRepository ApplicationsRepository { get; }
 
         INugetPackageRepository NugetPackageRepository { get; }

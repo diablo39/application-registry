@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Commands
 {
-    [SwaggerIgnoreProperty("Id")]
+    
     public class ProjectUpdateCommand : ICommand
     {
         public Guid? Id { get; set; }

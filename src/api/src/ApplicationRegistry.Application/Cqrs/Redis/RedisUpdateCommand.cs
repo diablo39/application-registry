@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Commands.Redis
 {
-    [SwaggerIgnoreProperty("Id")]
     public class RedisUpdateCommand : RedisCommandBase, ICommand
     {
 
@@ -66,7 +65,7 @@ namespace ApplicationRegistry.Application.Commands.Redis
             foreach (var childModel in command.Endpoints)
             {
                 var existingChild = redis.Endpoints
-                    .Where(c => c.Id == childModel.Id && c.Id != default(Guid))
+                    .Where(c => c.Id == childModel.Id && c.Id != default)
                     .SingleOrDefault();
 
                 if (existingChild != null)

@@ -27,6 +27,15 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public string Description { get; set; }
 
+        public string RFC { get; set; }
+
         public DateTime CreateDate { get; set; }
+
+        public VlanEntity(Guid id, string name, DateTime createDate = default)
+        {
+            Id = id;
+            Name = name;
+            CreateDate = createDate == default ? DateTime.Now : createDate;
+        }
     }
 }

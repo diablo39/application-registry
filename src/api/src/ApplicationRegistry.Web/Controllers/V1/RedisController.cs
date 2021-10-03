@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.Application.Commands.Redis;
+﻿using ApplicationRegistry.Application.Attributes;
+using ApplicationRegistry.Application.Commands.Redis;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.Application.Queries.Redis;
 using ApplicationRegistry.CQRS.Abstraction;
@@ -79,7 +80,7 @@ namespace ApplicationRegistry.Web.Controllers
         [HttpPut("{id}", Name = "UpdateRedis")]
         public async Task<IActionResult> Put(
             [FromRoute] Guid id,
-            [FromBody] RedisUpdateCommand command,
+            [FromBody][SwaggerIgnoreProperty("Id")] RedisUpdateCommand command,
             [FromServices] ICommandHandler<RedisUpdateCommand, RedisUpdateCommandResult> handler)
         {
             command.Id = id;

@@ -127,7 +127,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
                             IdApplicationVersionSpecification = specification.Id,
                             Path = path.Name,
                             HttpMethod = propertyName,
-                            OperationId = operationId == null ? null : operationId.ToString()
+                            OperationId = operationId?.ToString()
                         };
 
                         result.Add(resultItem);

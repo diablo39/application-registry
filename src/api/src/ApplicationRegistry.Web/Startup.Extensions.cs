@@ -66,7 +66,7 @@ namespace ApplicationRegistry.Web
                 c.IncludeXmlComments(xmlPath);
                 c.AddFluentValidationRules();
                 c.DescribeAllParametersInCamelCase();
-                c.SchemaFilter<SwaggerExcludePropertySchemaFilter>();
+                c.RequestBodyFilter<SwaggerExcludePropertyBodyFilter>();
                 
             });
         }

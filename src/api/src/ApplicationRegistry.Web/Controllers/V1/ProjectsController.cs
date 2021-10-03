@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.Application.Commands;
+﻿using ApplicationRegistry.Application.Attributes;
+using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid? id, [FromBody] ProjectUpdateCommand command, [FromServices] ICommandHandler<ProjectUpdateCommand, ProjectUpdateCommandResult> handler)
+        public async Task<IActionResult> Put(Guid? id, [FromBody][SwaggerIgnoreProperty("Id")] ProjectUpdateCommand command, [FromServices] ICommandHandler<ProjectUpdateCommand, ProjectUpdateCommandResult> handler)
         {
             command.Id = id;
 

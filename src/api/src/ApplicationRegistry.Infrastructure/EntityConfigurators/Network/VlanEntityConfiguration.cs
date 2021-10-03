@@ -24,6 +24,9 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
 
             builder.Property(e => e.Description)
                 .HasMaxLength(1200);
+
+            builder.Property(e => e.RFC)
+                .HasMaxLength(400);
         }
     }
 }

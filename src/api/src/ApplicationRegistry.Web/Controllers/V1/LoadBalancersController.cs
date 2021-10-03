@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationRegistry.Application.Attributes;
 using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Commands.Network;
 using ApplicationRegistry.Application.Queries;
@@ -79,7 +80,10 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         [HttpPut("{id}", Name = "UpdateLoadBalancer")]
-        public async Task<IActionResult> Put(Guid? id, [FromBody] LoadBalancerUpdateCommand command, [FromServices] ICommandHandler<LoadBalancerUpdateCommand, LoadBalancerUpdateCommandResult> handler)
+        public async Task<IActionResult> Put(
+            Guid? id, 
+            [FromBody][SwaggerIgnoreProperty("Id")] LoadBalancerUpdateCommand command, 
+            [FromServices] ICommandHandler<LoadBalancerUpdateCommand, LoadBalancerUpdateCommandResult> handler)
         {
             command.Id = id;
 

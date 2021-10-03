@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationRegistry.Application.Attributes;
+using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Web.Areas.Api.Models;
@@ -19,13 +21,13 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         // GET: api/vlans
         [HttpGet]
         public async Task<IActionResult> Get(
-            [FromServices] IQueryHandler<VlansListQuery, VlansListQueryResult> handler,
+            [FromServices] IQueryHandler<VlanListQuery, VlanListQueryResult> handler,
             [FromQuery] string sortBy = null,
             [FromQuery] bool? sortDesc = null,
             [FromQuery] int page = 1,
             [FromQuery] int itemsPerPage = -1)
         {
-            var query = new VlansListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
+            var query = new VlanListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
 
             var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
@@ -42,23 +44,25 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        //// POST api/<vlans>
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody] VlanCreateCommand command, [FromServices] ICommandHandler<VlanCreateCommand, VlanCreateCommandResult> handler)
-        //{
-        //    var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+        // POST api/<vlans>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] VlanCreateCommand command, [FromServices] ICommandHandler<VlanCreateCommand, VlanCreateCommandResult> handler)
+        {
+            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
-        //    return result;
-        //}
+            return result;
+        }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(Guid? id, [FromBody] VlanUpdateCommand command, [FromServices] ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult> handler)
-        //{
-        //    command.Id = id;
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid? id, 
+            [FromBody][SwaggerIgnoreProperty("Id")] VlanUpdateCommand command, 
+            [FromServices] ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult> handler)
+        {
+            command.Id = id;
 
-        //    var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
-        //    return result;
-        //}
+            return result;
+        }
     }
 }
