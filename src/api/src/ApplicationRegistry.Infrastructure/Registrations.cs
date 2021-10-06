@@ -1,5 +1,7 @@
-﻿using ApplicationRegistry.Database;
+﻿using ApplicationRegistry.Application.Services;
+using ApplicationRegistry.Database;
 using ApplicationRegistry.Infrastructure.Abstractions.Scheduler;
+using ApplicationRegistry.Infrastructure.ApplicationSevices;
 using ApplicationRegistry.Infrastructure.Implementations.Scheduler;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,8 @@ namespace ApplicationRegistry.Infrastructure
             });
 
             services.AddScoped<IScheduler, Scheduler>();
+
+            services.AddTransient<IGuidGenerator, GuidGenerator>();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
     public class VlanUpdateCommand : VlanCommandBase, ICommand
     {
-
+        public virtual Guid Id { get; set; }
     }
 
     public class VlanUpdateCommandValidator : VlanCommandValidatorBase<VlanUpdateCommand>

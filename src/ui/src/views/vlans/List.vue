@@ -4,6 +4,14 @@
       <v-col>
         <v-card>
           <v-section-toolbar :caption="caption">
+            <template slot="endButtons">
+              <router-link :to="getCreateUrl()" class="action-link">
+                <v-btn color="success">
+                  <v-icon>mdi-plus</v-icon>
+                  Create
+                </v-btn>
+              </router-link>
+            </template>
           </v-section-toolbar>
           <v-ajax-list-data-source :httpPath="httpPath">
             <template slot-scope="{ ds }">
@@ -73,6 +81,12 @@ export default Vue.extend({
   methods: {
     getDetailsUrl(item): string {
       return Paths.getVlanDetails(item.id);
+    },
+    getCreateUrl(): string {
+      return Paths.createVlan();
+    },
+    getEditUrl(item): string {
+      return Paths.editVlan(item.id, "list");
     },
   },
 });

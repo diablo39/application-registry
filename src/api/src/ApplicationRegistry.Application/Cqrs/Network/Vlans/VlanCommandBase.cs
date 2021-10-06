@@ -8,8 +8,6 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
     public class VlanCommandBase
     {
-        public virtual Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public int? Number { get; set; }

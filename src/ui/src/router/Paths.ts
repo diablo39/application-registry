@@ -1,7 +1,15 @@
 export class ViewPaths {
-    getVlanDetails(id): string {
 
-        return `/vlans/${id.replace('/', '_')}`
+    createVlan(): string {
+        return `/vlans/create`
+    }
+
+    getVlanDetails(id): string {
+        return `/vlans/${id}/details`
+    }
+
+    editVlan(id, source: string): string {
+        return `/vlans/${id}/edit?source=${source}`
     }
 
     createApplication(): string {

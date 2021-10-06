@@ -123,6 +123,14 @@ class HttpClientImplementation {
         return this.HTTP.get(`/api/Vlans/${id}`);
     }
 
+    createVlan(vlan: object) {
+        return this.HTTP.post(`/api/Vlans`, vlan);
+    }
+
+    updateVlan(vlan: object) {
+        return this.HTTP.put(`/api/Vlans`, vlan);
+    }
+
     getMachinesPath = `/api/Machines`;
 
     getMachine(id: string) {

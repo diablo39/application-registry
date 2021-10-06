@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.Application.Services;
+using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Domain.Entities.Network;
 using FluentValidation;
@@ -16,7 +17,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
         public VlanCreateCommandValidator()
             : base()
         {
-            RuleFor(e => e.Id).NotEmpty();
+
         }
     }
 
@@ -28,15 +29,17 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
     public class VlanCreateCommandHandler : ICommandHandler<VlanCreateCommand, VlanCreateCommandResult>
     {
         private readonly IUnitOfWork _context;
+        private readonly IGuidGenerator _guidGenerator;
 
-        public VlanCreateCommandHandler(IUnitOfWork context)
+        public VlanCreateCommandHandler(IUnitOfWork context, IGuidGenerator guidGenerator)
         {
             _context = context;
+            _guidGenerator = guidGenerator;
         }
 
         public async Task<OperationResult<VlanCreateCommandResult>> ExecuteAsync(VlanCreateCommand command)
         {
-            var item = new VlanEntity(command.Id, command.Name);
+            var item = new VlanEntity(_guidGenerator.CreateNewSequentialGuid(), command.Name);
 
             item.CopyValuesFrom(command);
 

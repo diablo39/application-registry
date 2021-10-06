@@ -1,5 +1,4 @@
-﻿using ApplicationRegistry.Application.Attributes;
-using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Domain.Entities.Redis;
 using FluentValidation;

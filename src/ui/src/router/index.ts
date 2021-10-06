@@ -104,9 +104,19 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: "vlans" */ '../views/vlans/List.vue'),
     },
     {
-        path: '/vlans/:id',
+        path: '/vlans/:id/details',
         name: 'VlanDetails',
         component: () => import(/* webpackChunkName: "vlans" */ '../views/vlans/Details.vue'),
+    },
+    {
+        path: '/vlans/create',
+        name: 'VlanCreate',
+        component: () => import(/* webpackChunkName: "vlans" */ '../views/vlans/Create.vue'),
+    },
+    {
+        path: '/vlans/:id/edit',
+        name: 'VlanEdit',
+        component: () => import(/* webpackChunkName: "vlans" */ '../views/vlans/Edit.vue'),
     },
     // load-balancers
     {

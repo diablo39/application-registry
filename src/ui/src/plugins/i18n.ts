@@ -54,6 +54,7 @@ const messages = {
             header: "Vlans",
             detailsHeader: "Vlan {cidr}",
             machinesHeader: "Machines",
+            createHeader: "Create new VLAN",
         },
         machines: {
             header: "Machines",
