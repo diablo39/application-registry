@@ -127,8 +127,10 @@ class HttpClientImplementation {
         return this.HTTP.post(`/api/Vlans`, vlan);
     }
 
-    updateVlan(vlan: object) {
-        return this.HTTP.put(`/api/Vlans`, vlan);
+    updateVlan(vlan) {
+        const id = vlan.id;
+        delete  vlan.id;
+        return this.HTTP.put(`/api/Vlans/${id}`, vlan);
     }
 
     getMachinesPath = `/api/Machines`;

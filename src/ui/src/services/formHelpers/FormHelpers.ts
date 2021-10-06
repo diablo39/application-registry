@@ -21,7 +21,7 @@ export function serializeRow(row: object): any {
      }
  }
 export interface RowItemOptions {
-    value?: string;
+    value?: unknown;
     label: string;
     validationRules: Array<Function>;
     itemText?: string;
@@ -32,7 +32,7 @@ export interface RowItemOptions {
   
 export class RowItem implements RowItemOptions {
     
-    value: string;
+    value: unknown;
     label: string;
     validationRules: Function[];
     itemText?: string|undefined;

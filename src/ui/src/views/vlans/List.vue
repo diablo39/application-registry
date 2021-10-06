@@ -29,6 +29,8 @@
                 <template v-slot:item.actions="{ item }">
                   <v-list-item-details-action-button
                       :to="getDetailsUrl(item)"></v-list-item-details-action-button>
+                  <v-list-item-edit-action-button
+                      :to="getEditUrl(item)"></v-list-item-edit-action-button>
                 </template>
                 <template v-slot:item.cidr="{ item }"><router-link :to="getDetailsUrl(item)">{{ item.cidr }}</router-link></template>
                 <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>
