@@ -51,10 +51,11 @@ const messages = {
             endpointsHeader: "Endpoint analysis",
         },
         vlans: {
-            header: "Vlans",
-            detailsHeader: "Vlan {cidr}",
+            header: "VLANs",
+            detailsHeader: "VLAN {cidr}",
             machinesHeader: "Machines",
             createHeader: "Create new VLAN",
+            editHeader: "Edit VLAN"
         },
         machines: {
             header: "Machines",

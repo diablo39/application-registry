@@ -2,6 +2,13 @@
   <v-container>
     <v-view-details-header :isError="isError" :isLoading="isLoading"></v-view-details-header>
     <v-view-details-toolbar v-if="dataLoaded" :caption="caption" :goBackUrl="goBackUrl">
+      <template slot="endButtons">
+        <router-link :to="'/vlans/' + id + '/edit'" class="action-link">
+          <v-btn color="#1E88E5" dark>
+            <v-icon>mdi-pencil</v-icon>Edit
+          </v-btn>
+        </router-link>
+      </template>
     </v-view-details-toolbar>
 
     <v-row v-if="dataLoaded">
