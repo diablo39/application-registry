@@ -17,7 +17,7 @@
           v-bind="props"
       />
     </template>
-    <v-list dense rounded>
+    <v-list dense rounded v-if="userCanViewMenu">
       <v-list-item link to="/">
         <v-list-item-icon>
           <v-icon>mdi-home</v-icon>
@@ -25,7 +25,7 @@
         <v-list-item-title class="">Home</v-list-item-title>
       </v-list-item>
       <!-- <v-subheader class="mt-4">Global</v-subheader> -->
-      <v-list-item link to="/env">
+      <v-list-item link to="/env" >
         <v-list-item-icon>
           <v-icon>mdi-sort</v-icon>
         </v-list-item-icon>
@@ -109,6 +109,14 @@ export default Vue.component('v-side-menu', {
     drawerComputed: function () {
       return this.drawer;
     },
+    userCanViewMenu: function() {
+      const app = (this.$root as any).$data || { isAuthenticated: false, authentication:{ enabled: true }};
+      if (!app.authentication.enabled ||  app.isAuthenticated) {
+        //already signed in, we can navigate anywhere
+        return true;
+      }
+      return false;
+    }
   },
 });
 </script>

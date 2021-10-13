@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+  # api:
+  #   image: ${DOCKER_REGISTRY-}applicationregistry-api:${APPLICATIONREGISTRY_VERSION:-latest}
+  #   networks:
+  #     - application-registry
+  #   environment:
+  #     ASPNETCORE_URLS: "https://+:443;http://+:80"
+  #   healthcheck:
+  #       test: ["CMD", "curl", "-f", "http://localhost/swagger/v1/swagger.json"]
+  # ui:
+  #   image: ${DOCKER_REGISTRY-}applicationregistry-ui:${APPLICATIONREGISTRY_VERSION:-latest}
+
+  #   networks:
+  #     - application-registry
+  dev-gateway:
+    image: ${DOCKER_REGISTRY-}applicationregistry-gateway:dev-${APPLICATIONREGISTRY_VERSION:-latest}
+    build:
+      context: src/gateway
+      dockerfile: Dockerfile
+      args:
+        "CONFIGFILE": "envoy.dev.yaml" 
+    networks:
+      - application-registry
+    ports: 
+    - "10000:10000"
+    - "9903:9903"
+  keycloak:
+    image: ${DOCKER_REGISTRY-}applicationregistry-keycloak:dev-${APPLICATIONREGISTRY_VERSION:-latest}
+    build:
+      context: src/keycloak
+      dockerfile: Dockerfile
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      #KEYCLOAK_FRONTEND_URL: http://localdocker:10000/keycloak/
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_LOGLEVEL: TRACE
+    ports:
+      - "18080:8080"
+    networks:
+      - application-registry
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "11433:1433"
+    volumes:
+      - sql-volume:/var/opt/mssql
+    networks:
+      - application-registry
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$$SA_PASSWORD" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+networks:
+  application-registry:
+
+volumes:
+  sql-volume:

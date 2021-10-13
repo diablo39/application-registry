@@ -3,5 +3,8 @@ module.exports = {
         "vuetify"
     ], "configureWebpack": {
         "plugins": []
-    }
+    },
+    "devServer": {
+        "disableHostCheck": true
+    },
 }

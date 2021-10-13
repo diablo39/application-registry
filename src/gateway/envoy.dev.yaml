@@ -17,6 +17,9 @@ static_resources:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
           stat_prefix: ingress_http
           codec_type: AUTO
+          skip_xff_append: false
+          use_remote_address: true
+          xff_num_trusted_hops : 2
           route_config:
             name: local_route
             virtual_hosts:
@@ -33,8 +36,10 @@ static_resources:
                 route: { cluster: api }             
               - match: { prefix: "/api/" }
                 route: { cluster: api }
+              - match: { prefix: "/keycloak" }
+                route: { cluster: keycloak }
               - match: { prefix: "/" }
-                route: { cluster: ui }
+                route: { cluster: ui, host_rewrite_literal: localhost }
           http_filters:
           - name: envoy.filters.http.router
   clusters:
@@ -49,7 +54,8 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: 192.168.1.149
+                address: 192.168.56.1
+                # address: api
                 port_value: 5010
   - name: ui
     connect_timeout: 0.25s
@@ -62,5 +68,20 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: 192.168.1.149
+                address: host.docker.internal
+                #address: ui
                 port_value: 8080
+  - name: keycloak
+    connect_timeout: 0.25s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: ui
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: keycloak
+                port_value: 8080
+

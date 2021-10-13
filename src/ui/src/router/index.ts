@@ -18,6 +18,14 @@ const routes: Array<RouteConfig> = [
             anonymousAccess: true
         },
     },
+    {
+        path: '/unauthorized',
+        name: 'Unauthorized',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Unauthorized.vue'),
+        meta: {
+            anonymousAccess: true
+        },
+    },
 // Env ---------------------------------------------
     {
         path: '/env',
