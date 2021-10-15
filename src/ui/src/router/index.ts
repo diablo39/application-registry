@@ -219,9 +219,9 @@ router.beforeEach(async (to, from, next) => {
     Vue.nextTick() // required for first loading
         .then(function () {
             const appInstance = router.app as any;
-            const app = router.app.$data || { isAuthenticated: false, authentication:{ enabled: true }} ;
+            const app = router.app.$data || { isAuthenticated: false} ;
 
-            if (!app.authentication.enabled ||  app.isAuthenticated) {
+            if (app.isAuthenticated) {
                 //already signed in, we can navigate anywhere
                 next();
             } else if (to.matched.some(record => ! record.meta.anonymousAccess)) {

@@ -37,10 +37,10 @@ export default {
       let returnToUrl = '/';
       if (result.state !== undefined) { returnToUrl = result.state;}
       this.dialog = false;
-      this.$router.push({ path: returnToUrl });
+      await this.$router.push({ path: returnToUrl });
     } catch (e) {
       this.dialog = false;
-      this.$router.push({ name: 'Unauthorized' });
+      await this.$router.push({ name: 'Unauthorized' });
     }
   }
 }

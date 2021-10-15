@@ -26,68 +26,59 @@ const getRuntimeConfig = async () => {
   const config = await axios.create({}).get('/runtimeConfig.json')
   return config.data;
 };
-getRuntimeConfig().then(function(config){
-  Oidc.Log.logger = console;
-  Oidc.Log.level = Oidc.Log.INFO;
 
-  let globalData  = {
-    authentication:{
-      enabled: config.authentication.enabled
-    },
-    isAuthenticated: false,
-    user: '',
-  } as any;
+Oidc.Log.logger = console;
+Oidc.Log.level = Oidc.Log.INFO;
+const config = window['runtimeConfig'];
 
-  if(globalData.authentication.enabled){
-    if(config.authentication.mode.toLowerCase() === "oidc")
-    {
-      const mgr = new Oidc.UserManager({
-        authority: config.authentication.oidc.authority,
-        client_id: config.authentication.oidc.client_id,
-        redirect_uri: config.authentication.oidc.redirect_uri,
-        response_type: config.authentication.oidc.response_type,
-        scope: config.authentication.oidc.scope,
-        post_logout_redirect_uri: config.authentication.oidc.post_logout_redirect_uri,
-        userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
-      });
-      globalData = {  mgr, ...globalData };
-    } else {
-      throw new Error("Only OIDC is supported");
-    }
-  }
-
-  const globalMethods = {
-    async authenticate(returnPath) {
-      const user = await ((this as any).$root.getUser()); //see if the user details are in local storage
-      if (user) {
-        (this as any).isAuthenticated = true;
-        (this as any).user = user;
-      } else {
-        await ((this as any).$root.signIn(returnPath));
-      }
-    },
-    async getUser () {
-      try {
-        const user = await ((this as any).mgr.getUser());
-        return user;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    signIn (returnPath) {
-      returnPath ? (this as any).mgr.signinRedirect({ state: returnPath })
-          : (this as any).mgr.signinRedirect();
-    }
-  }
-
-  new Vue({
-    vuetify,
-    i18n,
-    data: globalData,
-    methods: globalMethods,
-    render: h => h(App),
-    router,
-  }).$mount('#app')
-
+const mgr = new Oidc.UserManager({
+  authority: config.authentication.oidc.authority,
+  client_id: config.authentication.oidc.client_id,
+  redirect_uri: config.authentication.oidc.redirect_uri,
+  response_type: config.authentication.oidc.response_type,
+  scope: config.authentication.oidc.scope,
+  post_logout_redirect_uri: config.authentication.oidc.post_logout_redirect_uri,
+  userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
 });
+
+const globalData  = {
+  isAuthenticated: false,
+  user: '',
+  mgr: mgr
+} as any;
+
+const globalMethods = {
+  async authenticate(returnPath) {
+    const user = await ((this as any).$root.getUser()); //see if the user details are in local storage
+    if (user) {
+      (this as any).isAuthenticated = true;
+      (this as any).user = user;
+    } else {
+      await ((this as any).$root.signIn(returnPath));
+    }
+  },
+  async getUser () {
+    try {
+      const user = await ((this as any).mgr.getUser());
+      return user;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  signIn (returnPath) {
+    returnPath ? (this as any).mgr.signinRedirect({ state: returnPath })
+        : (this as any).mgr.signinRedirect();
+  }
+}
+
+new Vue({
+  vuetify,
+  i18n,
+  data: globalData,
+  methods: globalMethods,
+  render: h => h(App),
+  router,
+}).$mount('#app');
+
+
 

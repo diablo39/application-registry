@@ -13,6 +13,7 @@ using FluentValidation.AspNetCore;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -57,7 +58,7 @@ namespace ApplicationRegistry.Web
                     options.Filters.Add(new ProducesAttribute("application/json"));
                 })
                .AddFluentValidation(conf => { })
-               .AddNewtonsoftJson(e=> { })
+               .AddNewtonsoftJson(e => { })
                .ConfigureApiBehaviorOptions(options =>
                {
                    options.InvalidModelStateResponseFactory = context =>
@@ -90,40 +91,48 @@ namespace ApplicationRegistry.Web
 
             services.RegisterCommandsAndQueries();
 
-            //services
-            //    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //    {
-            //        options.Authority = "https://dev-hdra111x.eu.auth0.com";
-            //    });
-                //.AddCookie(setup => {  })
-                //.AddOpenIdConnect("OIDC", options =>
-                //{
-                //    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://dev-hdra111x.eu.auth0.com";
+                });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+            //        .RequireAuthenticatedUser()
+            //        .Build();
+            //});
 
-                //    // Set the authority to your Auth0 domain
-                //    options.Authority = $"https://{Configuration["Auth0:Domain"]}";
 
-                //    // Configure the Auth0 Client ID and Client Secret
-                //    options.ClientId = Configuration["Auth0:ClientId"];
-                //    options.ClientSecret = Configuration["Auth0:ClientSecret"];
+            //.AddCookie(setup => { })
+            //.AddOpenIdConnect("OIDC", options =>
+            //{
+            //    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-                //    // Set response type to code
-                //    options.ResponseType = "code";
+            //    // Set the authority to your Auth0 domain
+            //    options.Authority = $"https://{Configuration["Auth0:Domain"]}";
 
-                //    // Configure the scope
-                //    options.Scope.Clear();
-                //    options.Scope.Add("openid");
+            //    // Configure the Auth0 Client ID and Client Secret
+            //    options.ClientId = Configuration["Auth0:ClientId"];
+            //    options.ClientSecret = Configuration["Auth0:ClientSecret"];
 
-                //    // Set the callback path, so Auth0 will call back to http://localhost:3000/callback
-                //    // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
-                //    options.CallbackPath = new PathString("/api/signin-oidc");
+            //    // Set response type to code
+            //    options.ResponseType = "code";
 
-                //    // Configure the Claims Issuer to be Auth0
-                //    options.ClaimsIssuer = "Auth0";
-                //    options.CorrelationCookie.SameSite = SameSiteMode.None;
-                //    options.NonceCookie.SameSite = SameSiteMode.None;
-                //});
+            //    // Configure the scope
+            //    options.Scope.Clear();
+            //    options.Scope.Add("openid");
+
+            //    // Set the callback path, so Auth0 will call back to http://localhost:3000/callback
+            //    // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
+            //    options.CallbackPath = new PathString("/api/signin-oidc");
+
+            //    // Configure the Claims Issuer to be Auth0
+            //    options.ClaimsIssuer = "Auth0";
+            //    options.CorrelationCookie.SameSite = SameSiteMode.None;
+            //    options.NonceCookie.SameSite = SameSiteMode.None;
+            //});
         }
 
 
@@ -160,7 +169,7 @@ namespace ApplicationRegistry.Web
                 c.DisplayRequestDuration();
             });
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
