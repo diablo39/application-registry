@@ -76,7 +76,7 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
 
             var count = await applicationsQuery.CountAsync();
 
-            applicationsQuery = applicationsQuery.SortAndFilter(query);
+            applicationsQuery = applicationsQuery.SortAndPage(query);
 
             var items = await applicationsQuery.ToArrayAsync();
 

@@ -29,7 +29,7 @@ namespace System.Linq
             return query.Provider.CreateQuery(orderByCall) as IQueryable<T>;
         }
 
-        public  static IQueryable<T> SortAndFilter<T,K>(this IQueryable<T> dbQuery, K query)
+        public  static IQueryable<T> SortAndPage<T,K>(this IQueryable<T> dbQuery, K query)
             where K: ListQueryParameters
         {
             if (!string.IsNullOrWhiteSpace(query.SortBy))

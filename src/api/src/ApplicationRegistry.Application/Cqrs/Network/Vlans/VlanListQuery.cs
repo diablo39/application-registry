@@ -73,7 +73,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
               .Select(MappingDomainToQueryResult());
 
             var count = await dbQuery.CountAsync();
-            var items = await dbQuery.ToArrayAsync();
+            var items = await dbQuery.SortAndPage(query).ToArrayAsync();
 
             var result = new VlanListQueryResult(items, count);
 

@@ -72,7 +72,7 @@ namespace ApplicationRegistry.Application.Queries
 
             var count = await dbQuery.CountAsync();
 
-            dbQuery = dbQuery.SortAndFilter(query);
+            dbQuery = dbQuery.SortAndPage(query);
 
             var items = await dbQuery.ToArrayAsync();
 
