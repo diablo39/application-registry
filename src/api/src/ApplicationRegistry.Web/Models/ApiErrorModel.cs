@@ -19,7 +19,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Models
             Detail = "The inputs supplied to the API are invalid";
             Status = 422;
             ConstructErrorMessages(context.ModelState);
-            Type = context.HttpContext.TraceIdentifier;
+            Type = "about:blank";
         }
 
         public ApiErrorModel(IBusinessErrorResult businessError, HttpContext context)
@@ -35,7 +35,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Models
                 modelState.AddModelError(error.Key, error.Value);
             }
             ConstructErrorMessages(modelState);
-            Type = context.TraceIdentifier;
+            Type = "about:blank";
         }
 
         public ApiErrorModel(IServerErrorResult serverError, HttpContext context)
