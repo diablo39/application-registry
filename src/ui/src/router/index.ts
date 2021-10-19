@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, {RouteConfig} from 'vue-router'
 import Home from '@/views/Home.vue'
 import Callback from '@/views/Callback.vue'
+
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -14,14 +15,6 @@ const routes: Array<RouteConfig> = [
         path: '/oidc/callback',
         name: 'Callback',
         component: Callback,
-        meta: {
-            anonymousAccess: true
-        },
-    },
-    {
-        path: '/unauthorized',
-        name: 'Unauthorized',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Unauthorized.vue'),
         meta: {
             anonymousAccess: true
         },
@@ -219,14 +212,14 @@ router.beforeEach(async (to, from, next) => {
     Vue.nextTick() // required for first loading
         .then(function () {
             const appInstance = router.app as any;
-            const app = router.app.$data || { isAuthenticated: false} ;
+            const app = router.app.$data || {isAuthenticated: false};
 
             if (app.isAuthenticated) {
                 //already signed in, we can navigate anywhere
                 next();
-            } else if (to.matched.some(record => ! record.meta.anonymousAccess)) {
+            } else if (to.matched.some(record => !record.meta.anonymousAccess)) {
                 //authentication is required. Trigger the sign in process, including the return URI
-                Vue.nextTick(function(){
+                Vue.nextTick(function () {
                     appInstance.authenticate(to.path).then(() => {
                         console.log('authenticating a protected url:' + to.path);
                         if (app.isAuthenticated) {
@@ -237,6 +230,7 @@ router.beforeEach(async (to, from, next) => {
                 });
             } else {
                 //No auth required. We can navigate
+
                 next()
             }
         })
