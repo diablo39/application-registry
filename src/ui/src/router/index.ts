@@ -9,7 +9,10 @@ const routes: Array<RouteConfig> = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+            title: "Home"
+        }
     },
     {
         path: '/oidc/callback',
@@ -200,11 +203,11 @@ const router = new VueRouter({
 })
 
 const DEFAULT_TITLE = 'Application registry';
-router.afterEach((to, from) => {
+router.afterEach((to) => {
     // Use next tick to handle router history correctly
     // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
     Vue.nextTick(() => {
-        document.title = to.meta.title || DEFAULT_TITLE;
+        document.title =  DEFAULT_TITLE + ( to.meta.title ? (' - ' + to.meta.title) : '' );
     });
 });
 
