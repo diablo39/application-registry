@@ -8,6 +8,7 @@ using ApplicationRegistry.Infrastructure;
 using ApplicationRegistry.Infrastructure.HangfireExtensions;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
 using ApplicationRegistry.Web.Areas.Api.Models;
+using ApplicationRegistry.Web.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
@@ -74,6 +75,8 @@ namespace ApplicationRegistry.Web
 
             services.Configure<SotDataProviderConfiguration>(Configuration.GetSection("SotDataProvider"));
 
+            services.Configure<ApplicationConfiguration>(Configuration);
+
             services.AddDbContext<ApplicationRegistryDatabaseContext>(options =>
                 options
                     .UseSqlServer(Configuration.GetConnectionString("ApplicationRegistry"), b => b.MigrationsAssembly("ApplicationRegistry.Web").UseHierarchyId())
@@ -95,14 +98,16 @@ namespace ApplicationRegistry.Web
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = "https://dev-hdra111x.eu.auth0.com";
+                    options.Authority = Configuration["Authentication:Authority"];
+                    options.RequireHttpsMetadata = false;
+                    options.Audience = Configuration["Authentication:Audience"];
                 });
-            //services.AddAuthorization(options =>
-            //{
-            //    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-            //        .RequireAuthenticatedUser()
-            //        .Build();
-            //});
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
 
 
             //.AddCookie(setup => { })
@@ -155,8 +160,6 @@ namespace ApplicationRegistry.Web
 
             app.UseRouting();
 
-            //app.UseAuthentication();
-
             app.UseSwagger(c =>
             {
                 //c.SerializeAsV2 = true;
@@ -169,6 +172,7 @@ namespace ApplicationRegistry.Web
                 c.DisplayRequestDuration();
             });
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

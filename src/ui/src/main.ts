@@ -8,7 +8,8 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import './components/_globals'
 import axios from 'axios'
-import Oidc from "oidc-client";
+import {HttpClient} from "@/services/httpClient/HttpClient";
+import AuthService from "@/services/AuthService";
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -23,57 +24,43 @@ Vue.prototype.$formatDateTime = function (d: string) {
 }
 
 const getRuntimeConfig = async () => {
-  const config = await axios.create({}).get('/runtimeConfig.json')
+  const config = await axios.create({}).get('/api/configuration/frontendconfiguration')
   return config.data;
 };
 
 getRuntimeConfig().then(function (config) {
-  Oidc.Log.logger = console;
-  Oidc.Log.level = Oidc.Log.INFO;
 
-  const mgr = new Oidc.UserManager({
-    authority: config.authentication.oidc.authority,
-    client_id: config.authentication.oidc.client_id,
-    redirect_uri: config.authentication.oidc.redirect_uri,
-    response_type: config.authentication.oidc.response_type,
-    scope: config.authentication.oidc.scope,
-    post_logout_redirect_uri: config.authentication.oidc.post_logout_redirect_uri,
-    userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
-    automaticSilentRenew: false,
-  });
+  const mgr = new AuthService(config);
 
   const globalData = {
-    authentication: {
-      enabled: config.authentication.enabled
-    },
     isAuthenticated: false,
-    user: '',
+    user: null,
     mgr: mgr
   } as any;
 
   const globalMethods = {
     async authenticate(returnPath) {
-      const user = await ((this as any).$root.getUser()); //see if the user details are in local storage
+      const user = await ((this as any).$root.mgr.getUser()); //see if the user details are in local storage
       if (user) {
         (this as any).isAuthenticated = true;
         (this as any).user = user;
       } else {
-        await ((this as any).$root.signIn(returnPath));
+        await ((this as any).$root.mgr.login(returnPath));
       }
     },
-    async getUser() {
-      try {
-        const user = await ((this as any).mgr.getUser());
-        return user;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    signIn(returnPath) {
-      returnPath ? (this as any).mgr.signinRedirect({ state: returnPath })
-        : (this as any).mgr.signinRedirect();
-    }
   }
+
+  HttpClient.HTTP.interceptors.request.use (
+      async (config) => {
+
+        const token = await mgr.getAccessToken(); // slightly longer running function than example above
+        if (token) config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      },
+      (error) => {
+        return Promise.reject (error);
+      }
+  );
 
   new Vue({
     vuetify,

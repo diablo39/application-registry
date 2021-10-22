@@ -4,11 +4,12 @@ import {PagingInfo} from './PagingInfo'
 
 class HttpClientImplementation {
 
-    HTTP = axios.create({
+    public HTTP = axios.create({
         //baseURL: `https://localhost:5011/`,
-        // headers: {
-        //   Authorization: 'Bearer {token}'
-        // }
+        headers: {
+//          Authorization: 'Bearer {token}'
+            headers: {'Content-Type': 'application/json'},
+        }
     })
 
     private adjustPagingInfo(pagingInfo: PagingInfo, useServerSidePagination): PagingInfo {

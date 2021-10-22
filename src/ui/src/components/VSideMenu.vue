@@ -4,7 +4,7 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title">
-          THE SOURCE
+          Application Registry
         </v-list-item-title>
       </v-list-item-content>
     </v-list-item>
@@ -110,8 +110,8 @@ export default Vue.component('v-side-menu', {
       return this.drawer;
     },
     userCanViewMenu: function() {
-      const app = (this.$root as any).$data || { isAuthenticated: false, authentication:{ enabled: true }};
-      if (!app.authentication.enabled ||  app.isAuthenticated) {
+      const app = (this.$root as any).$data || { isAuthenticated: false};
+      if (app.isAuthenticated) {
         //already signed in, we can navigate anywhere
         return true;
       }

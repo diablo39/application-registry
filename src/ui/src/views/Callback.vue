@@ -22,11 +22,26 @@
     </div>
     <v-container v-if="unauthorized">
       <v-card>
-        <v-card-text class="headline font-weight-bold">
+        <v-card-text class="font-weight-bold justify-center">
           <v-spacer></v-spacer>
           <h1 class="display-4" style="text-align: center">Unauthorized</h1>
           <v-spacer></v-spacer>
           <span style="display: block; text-align: center;">{{ errorDescription }}</span>
+          <v-row>
+            <v-col style="text-align: center;">
+              <v-btn
+                  small
+                  dense
+                  color="success"
+                  v-on:click="retry"
+              >
+                <v-icon></v-icon>
+                Retry
+              </v-btn>
+            </v-col>
+          </v-row>
+
+
         </v-card-text>
       </v-card>
     </v-container>
@@ -36,7 +51,7 @@
 
 <script>
 function getHashValue(key) {
-  const matches = location.hash.match(new RegExp(key+'=([^&]*)'));
+  const matches = location.hash.match(new RegExp(key + '=([^&]*)'));
   return matches ? matches[1] : null;
 }
 
@@ -58,9 +73,15 @@ export default {
       this.dialog = false;
       await this.$router.push({path: returnToUrl});
     } catch (e) {
-      this.errorDescription = decodeURI(getHashValue('error_description') || "" ).replaceAll('+', ' ');
+      this.errorDescription = decodeURI(getHashValue('error_description') || "").replaceAll('+', ' ');
       this.dialog = false;
       this.unauthorized = true;
+    }
+  },
+  methods:{
+    retry: function (){
+      //
+      this.$root.authenticate();
     }
   }
 }

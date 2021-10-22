@@ -4,7 +4,6 @@ using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.Application.Queries.Redis;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Web.Areas.Api.Models;
-using ApplicationRegistry.Web.Models.Redis;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

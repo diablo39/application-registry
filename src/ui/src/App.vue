@@ -8,6 +8,7 @@
       <v-menu
           :close-on-content-click="false"
           open-on-hover
+          v-if="userCanViewMenu"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -23,8 +24,8 @@
           <v-list>
             <v-list-item>
               <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>
+                <v-list-item-title>{{userName}}</v-list-item-title>
+<!--                <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>-->
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -55,7 +56,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>Log out</v-list-item-title>
+                  <v-list-item-title v-on:click="logoutEvent">Log out</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -71,13 +72,35 @@
 
 <script lang="ts">
 import Vue from "vue";
+import AuthService from "@/services/AuthService";
 
 export default Vue.extend({
   name: "app",
 
   data: () => ({
     drawer: null,
+
   }),
+  computed: {
+    userCanViewMenu: function () {
+      const app = (this.$root as any).$data || {isAuthenticated: false};
+      if (app.isAuthenticated) {
+        //already signed in, we can navigate anywhere
+        return true;
+      }
+      return false;
+    },
+    userName: function(){
+      const result = (this.$root as any).user.profile.name;
+      return result;
+    }
+  },
+
+  methods:{
+     logoutEvent: async function() {
+      await (this.$root as any).mgr.logout();
+    }
+  }
 });
 </script>
 

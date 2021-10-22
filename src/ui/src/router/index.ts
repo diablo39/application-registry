@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, {RouteConfig} from 'vue-router'
 import Home from '@/views/Home.vue'
 import Callback from '@/views/Callback.vue'
+import SilentRenew from '@/views/SilentRenew.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,14 @@ const routes: Array<RouteConfig> = [
         path: '/oidc/callback',
         name: 'Callback',
         component: Callback,
+        meta: {
+            anonymousAccess: true
+        },
+    },
+    {
+        path: '/oidc/silentrenew',
+        name: 'Callback',
+        component: SilentRenew,
         meta: {
             anonymousAccess: true
         },
