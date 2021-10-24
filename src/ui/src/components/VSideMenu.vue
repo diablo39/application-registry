@@ -39,12 +39,12 @@
         </v-list-item-icon>
         <v-list-item-title>VLAN</v-list-item-title>
       </v-list-item>
-      <v-list-item link to="/load-balancers">
-        <v-list-item-icon>
-          <v-icon>mdi-sitemap</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Load balancers</v-list-item-title>
-      </v-list-item>
+<!--      <v-list-item link to="/load-balancers">-->
+<!--        <v-list-item-icon>-->
+<!--          <v-icon>mdi-sitemap</v-icon>-->
+<!--        </v-list-item-icon>-->
+<!--        <v-list-item-title>Load balancers</v-list-item-title>-->
+<!--      </v-list-item>-->
 <!--      <v-list-item link to="/firewall-rules">-->
 <!--        <v-list-item-icon>-->
 <!--          <v-icon>mdi-security-network</v-icon>-->
