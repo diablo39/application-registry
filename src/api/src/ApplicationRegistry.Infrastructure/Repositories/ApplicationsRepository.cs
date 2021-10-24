@@ -29,9 +29,9 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
                 throw new DomainException(new KeyValuePair<string, string>("", $"Application with code: {application.Code } or id: {application.Id} already exists"));
             }
 
-            if (!CheckProjectExists(application.IdProject))
+            if (!CheckProjectExists(application.IdSystem))
             {
-                throw new DomainException(new KeyValuePair<string, string>(nameof(application.IdProject), $"Project with id: {application.IdProject} does not exist."));
+                throw new DomainException(new KeyValuePair<string, string>(nameof(application.IdSystem), $"Project with id: {application.IdSystem} does not exist."));
             }
 
             _context.Applications.Add(application);
@@ -51,7 +51,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 
         private bool CheckProjectExists(Guid id)
         {
-            return _context.Projects.Local.OfType<ProjectEntity>().Any(e => e.Id == id) || _context.Projects.Any(e => e.Id == id);
+            return _context.Systems.Local.OfType<SystemEntity>().Any(e => e.Id == id) || _context.Systems.Any(e => e.Id == id);
         }
     }
 }

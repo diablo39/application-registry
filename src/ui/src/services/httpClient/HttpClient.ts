@@ -100,22 +100,22 @@ class HttpClientImplementation {
         return this.HTTP.put(`/api/Environments/${env.id}`, env);
     }
 
-    getProjectsPath = `/api/Projects`
+    getSystemsPath = `/api/Systems`
 
-    getProjects(pagingInfo: PagingInfo = PagingInfo.Default) {
-        return this.HTTP.get(`/api/Projects`, {params: this.pagingInfoToQueryStringParams(pagingInfo)});
+    getSystems(pagingInfo: PagingInfo = PagingInfo.Default) {
+        return this.HTTP.get(`/api/Systems`, {params: this.pagingInfoToQueryStringParams(pagingInfo)});
     }
 
-    getProject(id: string) {
-        return this.HTTP.get(`/api/Projects/${id}`);
+    getSystem(id: string) {
+        return this.HTTP.get(`/api/Systems/${id}`);
     }
 
-    createProject(project) {
-        return this.HTTP.post(`/api/Projects`, project);
+    createSystem(system) {
+        return this.HTTP.post(`/api/Systems`, system);
     }
 
-    updateProject(project) {
-        return this.HTTP.put(`/api/Projects/${project.id}`, project);
+    updateSystem(system) {
+        return this.HTTP.put(`/api/Systems/${system.id}`, system);
     }
 
     getVlansPath = `/api/Vlans`;

@@ -192,7 +192,7 @@ export default Vue.extend({
     try {
 
       const [projectsResponse, environmentsResponse] = await Promise.all([
-        HttpClient.getProjects(),
+        HttpClient.getSystems(),
         HttpClient.getEnvironments()
       ]);
 

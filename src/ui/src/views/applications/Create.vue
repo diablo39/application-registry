@@ -179,7 +179,7 @@ export default Vue.extend({
   async mounted() {
     try {
       const [projectsResponse, environmentsResponse] = await Promise.all([
-        HttpClient.getProjects(),
+        HttpClient.getSystems(),
         HttpClient.getEnvironments()
       ]);
 

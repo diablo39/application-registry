@@ -22,8 +22,8 @@ namespace ApplicationRegistry.Database.Entities
         public string Name { get; set; }
 
         [Required]
-        [Column("IdProject")]
-        public Guid IdProject { get; set; }
+        [Column("IdSystem")]
+        public Guid IdSystem { get; set; }
 
 
         public DateTime CreateDate { get; private set; }
@@ -40,7 +40,7 @@ namespace ApplicationRegistry.Database.Entities
 
         #region Navigation properties
 
-        public ProjectEntity Project { get; private set; }
+        public SystemEntity System { get; private set; }
 
         public IEnumerable<ApplicationVersionEntity> Versions => _versions;
 
@@ -48,7 +48,7 @@ namespace ApplicationRegistry.Database.Entities
 
         #endregion
 
-        public ApplicationEntity(Guid id, string name, string code, Guid idProject = default, DateTime createDate = default)
+        public ApplicationEntity(Guid id, string name, string code, Guid idSystem = default, DateTime createDate = default)
         {
             if (id == default) throw new DomainException(nameof(id), "");
 
@@ -56,12 +56,12 @@ namespace ApplicationRegistry.Database.Entities
 
             if (string.IsNullOrWhiteSpace(code)) throw new DomainException(nameof(code), "Code is required");
 
-            if (idProject == default) idProject = ProjectEntity.UnasignedApplications;
+            if (idSystem == default) idSystem = SystemEntity.UnasignedApplications;
 
             Id = id;
             Name = name;
             Code = code;
-            IdProject = idProject;
+            IdSystem = idSystem;
             CreateDate = createDate == default ? DateTime.Now : createDate;
 
             Endpoints = new List<ApplicationEndpointEntity>();

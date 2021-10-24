@@ -43,12 +43,10 @@ export default class AuthService {
         });
 
         mgr.events.addSilentRenewError(function () {
-            debugger;
             console.error('Silent Renew Error：', arguments);
         });
 
         mgr.events.addUserSignedOut(function () {
-            debugger;
             alert('Going out!');
             console.log('UserSignedOut：', arguments);
             mgr.signoutRedirect().then(function (resp) {

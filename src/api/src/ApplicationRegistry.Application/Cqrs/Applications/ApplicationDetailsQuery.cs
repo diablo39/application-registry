@@ -77,7 +77,7 @@ namespace ApplicationRegistry.Application.Queries
         public async Task<OperationResult<ApplicationDetailsQueryResult>> ExecuteAsync(ApplicationDetailsQuery query)
         {
             var dbQuery = _queryModel.Applications
-                .Include(a => a.Project);
+                .Include(a => a.System);
 
 
             var applicationEntityResult = await dbQuery.Where(m => m.Id.ToString() == query.IdOrCode || m.Code == query.IdOrCode)
@@ -90,8 +90,8 @@ namespace ApplicationRegistry.Application.Queries
                     Id = applicationEntity.Id,
                     Name = applicationEntity.Name,
                     Owner = applicationEntity.Owner,
-                    ProjectId = applicationEntity.Project.Id,
-                    ProjectName = applicationEntity.Project.Name,
+                    ProjectId = applicationEntity.System.Id,
+                    ProjectName = applicationEntity.System.Name,
                     RepositoryUrl = applicationEntity.RepositoryUrl,
                     Framework = applicationEntity.Framework,
                     Endpoints = applicationEntity.Endpoints.Select(e => new ApplicationDetailsQueryResultEndpoint

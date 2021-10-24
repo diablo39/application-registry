@@ -31,10 +31,10 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
                 Guid.Parse("{9082CE90-A689-48FC-8070-B67FA3B2B446}"),
                 Guid.Parse("{0E6A3923-6FB2-4274-8076-0D8B9A3C8B29}") };
 
-            modelBuilder.Entity<ProjectEntity>().HasData(
-                new ProjectEntity(projectGuids[0], "Shared Services") { Description = "Common / infrastructural services shared by other service" },
-                new ProjectEntity(projectGuids[1], "Accounting system") { Description = "System used by accountants" },
-                new ProjectEntity(projectGuids[2], "HR system") { Description = "System that is used for HR related topics" }
+            modelBuilder.Entity<SystemEntity>().HasData(
+                new SystemEntity(projectGuids[0], "Shared Services") { Description = "Common / infrastructural services shared by other service" },
+                new SystemEntity(projectGuids[1], "Accounting system") { Description = "System used by accountants" },
+                new SystemEntity(projectGuids[2], "HR system") { Description = "System that is used for HR related topics" }
                 );
 
             modelBuilder.Entity<EnvironmentEntity>().HasData(

@@ -25,7 +25,7 @@ const routes: Array<RouteConfig> = [
     },
     {
         path: '/oidc/silentrenew',
-        name: 'Callback',
+        name: 'SilentRenew',
         component: SilentRenew,
         meta: {
             anonymousAccess: true

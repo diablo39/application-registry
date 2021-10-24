@@ -61,7 +61,7 @@ namespace ApplicationRegistry.Application.Commands
             application.BuildProcessUrls = command.BuildProcessUrls;
             application.Code = command.Code;
             application.Description = command.Description;
-            application.IdProject = command.IdProject;
+            application.IdSystem = command.IdProject;
             application.Name = command.Name;
             application.Owner = command.Owner;
             application.RepositoryUrl = command.RepositoryUrl;

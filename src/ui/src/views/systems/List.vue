@@ -59,7 +59,7 @@ export default Vue.extend({
   data() {
     return {
       caption: "systems.header",
-      httpPath: HttpClient.getProjectsPath,
+      httpPath: HttpClient.getSystemsPath,
       headers: [
         {
           text: this.$t("common.fieldNames.actions"),

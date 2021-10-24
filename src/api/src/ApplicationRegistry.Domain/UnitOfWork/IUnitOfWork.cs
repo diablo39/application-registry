@@ -36,7 +36,7 @@ namespace ApplicationRegistry.Database
 
         DbSet<EnvironmentEntity> Environments { get; }
 
-        DbSet<ProjectEntity> Projects { get; }
+        DbSet<SystemEntity> Systems { get; }
 
         DbSet<SwaggerSpecificationOperationEntity> SwaggerSpecificationOperations { get; }
 
@@ -75,7 +75,7 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
 
-        DbSet<ProjectEntity> Projects { get; }
+        DbSet<SystemEntity> Systems { get; }
 
         DbSet<DependencyEntity> Dependencies { get; }
 

@@ -31,7 +31,7 @@ namespace ApplicationRegistry.Infrastructure.UnitOfWork
 
         public DbSet<EnvironmentEntity> Environments { get; set; }
 
-        public DbSet<ProjectEntity> Projects { get; set; }
+        public DbSet<SystemEntity> Systems { get; set; }
 
         public DbSet<SwaggerSpecificationOperationEntity> SwaggerSpecificationOperations { get; set; }
 

@@ -61,7 +61,7 @@ export default Vue.extend({
     loadData() {
       this.isLoading = true;
       const id: string = this.$route.params.id;
-      HttpClient.getProject(id)
+      HttpClient.getSystem(id)
         .then((response) => {
           this.item = response.data;
         })

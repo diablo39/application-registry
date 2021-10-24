@@ -89,7 +89,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
 
             var application = context.Applications.Include(e => e.Versions).ThenInclude(e => e.Specifications).FirstOrDefault(a => a.Code == applicationCode);
             application.Should().NotBeNull("new application should be created");
-            application.IdProject.Should().Be(ProjectEntity.UnasignedApplications, "application should be added to default project");
+            application.IdSystem.Should().Be(SystemEntity.UnasignedApplications, "application should be added to default project");
 
             var version = application.Versions.FirstOrDefault(e => e.Version == command.Version);
             version.Should().NotBeNull("Version should be created");

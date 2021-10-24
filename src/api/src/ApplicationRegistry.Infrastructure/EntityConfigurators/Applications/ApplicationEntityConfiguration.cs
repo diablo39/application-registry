@@ -11,9 +11,9 @@ namespace ApplicationRegistry.Database.EntityConfigurators
         {
             builder.ToTable("Application");
 
-            builder.HasOne(e => e.Project)
+            builder.HasOne(e => e.System)
                     .WithMany(e => e.Applications)
-                    .HasForeignKey(e => e.IdProject);
+                    .HasForeignKey(e => e.IdSystem);
 
             builder.HasMany(e => e.Endpoints)
                 .WithOne(e => e.Application)

@@ -5,7 +5,7 @@ using System;
 
 namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
-    public class ProjectsRepository : RepositoryBase<ProjectEntity>, IProjectsRepository
+    public class ProjectsRepository : RepositoryBase<SystemEntity>, IProjectsRepository
     {
         public ProjectsRepository(ApplicationRegistryDatabaseContext context) : base(context)
         {

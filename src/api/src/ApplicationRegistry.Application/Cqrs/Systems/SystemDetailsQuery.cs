@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Queries
 {
-    public class ProjectDetailsQuery : IQuery
+    public class SystemDetailsQuery : IQuery
     {
         public Guid Id { get; set; }
     }
 
-    public class ProjectDetailsQueryValidator : AbstractValidator<ProjectDetailsQuery>
+    public class SystemDetailsQueryValidator : AbstractValidator<SystemDetailsQuery>
     {
-        public ProjectDetailsQueryValidator()
+        public SystemDetailsQueryValidator()
         {
 
         }
     }
 
-    public class ProjectDetailsQueryResult
+    public class SystemDetailsQueryResult
     {
         public Guid Id { get; set; }
 
@@ -36,27 +36,27 @@ namespace ApplicationRegistry.Application.Queries
 
 
 
-    public class ProjectDetailsQueryHandler : IQueryHandler<ProjectDetailsQuery, ProjectDetailsQueryResult>
+    public class SystemDetailsQueryHandler : IQueryHandler<SystemDetailsQuery, SystemDetailsQueryResult>
     {
         readonly IQueryDataModel _queryModel;
 
-        public ProjectDetailsQueryHandler(IQueryDataModel queryModel)
+        public SystemDetailsQueryHandler(IQueryDataModel queryModel)
         {
             _queryModel = queryModel;
         }
 
-        public async Task<OperationResult<ProjectDetailsQueryResult>> ExecuteAsync(ProjectDetailsQuery query)
+        public async Task<OperationResult<SystemDetailsQueryResult>> ExecuteAsync(SystemDetailsQuery query)
         {
-            ProjectDetailsQueryResult result = null;
+            SystemDetailsQueryResult result = null;
 
-            result = await _queryModel.Projects.Where(e => e.Id == query.Id).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
+            result = await _queryModel.Systems.Where(e => e.Id == query.Id).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
 
             return OperationResult.Success(result);
         }
 
-        internal static Expression<Func<ProjectEntity, ProjectDetailsQueryResult>> MappingDomainToQueryResult()
+        internal static Expression<Func<SystemEntity, SystemDetailsQueryResult>> MappingDomainToQueryResult()
         {
-            return e => new ProjectDetailsQueryResult
+            return e => new SystemDetailsQueryResult
             {
                 Id = e.Id,
                 Description = e.Description,

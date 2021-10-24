@@ -93,7 +93,7 @@ export default Vue.extend({
     loadData() {
       this.isLoading = true;
       const id: string = this.$route.params.id;
-      HttpClient.getProject(id)
+      HttpClient.getSystem(id)
         .then((response) => {
           this.item = response.data;
 
@@ -121,7 +121,7 @@ export default Vue.extend({
         description,
       };
 
-      HttpClient.updateProject(editedProject)
+      HttpClient.updateSystem(editedProject)
         .then((creationResult) => {
           if (creationResult.status === 200) {
             this.$router.push("/systems/"+creationResult.data.id);

@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Queries
 {
-    public class ProjectsListQuery : IQuery
+    public class SystemsListQuery : IQuery
     {
 
     }
 
-    public class ProjectsListQueryValidator : AbstractValidator<ProjectsListQuery>
+    public class SystemsListQueryValidator : AbstractValidator<SystemsListQuery>
     {
-        public ProjectsListQueryValidator()
+        public SystemsListQueryValidator()
         {
 
         }
     }
 
-    public class ProjectsListQueryResult : CollectionQueryResultBase<ProjectsListQueryResultItem>
+    public class SystemsListQueryResult : CollectionQueryResultBase<SystemsListQueryResultItem>
     {
-        public ProjectsListQueryResult(IEnumerable<ProjectsListQueryResultItem> items, int count)
+        public SystemsListQueryResult(IEnumerable<SystemsListQueryResultItem> items, int count)
             : base(items, count)
         {
 
@@ -34,7 +34,7 @@ namespace ApplicationRegistry.Application.Queries
 
     }
 
-    public class ProjectsListQueryResultItem
+    public class SystemsListQueryResultItem
     {
         public Guid Id { get; set; }
 
@@ -46,31 +46,31 @@ namespace ApplicationRegistry.Application.Queries
     }
 
 
-    public class ProjectsListQueryHandler : IQueryHandler<ProjectsListQuery, ProjectsListQueryResult>
+    public class SystemsListQueryHandler : IQueryHandler<SystemsListQuery, SystemsListQueryResult>
     {
         readonly IQueryDataModel _queryModel;
 
-        public ProjectsListQueryHandler(IQueryDataModel queryModel)
+        public SystemsListQueryHandler(IQueryDataModel queryModel)
         {
             _queryModel = queryModel;
         }
 
-        public async Task<OperationResult<ProjectsListQueryResult>> ExecuteAsync(ProjectsListQuery query)
+        public async Task<OperationResult<SystemsListQueryResult>> ExecuteAsync(SystemsListQuery query)
         {
             var dbQuery = _queryModel
-              .Projects
+              .Systems
               .Select(MappingDomainToQueryResult());
 
             var count = await dbQuery.CountAsync();
             var items = await dbQuery.ToArrayAsync();
 
-            var result = new ProjectsListQueryResult(items, count);
+            var result = new SystemsListQueryResult(items, count);
 
             return OperationResult.Success(result);
         }
-        internal static Expression<Func<ProjectEntity, ProjectsListQueryResultItem>> MappingDomainToQueryResult()
+        internal static Expression<Func<SystemEntity, SystemsListQueryResultItem>> MappingDomainToQueryResult()
         {
-            return e => new ProjectsListQueryResultItem
+            return e => new SystemsListQueryResultItem
             {
                 CreateDate = e.CreateDate,
                 Description = e.Description,

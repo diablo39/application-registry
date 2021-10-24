@@ -86,7 +86,7 @@ export default Vue.extend({
         description,
       };
 
-      HttpClient.createProject(newProject)
+      HttpClient.createSystem(newProject)
         .then((creationResult) => {
           if (creationResult.status === 200) {
             this.$router.push("/systems");

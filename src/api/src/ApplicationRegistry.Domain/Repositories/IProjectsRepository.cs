@@ -3,7 +3,7 @@ using System;
 
 namespace ApplicationRegistry.Domain.Persistency
 {
-    public interface IProjectsRepository : IRepository<ProjectEntity>
+    public interface IProjectsRepository : IRepository<SystemEntity>
     {
     }
 }

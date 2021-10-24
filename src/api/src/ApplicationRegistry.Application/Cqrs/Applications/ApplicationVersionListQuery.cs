@@ -91,7 +91,7 @@ namespace ApplicationRegistry.Application.Queries
 
             var dbQuery = _queryModel
               .ApplicationVersions
-              .Include(e => e.Application).ThenInclude(e => e.Project)
+              .Include(e => e.Application).ThenInclude(e => e.System)
               .Include(e => e.Environment)
               .Include(e => e.Specifications)
               .Where(e => e.IdApplication == applicationEntity.Id && (query.ShowArchived == true || e.IsArchived == false));
