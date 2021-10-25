@@ -59,11 +59,16 @@ export default Vue.extend({
       row: {
         name: new form.RowItem({
           label: "Name",
-          validationRules: [ValidationRules.required()],
+          validationRules: [
+            ValidationRules.required(),
+            ValidationRules.maxLength(400),
+          ],
         }),
         description: new form.RowItem({
           label: "Description",
-          validationRules: [],
+          validationRules: [
+            ValidationRules.maxLength(1200),
+          ],
         }),
       },
     };

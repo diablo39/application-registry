@@ -15,6 +15,9 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.Property(e => e.Name)
                 .RulesForName();
 
+            builder.Property(e => e.Description)
+                .RulesForDescription();
+
             builder.Property(e => e.Number);
 
             builder.Property(e => e.Alias)
@@ -23,9 +26,6 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.Property(e => e.Cidr)
                 .IsRequired()
                 .HasMaxLength(40);
-
-            builder.Property(e => e.Description)
-                .RulesForDescription();
 
             builder.Property(e => e.RFC)
                 .HasMaxLength(400);

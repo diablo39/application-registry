@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.Application.Services;
+﻿using ApplicationRegistry.Application.Cqrs;
+using ApplicationRegistry.Application.Services;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
@@ -20,7 +21,7 @@ namespace ApplicationRegistry.Application.Commands
     {
         public SystemCreateCommandValidator()
         {
-            RuleFor(e => e.Name).NotEmpty();
+            RuleFor(e => e.Name).IsName();
         }
     }
 
@@ -54,7 +55,6 @@ namespace ApplicationRegistry.Application.Commands
             {
                 throw;
             }
-
 
             var result = new SystemCreateCommandResult { Id = System.Id };
 
