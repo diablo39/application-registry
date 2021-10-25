@@ -38,7 +38,7 @@ namespace ApplicationRegistry.Application.Commands.Redis
 
         public async Task<OperationResult<RedisUpdateCommandResult>> ExecuteAsync(RedisUpdateCommand command)
         {
-            var redis = await _context.Redis.Include(e => e.Endpoints).FirstAsync(e => e.Id == command.Id);
+            var redis = await _context.RedisRepository.GetWithEndpointsAsync(command.Id);
 
             if (redis == null)
             {

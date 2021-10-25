@@ -45,7 +45,7 @@ namespace ApplicationRegistry.Application.Cqrs.Systems
         {
             var System = new SystemEntity(_guidGenerator.CreateNewSequentialGuid(), command.Name) { Description = command.Description };
 
-            _context.Systems.Add(System);
+            _context.SystemsRepository.Add(System);
 
             try
             {

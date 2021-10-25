@@ -6,7 +6,7 @@ using ApplicationRegistry.Infrastructure.UnitOfWork;
 
 namespace ApplicationRegistry.Infrastructure.Repositories.Network
 {
-    public class VlanRepository : RepositoryBase<VlanEntity>, IVlanRepository
+    internal class VlanRepository : RepositoryBase<VlanEntity>, IVlanRepository
     {
 
         public VlanRepository(ApplicationRegistryDatabaseContext context)

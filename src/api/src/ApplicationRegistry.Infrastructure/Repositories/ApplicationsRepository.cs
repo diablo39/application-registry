@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
-    public class ApplicationsRepository : RepositoryBase<ApplicationEntity>, IApplicationsRepository
+    internal class ApplicationsRepository : RepositoryBase<ApplicationEntity>, IApplicationsRepository
     {
         private ApplicationRegistryDatabaseContext _context;
 

@@ -7,12 +7,12 @@ using System.Text;
 
 namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
-    public abstract class RepositoryBase<T> : IRepository<T>
+    internal class RepositoryBase<T> : IRepository<T>
         where T: class
     {
         protected DbSet<T> _set;
 
-        protected RepositoryBase(DbContext context)
+        public RepositoryBase(DbContext context)
         {
             _set = context.Set<T>();
         }
@@ -22,18 +22,18 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
             _set.Add(entity);
         }
 
-        public bool Exists(Func<T, bool> predicate)
+        public virtual bool Exists(Func<T, bool> predicate)
         {
             return _set.Local.Any(predicate) || _set.Any(predicate);
         }
 
-        public bool Exists<K>(Func<K, bool> predicate)
+        public virtual bool Exists<K>(Func<K, bool> predicate)
             where K : class, T
         {
             return _set.Local.OfType<K>().Any(predicate) || _set.OfType<K>().Any(predicate);
         }
 
-        public T Get(params object[] keyValues)
+        public virtual T Get(params object[] keyValues)
         {
             return _set.Find(keyValues);
         }

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ApplicationRegistry.Infrastructure.Repositories.Network
 {
-    public class LoadBalancerRepository : RepositoryBase<LoadBalancerEntity>, ILoadBalancerRepository
+    internal class LoadBalancerRepository : RepositoryBase<LoadBalancerEntity>, ILoadBalancerRepository
     {
 
         public LoadBalancerRepository(ApplicationRegistryDatabaseContext context)

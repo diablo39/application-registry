@@ -9,7 +9,7 @@ using System.Text;
 
 namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
-    public class EnvironmentRepository : RepositoryBase<EnvironmentEntity>, IEnvironmentRepository
+    internal class EnvironmentRepository : RepositoryBase<EnvironmentEntity>, IEnvironmentRepository
     {
         public EnvironmentRepository(ApplicationRegistryDatabaseContext context) : base(context)
         {

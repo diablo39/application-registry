@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
-    public class NugetPackageRepository : RepositoryBase<NugetPackageEntity>, INugetPackageRepository
+    internal class NugetPackageRepository : RepositoryBase<NugetPackageEntity>, INugetPackageRepository
     {
         private readonly DbContext _context;
 

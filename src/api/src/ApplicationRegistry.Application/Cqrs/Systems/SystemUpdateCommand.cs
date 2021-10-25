@@ -46,12 +46,12 @@ namespace ApplicationRegistry.Application.Cqrs.Systems
 
         public async Task<OperationResult<SystemUpdateCommandResult>> ExecuteAsync(SystemUpdateCommand command)
         {
-            var System = _context.ProjectsRepository.Get(command.Id);
+            var System = _context.SystemsRepository.Get(command.Id);
 
             if (System == null)
             {
                 System = new SystemEntity(command.Id ?? Guid.NewGuid(), command.Name);
-                _context.ProjectsRepository.Add(System);
+                _context.SystemsRepository.Add(System);
             }
 
             System.Name = command.Name;

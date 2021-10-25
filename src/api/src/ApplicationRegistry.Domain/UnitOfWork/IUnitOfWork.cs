@@ -4,6 +4,7 @@ using ApplicationRegistry.Domain.Entities.Applications;
 using ApplicationRegistry.Domain.Entities.Network;
 using ApplicationRegistry.Domain.Entities.Redis;
 using ApplicationRegistry.Domain.Persistency;
+using ApplicationRegistry.Domain.Repositories;
 using ApplicationRegistry.Domain.Repositories.Network;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -75,8 +76,6 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
 
-        DbSet<SystemEntity> Systems { get; }
-
         DbSet<DependencyEntity> Dependencies { get; }
 
         DbSet<DependencyVersionEntity> DependencyVersions { get; }
@@ -84,8 +83,6 @@ namespace ApplicationRegistry.Database
         DbSet<ApplicationVersionSpecificationTextEntity> ApplicationVersionSpecificationTexts { get; }
 
         DbSet<ApplicationVersionEntity> ApplicationVersions { get; }
-
-        DbSet<RedisEntity> Redis { get; }
 
         DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; }
 
@@ -104,11 +101,13 @@ namespace ApplicationRegistry.Database
 
         IEnvironmentRepository EnvironmentsRepository { get; }
 
-        IProjectsRepository ProjectsRepository { get; }
+        ISystemsRepository SystemsRepository { get; }
 
         ILoadBalancerRepository LoadBalancerRepository { get; }
 
         IVlanRepository VlanRepository { get; }
+
+        IRedisRepository RedisRepository { get; }
 
         void FixApplicationVersion(Guid applicationId);
 

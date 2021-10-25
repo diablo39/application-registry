@@ -56,7 +56,7 @@ namespace ApplicationRegistry.Application.Commands.Redis
                 Endpoints = command.Endpoints?.Select(e => new RedisEndpointEntity { Host = e.Host, Id = e.Id, Port = e.Port, RedisId = command.Id }).ToList()
             };
 
-            _context.Redis.Add(redis);
+            _context.RedisRepository.Add(redis);
 
             await _context.SaveChangesAsync();
 
