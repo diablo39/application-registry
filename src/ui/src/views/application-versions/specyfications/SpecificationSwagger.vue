@@ -41,13 +41,20 @@ export default {
   },
   mounted() {
     const id = this.$route.params.applicationVersionId;
-
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const control = this;
     SwaggerUI({
       url: `${window.location.origin}/api/ApplicationVersions/${id}/specifications/swagger`,
       dom_id: "#swagger-ui",
       deepLinking: false,
       presets: [SwaggerUI.presets.apis],
       plugins: [SwaggerUI.plugins.DownloadUrl],
+      requestInterceptor: async function(request){
+        debugger;
+        const token = await control.$root.mgr.getAccessToken();
+        request.headers.Authorization = `Bearer ${token}`;
+        return request;
+      }
     });
   },
   components: {

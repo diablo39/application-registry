@@ -114,6 +114,15 @@
                     <img src="@/assets/swagger.png" alt="Swagger" style="width: 17px; vertical-align: middle"/>
                   </router-link>
                 </template>
+                <template v-slot:item.version="{ item }">
+                  <router-link
+                      :to="paths.getApplicationVersionDetails(application.id,item.id)"
+                      title="Details"
+                      class="action-link"
+                  >
+                    {{ item.version}}
+                  </router-link>
+                </template>
                 <template v-slot:item.collectorExecutionSucceeded="{ item }">
                   <v-dialog
                       max-width="500"
@@ -180,8 +189,8 @@ export default Vue.extend({
           filterable: false,
           groupable: false,
         },
-        {text: "Environment", value: "idEnvironment", groupable: true, filterable: true,},
         {text: "Version", value: "version", groupable: false},
+        {text: "Environment", value: "idEnvironment", groupable: true, filterable: true,},
         {text: "Collector status", value: "collectorExecutionSucceeded", groupable: false},
         {text: "Tools version", value: "toolsVersion", groupable: false},
         {text: "Create date", value: "createDate", groupable: false, filterable: false},
