@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.Application.Cqrs;
+using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
 using FluentValidation;
@@ -8,9 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Commands
+namespace ApplicationRegistry.Application.Cqrs.Systems
 {
-    
+
     public class SystemUpdateCommand : ICommand
     {
         public Guid? Id { get; set; }
@@ -25,7 +26,7 @@ namespace ApplicationRegistry.Application.Commands
         public SystemUpdateCommandValidator()
         {
             RuleFor(e => e.Id).NotNull();
-            RuleFor(e => e.Name).NotEmpty();
+            RuleFor(e => e.Name).IsName();
         }
     }
 

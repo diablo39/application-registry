@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Commands
+namespace ApplicationRegistry.Application.Cqrs.Environments
 {
     public class EnvironmentUpdateCommand : ICommand
     {

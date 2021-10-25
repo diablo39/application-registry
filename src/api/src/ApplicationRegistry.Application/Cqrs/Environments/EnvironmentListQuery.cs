@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Queries
+namespace ApplicationRegistry.Application.Cqrs.Environments
 {
     public class EnvironmentsListQuery : ListQueryParameters, IQuery
     {
@@ -72,7 +72,7 @@ namespace ApplicationRegistry.Application.Queries
             return OperationResult.Success(result);
         }
 
-        
+
 
         internal static Expression<Func<EnvironmentEntity, EnvironmentsListQueryResultItem>> MappingDomainToQueryResult()
         {

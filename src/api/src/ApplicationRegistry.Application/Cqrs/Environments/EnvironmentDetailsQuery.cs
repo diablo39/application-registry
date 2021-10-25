@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Queries
+namespace ApplicationRegistry.Application.Cqrs.Environments
 {
     public class EnvironmentDetailsQuery : IQuery
     {

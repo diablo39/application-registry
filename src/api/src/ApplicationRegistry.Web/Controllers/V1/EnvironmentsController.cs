@@ -1,5 +1,4 @@
-﻿using ApplicationRegistry.Application.Commands;
-using ApplicationRegistry.Application.Queries;
+﻿using ApplicationRegistry.Application.Cqrs.Environments;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Web.Areas.Api.Models;
 using Microsoft.AspNetCore.Http;

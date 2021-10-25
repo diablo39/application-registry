@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Commands
+namespace ApplicationRegistry.Application.Cqrs.Systems
 {
     public class SystemCreateCommand : ICommand
     {

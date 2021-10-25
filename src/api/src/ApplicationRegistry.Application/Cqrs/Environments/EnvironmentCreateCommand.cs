@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Application.Commands
+namespace ApplicationRegistry.Application.Cqrs.Environments
 {
     public class EnvironmentCreateCommand : ICommand
     {

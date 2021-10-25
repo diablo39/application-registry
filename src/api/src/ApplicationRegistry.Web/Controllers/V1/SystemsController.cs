@@ -1,6 +1,5 @@
 ﻿using ApplicationRegistry.Application.Attributes;
-using ApplicationRegistry.Application.Commands;
-using ApplicationRegistry.Application.Queries;
+using ApplicationRegistry.Application.Cqrs.Systems;
 using ApplicationRegistry.CQRS.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using System;
