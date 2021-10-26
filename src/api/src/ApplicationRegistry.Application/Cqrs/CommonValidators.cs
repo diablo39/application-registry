@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationRegistry.Application.Cqrs
+namespace FluentValidation
 {
     static class CommonValidators
     {

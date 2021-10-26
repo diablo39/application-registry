@@ -15,8 +15,8 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class ApplicationsController : ControllerBase
     {
         // GET: api/<ApplicationsController>
@@ -74,6 +74,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
         // POST api/<ApplicationsController>
         [HttpPost(Name = "CreateApplication")]
+        [ProducesResponseType(typeof(ApplicationCreateCommandResult), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Post(
             [FromBody] ApplicationCreateCommand command, 
@@ -86,6 +87,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
         // PUT api/<ApplicationsController>/5
         [HttpPut("{idOrCode}", Name = "UpdateApplication")]
+        [ProducesResponseType(typeof(ApplicationUpdateCommandResult), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Put(
             [FromRoute] Guid idOrCode, 
@@ -99,10 +101,5 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        //// DELETE api/<ApplicationsController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

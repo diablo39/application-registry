@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationRegistry.Application.Cqrs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,23 +25,6 @@ namespace ApplicationRegistry.Application.Commands
 
         public Guid IdProject { get; set; }
 
-        public IEnumerable<ApplicationCommandBaseEndpoint> Endpoints { get; }
-
-        public ApplicationCommandBase()
-        {
-            Endpoints = new List<ApplicationCommandBaseEndpoint>();
-        }
-    }
-
-    public class ApplicationCommandBaseEndpoint
-    {
-        public string EnvironmentId { get; set; }
-
-        public string Path { get; set; }
-
-        public string Comment { get; set; }
-
-        public Guid Id { get; set; }
     }
 
 }

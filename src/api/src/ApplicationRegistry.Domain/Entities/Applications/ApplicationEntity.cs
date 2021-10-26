@@ -12,19 +12,13 @@ namespace ApplicationRegistry.Database.Entities
     {
         readonly HashSet<ApplicationVersionEntity> _versions = new HashSet<ApplicationVersionEntity>();
 
-        [Required]
         public Guid Id { get; private set; }
 
-        [Required]
         public string Code { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
-        [Required]
-        [Column("IdSystem")]
         public Guid IdSystem { get; set; }
-
 
         public DateTime CreateDate { get; private set; }
 

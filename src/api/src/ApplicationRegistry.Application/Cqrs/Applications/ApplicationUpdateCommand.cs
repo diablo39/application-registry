@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.Application.Services;
+using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Domain.Entities.Applications;
 using FluentValidation;
@@ -12,16 +13,24 @@ namespace ApplicationRegistry.Application.Commands
 {
     public class ApplicationUpdateCommand : ApplicationCommandBase, ICommand
     {
+        public List<ApplicationUpdateCommandEndpoint> Endpoints { get; }
 
+        public ApplicationUpdateCommand()
+        {
+            Endpoints = new List<ApplicationUpdateCommandEndpoint>();
+        }
     }
 
-    public class ApplicationUpdateCommandValidator : AbstractValidator<ApplicationUpdateCommand>
+    public class ApplicationUpdateCommandEndpoint: ApplicationCommandBaseEndpoint
+    {
+        public Guid? Id { get; set; }
+    }
+
+    public class ApplicationUpdateCommandValidator : ApplicationCommandValidatorBase<ApplicationUpdateCommand>
     {
         public ApplicationUpdateCommandValidator()
+            : base()
         {
-            RuleFor(e => e.Name).NotEmpty();
-            RuleFor(e => e.Code).NotEmpty();
-
             //RuleForEach(e => e.Endpoints).SetValidator(new ApplicationCommandEndpointValidator());
         }
     }
@@ -43,10 +52,12 @@ namespace ApplicationRegistry.Application.Commands
     public class ApplicationUpdateCommandHandler : ICommandHandler<ApplicationUpdateCommand, ApplicationUpdateCommandResult>
     {
         private readonly IUnitOfWork _context;
+        private readonly IGuidGenerator _guidGenerator;
 
-        public ApplicationUpdateCommandHandler(IUnitOfWork context)
+        public ApplicationUpdateCommandHandler(IUnitOfWork context, IGuidGenerator guidGenerator)
         {
             _context = context;
+            _guidGenerator = guidGenerator;
         }
 
         public async Task<OperationResult<ApplicationUpdateCommandResult>> ExecuteAsync(ApplicationUpdateCommand command)
@@ -76,7 +87,7 @@ namespace ApplicationRegistry.Application.Commands
             foreach (var childModel in command.Endpoints)
             {
                 var existingChild = application.Endpoints
-                    .Where(c => c.Id == childModel.Id && c.Id != default(Guid))
+                    .Where(c => childModel.Id != null && c.Id == childModel.Id && c.Id != default)
                     .SingleOrDefault();
 
                 if (existingChild != null)
@@ -85,7 +96,6 @@ namespace ApplicationRegistry.Application.Commands
                     existingChild.EnvironmentId = childModel.EnvironmentId;
                     existingChild.Path = childModel.Path;
                 }
-                    
                 else
                 {
                     var newChild = new ApplicationEndpointEntity
@@ -94,11 +104,11 @@ namespace ApplicationRegistry.Application.Commands
                         Comment = childModel.Comment,
                         CreateDate = DateTime.Now,
                         EnvironmentId = childModel.EnvironmentId,
-                        Id = Guid.NewGuid(),
+                        Id = _guidGenerator.CreateNewSequentialGuid(),
                         Path = childModel.Path
                     };
                     application.Endpoints.Add(newChild);
-                    
+
                     _context.ApplicationEndpoints.Add(newChild);
                 }
             }
