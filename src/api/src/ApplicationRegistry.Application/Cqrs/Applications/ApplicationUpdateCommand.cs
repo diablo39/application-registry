@@ -13,6 +13,8 @@ namespace ApplicationRegistry.Application.Commands
 {
     public class ApplicationUpdateCommand : ApplicationCommandBase, ICommand
     {
+        public Guid Id { get; set; }
+
         public List<ApplicationUpdateCommandEndpoint> Endpoints { get; }
 
         public ApplicationUpdateCommand()
@@ -21,7 +23,7 @@ namespace ApplicationRegistry.Application.Commands
         }
     }
 
-    public class ApplicationUpdateCommandEndpoint: ApplicationCommandBaseEndpoint
+    public class ApplicationUpdateCommandEndpoint : ApplicationCommandBaseEndpoint
     {
         public Guid? Id { get; set; }
     }
@@ -62,7 +64,7 @@ namespace ApplicationRegistry.Application.Commands
 
         public async Task<OperationResult<ApplicationUpdateCommandResult>> ExecuteAsync(ApplicationUpdateCommand command)
         {
-            var application = await _context.Applications.Include(e => e.Endpoints).SingleOrDefaultAsync(e => e.Id == command.Id);
+            var application = await _context.ApplicationsRepository.GetWithEndpointsAsync(command.Id); 
 
             if (application == null)
             {
@@ -78,40 +80,22 @@ namespace ApplicationRegistry.Application.Commands
             application.RepositoryUrl = command.RepositoryUrl;
             application.Framework = command.Framework;
 
-            // Delete children
-            foreach (var existingChild in application.Endpoints.Where(existingChild => !command.Endpoints.Any(c => c.Id == existingChild.Id)).ToList())
+            var endpoints = command.Endpoints.Select(e => new ApplicationEndpointEntity(e.Id ?? _guidGenerator.CreateNewSequentialGuid(), e.EnvironmentId, application.Id, e.Path)
             {
-                application.Endpoints.Remove(existingChild);
-            }
+                Comment = e.Comment,
+            });
 
-            foreach (var childModel in command.Endpoints)
-            {
-                var existingChild = application.Endpoints
-                    .Where(c => childModel.Id != null && c.Id == childModel.Id && c.Id != default)
-                    .SingleOrDefault();
-
-                if (existingChild != null)
+            _context.ApplicationsRepository.UpdateChildCollection<ApplicationEndpointEntity, Guid>(
+                application,
+                e => e.Endpoints,
+                endpoints,
+                (existingItem, updatedItem) =>
                 {
-                    existingChild.Comment = childModel.Comment;
-                    existingChild.EnvironmentId = childModel.EnvironmentId;
-                    existingChild.Path = childModel.Path;
+                    existingItem.Comment = updatedItem.Comment;
+                    existingItem.EnvironmentId = updatedItem.EnvironmentId;
+                    existingItem.Path = updatedItem.Path;
                 }
-                else
-                {
-                    var newChild = new ApplicationEndpointEntity
-                    {
-                        ApplicationId = application.Id,
-                        Comment = childModel.Comment,
-                        CreateDate = DateTime.Now,
-                        EnvironmentId = childModel.EnvironmentId,
-                        Id = _guidGenerator.CreateNewSequentialGuid(),
-                        Path = childModel.Path
-                    };
-                    application.Endpoints.Add(newChild);
-
-                    _context.ApplicationEndpoints.Add(newChild);
-                }
-            }
+            );
 
             try
             {
@@ -125,7 +109,6 @@ namespace ApplicationRegistry.Application.Commands
             {
                 throw;
             }
-
 
             var result = new ApplicationUpdateCommandResult { Id = application.Id };
 

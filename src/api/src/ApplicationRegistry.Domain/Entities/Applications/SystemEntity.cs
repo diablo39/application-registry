@@ -15,7 +15,6 @@ namespace ApplicationRegistry.Database.Entities
 
         public DateTime CreateDate { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -29,6 +28,7 @@ namespace ApplicationRegistry.Database.Entities
             if (string.IsNullOrWhiteSpace(name)) throw new DomainException(nameof(name), "");
 
             Id = id;
+
             Name = name;
 
             CreateDate = createDate == default ? DateTime.Now : createDate;

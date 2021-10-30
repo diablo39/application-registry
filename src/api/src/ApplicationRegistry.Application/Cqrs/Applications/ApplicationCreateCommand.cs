@@ -60,24 +60,17 @@ namespace ApplicationRegistry.Application.Commands
                 Framework = command.Framework,
             };
 
-            _context.ApplicationsRepository.Add(application);
-
             foreach (var endpoint in command.Endpoints)
             {
-                var applicationEndpoint = new ApplicationEndpointEntity
+                var applicationEndpoint = new ApplicationEndpointEntity(_guidGenerator.CreateNewSequentialGuid(), endpoint.EnvironmentId, application.Id, endpoint.Path)
                 {
-                    ApplicationId = application.Id,
                     Comment = endpoint.Comment,
-                    CreateDate = DateTime.Now,
-                    EnvironmentId = endpoint.EnvironmentId,
-                    Id = _guidGenerator.CreateNewSequentialGuid(),
-                    Path = endpoint.Path,
                 };
 
                 application.Endpoints.Add(applicationEndpoint);
-
-                _context.ApplicationEndpoints.Add(applicationEndpoint);
             }
+
+            _context.ApplicationsRepository.Add(application);
 
             try
             {

@@ -196,7 +196,7 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
         public ApplicationRegistryDatabaseContext GetContext()
         {
             var builder = new DbContextOptionsBuilder<ApplicationRegistryDatabaseContext>()
-                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry18;Trusted_Connection=True;MultipleActiveResultSets=true", 
+                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry20;Trusted_Connection=True;MultipleActiveResultSets=true", 
                                 b => b.MigrationsAssembly("ApplicationRegistry.Web").UseHierarchyId());
 
             var options = builder.Options;
@@ -205,6 +205,7 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             var context = new TestDatabaseContext(options);
             //var deleted = context.Database.EnsureDeleted();
             var created = context.Database.EnsureCreated();
+            //context.Database.Migrate();
             return context;
         }
     }

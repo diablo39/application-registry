@@ -1,4 +1,7 @@
+using ApplicationRegistry.Database;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace ApplicationRegistry.Domain.Persistency
 {
@@ -13,5 +16,8 @@ namespace ApplicationRegistry.Domain.Persistency
         void Add(T entity);
 
         T Get(params object[] keyValues);
+
+        void UpdateChildCollection<TChild, TKey>(T entity, Expression<Func<T, IEnumerable<TChild>>> property, IEnumerable<TChild> modifiedCollection, Action<TChild, TChild> updater)
+            where TChild : IEntity<TKey>;
     }
 }

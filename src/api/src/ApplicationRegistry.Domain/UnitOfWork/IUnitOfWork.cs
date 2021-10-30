@@ -90,8 +90,6 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationEntity> Applications { get; }
 
-        DbSet<ApplicationEndpointEntity> ApplicationEndpoints { get; }
-
         DbSet<SwaggerSpecificationOperationEntity> SwaggerSpecificationOperations { get; }
 
         #endregion

@@ -9,5 +9,7 @@ namespace ApplicationRegistry.Domain.Persistency
     public interface IApplicationsRepository : IRepository<ApplicationEntity>
     {
         ApplicationEntity Get(string idOrCode);
+
+        Task<ApplicationEntity> GetWithEndpointsAsync(Guid Id);
     }
 }

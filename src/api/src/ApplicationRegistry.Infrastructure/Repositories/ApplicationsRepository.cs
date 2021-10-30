@@ -29,7 +29,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
                 throw new DomainException(new KeyValuePair<string, string>("", $"Application with code: {application.Code } or id: {application.Id} already exists"));
             }
 
-            if (!CheckProjectExists(application.IdSystem))
+            if (!CheckSystemExists(application.IdSystem))
             {
                 throw new DomainException(new KeyValuePair<string, string>(nameof(application.IdSystem), $"Project with id: {application.IdSystem} does not exist."));
             }
@@ -44,14 +44,19 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
             throw new NotImplementedException();
         }
 
+        public Task<ApplicationEntity> GetWithEndpointsAsync(Guid id)
+        {
+            return _set.Include(e => e.Endpoints).SingleOrDefaultAsync(e => e.Id == id);
+        }
+
         private bool CheckApplicationExists(Guid id, string code)
         {
             return Exists(e => e.Id == id || e.Code == code);
         }
 
-        private bool CheckProjectExists(Guid id)
+        private bool CheckSystemExists(Guid id)
         {
-            return _context.Systems.Local.OfType<SystemEntity>().Any(e => e.Id == id) || _context.Systems.Any(e => e.Id == id);
+            return _context.SystemsRepository.Exists(e => e.Id == id);
         }
     }
 }
