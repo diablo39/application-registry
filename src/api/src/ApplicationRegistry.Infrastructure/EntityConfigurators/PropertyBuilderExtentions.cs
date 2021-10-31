@@ -14,6 +14,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             return property.HasMaxLength(1200);
         }
 
+        /// <summary>
+        ///     .HasMaxLength(25)
+        ///     .IsRequired()
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
         public static PropertyBuilder<string> IsEnvironmentId(this PropertyBuilder<string> property)
         {
             return property.HasMaxLength(25).IsRequired();

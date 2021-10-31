@@ -14,13 +14,13 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
     internal class RepositoryBase<T> : IRepository<T>
         where T : class
     {
-        protected readonly DbContext _context;
+        protected readonly DbContext _dbContext;
         protected readonly DbSet<T> _set;
 
         public RepositoryBase(DbContext context)
         {
             _set = context.Set<T>();
-            _context = context;
+            _dbContext = context;
         }
 
         public virtual void Add(T entity)
@@ -47,7 +47,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
         public void UpdateChildCollection<TChild, Tkey>(T entity, Expression<Func<T, IEnumerable<TChild>>> property, IEnumerable<TChild> modifiedCollection, Action<TChild, TChild> updater)
             where TChild: IEntity<Tkey>
         {
-            var dbEntry = _context.Entry(entity);
+            var dbEntry = _dbContext.Entry(entity);
 
             var propertyName = property.GetPropertyAccess().Name;
             var dbItemsEntry = dbEntry.Collection(propertyName);
@@ -60,7 +60,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
                 if (!dbItemsMap.TryGetValue(item.Id, out var oldItem))
                 {
                     accessor.Add(entity, item, true);
-                    _context.Add(item);
+                    _dbContext.Add(item);
                 }
                 else
                 {

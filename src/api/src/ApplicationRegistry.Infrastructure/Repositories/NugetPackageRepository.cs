@@ -10,11 +10,8 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 {
     internal class NugetPackageRepository : RepositoryBase<NugetPackageEntity>, INugetPackageRepository
     {
-        private readonly DbContext _context;
-
         internal NugetPackageRepository(DbContext context) : base(context)
         {
-            _context = context;
         }
 
         public NugetPackageEntity EnsureExists(string name, string version)
@@ -25,7 +22,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
 
             result = new NugetPackageEntity(name, version);
 
-            _context.Add(result);
+            _dbContext.Add(result);
             
 
             return result;

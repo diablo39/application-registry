@@ -30,7 +30,11 @@ namespace ApplicationRegistry.Application.Commands
     {
         public ApplicationVersionCreateCommandValidator()
         {
+            RuleFor(e => e.EnvironmentId).NotEmpty().MaximumLength(25);
 
+            RuleFor(e => e.Version).NotEmpty().MaximumLength(250);
+
+            RuleFor(e => e.FrameworkVersion).MaximumLength(60);
         }
     }
 
@@ -63,15 +67,6 @@ namespace ApplicationRegistry.Application.Commands
             var result = new ApplicationVersionCreateCommandResult { Id = applicationVersion.Id };
 
             return OperationResult.Success(result);
-        }
-    }
-
-    public static class ApplicationVersionCreateCommandRegistration
-    {
-        public static void RegisterApplicationVersionCreateCommand(this IServiceCollection services)
-        {
-            services.AddScoped<ICommandHandler<ApplicationVersionCreateCommand, ApplicationVersionCreateCommandResult>, ApplicationVersionCreateCommandHandler>();
-            services.AddTransient<IValidator<ApplicationVersionCreateCommand>, ApplicationVersionCreateCommandValidator>();
         }
     }
 }

@@ -65,13 +65,4 @@ namespace ApplicationRegistry.Application.Queries
             return OperationResult.Success(result);
         }
     }
-
-    public static class SwaggerSpecyficationTextQueryRegistration
-    {
-        public static void RegisterSwaggerSpecyficationTextQuery(this IServiceCollection services)
-        {
-            services.AddTransient<IValidator<SwaggerSpecyficationTextQuery>, SwaggerSpecyficationTextQueryValidator>();
-            services.AddScoped<IQueryHandler<SwaggerSpecyficationTextQuery, SwaggerSpecyficationTextQueryResult>, SwaggerSpecyficationTextQueryHandler>();
-        }
-    }
 }

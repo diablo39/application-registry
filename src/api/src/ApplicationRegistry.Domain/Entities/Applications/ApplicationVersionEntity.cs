@@ -11,13 +11,10 @@ namespace ApplicationRegistry.Database.Entities
     {
         public Guid Id { get; set; }
 
-        [Required]
         public Guid IdApplication { get; set; }
 
-        [Required]
         public string IdEnvironment { get; set; }
 
-        [Required]
         public string Version { get; set; }
 
         public DateTime CreateDate { get; set; }
