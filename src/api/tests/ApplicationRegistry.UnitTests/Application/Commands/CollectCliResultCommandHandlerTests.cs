@@ -173,7 +173,12 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
 
             result.IsSuccess.Should().BeTrue();
 
-            var application = context.Applications.Include(e => e.Versions).ThenInclude(e => e.ApplicationVersionNugetPackageDependencies).Include(e => e.Versions).ThenInclude(e => e.Specifications).ThenInclude(e => e.SpecificationText).FirstOrDefault(a => a.Code == applicationCode);
+            var application = context.Applications
+                .Include(e => e.Versions)
+                    .ThenInclude(e => e.ApplicationVersionNugetPackageDependencies)
+                .Include(e => e.Versions)
+                    .ThenInclude(e => e.Specifications)
+                .FirstOrDefault(a => a.Code == applicationCode);
             application.Should().NotBeNull("new application should be created");
 
             var applicationVersion = application.Versions.FirstOrDefault(e => e.Version == command.Version && e.IdEnvironment == command.IdEnvironment);
@@ -185,8 +190,8 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             specification.Should().NotBeNull();
             specification.SpecificationTextHash.Should().NotBeNull();
 
-            specification.SpecificationText.Should().NotBeNull();
-            specification.SpecificationText.Specification.Should().NotBeNull()
+            specification.Specification.Should().NotBeNull();
+            specification.Specification.Should().NotBeNull()
                 .And.Be(command.Specifications[0].Specification);
 
             applicationVersion.ApplicationVersionNugetPackageDependencies.Should().HaveCount(1);
@@ -203,7 +208,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             var idEnvironment = "INT";
 
             var existingApplication = context.Applications
-                .Include(e => e.Versions).ThenInclude(e => e.Specifications).ThenInclude(e => e.SpecificationText)
+                .Include(e => e.Versions).ThenInclude(e => e.Specifications)
                 .Where(e => e.Versions.Any(v => v.Specifications.Any() && v.IdEnvironment == idEnvironment))
                 .First();
 

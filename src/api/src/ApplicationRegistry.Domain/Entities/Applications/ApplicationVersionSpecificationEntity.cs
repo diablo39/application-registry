@@ -21,10 +21,11 @@ namespace ApplicationRegistry.Database.Entities
         [Required]
         public string Code { get; set; }
 
+        public string Specification { get; set; }
+
         // navigation properties
         public ApplicationVersionEntity ApplicationVersion { get; set; }
 
-        public ApplicationVersionSpecificationTextEntity SpecificationText { get; set; }
     }
 
     public class SwaggerApplicationVersionSpecificationEntity : ApplicationVersionSpecificationEntity

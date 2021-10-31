@@ -27,8 +27,6 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
 
-        DbSet<ApplicationVersionSpecificationTextEntity> ApplicationVersionSpecificationTexts { get; }
-
         DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; }
 
         DbSet<DependencyEntity> Dependencies { get; }
@@ -79,8 +77,6 @@ namespace ApplicationRegistry.Database
         DbSet<DependencyEntity> Dependencies { get; }
 
         DbSet<DependencyVersionEntity> DependencyVersions { get; }
-
-        DbSet<ApplicationVersionSpecificationTextEntity> ApplicationVersionSpecificationTexts { get; }
 
         DbSet<ApplicationVersionEntity> ApplicationVersions { get; }
 

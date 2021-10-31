@@ -61,9 +61,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
                 var result = new List<SwaggerSpecificationOperationEntity>();
 
-                var specificationText = _context.ApplicationVersionSpecificationTexts.Find(id);
-
-                var text = specificationText.Specification;
+                var text = specification.Specification;
 
                 var contextType = specification.ContentType;
 

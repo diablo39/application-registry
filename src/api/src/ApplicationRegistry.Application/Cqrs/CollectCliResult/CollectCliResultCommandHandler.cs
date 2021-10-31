@@ -114,7 +114,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                         Id = id,
                         ContentType = specification.ContentType,
                         SpecificationType = specification.SpecificationType,
-                        SpecificationText = new ApplicationVersionSpecificationTextEntity { Specification = specification.Specification },
+                        Specification = specification.Specification,
                         SpecificationTextHash = specification.Specification.CalculateSHA256(),
                         Code = specification.Code
                     };
@@ -127,7 +127,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
                     }
 
                     _context.ApplicationVersionSpecifications.Add(specyfication);
-                    _context.ApplicationVersionSpecificationTexts.Add(specyfication.SpecificationText);
                 }
             }
 
@@ -231,7 +230,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
             var entity = _context.ApplicationVersions
                 .Include(e => e.Dependencies)
                 .Include(e => e.Specifications)
-                .ThenInclude(s => s.SpecificationText)
                 .FirstOrDefault(v => v.IdApplication == idApplication && v.IdEnvironment == idEnvironment && v.Version == version);
 
             return entity;

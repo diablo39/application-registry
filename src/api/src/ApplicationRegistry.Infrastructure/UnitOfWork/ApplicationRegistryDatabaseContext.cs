@@ -21,8 +21,6 @@ namespace ApplicationRegistry.Infrastructure.UnitOfWork
 
         public DbSet<ApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; set; }
 
-        public DbSet<ApplicationVersionSpecificationTextEntity> ApplicationVersionSpecificationTexts { get; set; }
-
         public DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; set; }
 
         public DbSet<DependencyEntity> Dependencies { get; set; }

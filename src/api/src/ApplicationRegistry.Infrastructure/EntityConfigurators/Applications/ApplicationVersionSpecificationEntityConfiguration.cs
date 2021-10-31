@@ -16,11 +16,6 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Specyfic
                 .WithMany(e => e.Specifications)
                 .HasForeignKey(e => e.IdApplicationVersion);
 
-            builder
-                .HasOne(e => e.SpecificationText)
-                .WithOne()
-                .HasPrincipalKey<ApplicationVersionSpecificationEntity>(e => e.Id);
-
             builder.HasDiscriminator<string>("SpecificationType")
                 .HasValue<SwaggerApplicationVersionSpecificationEntity>(SpecificationTypeEntity.Swagger);
 

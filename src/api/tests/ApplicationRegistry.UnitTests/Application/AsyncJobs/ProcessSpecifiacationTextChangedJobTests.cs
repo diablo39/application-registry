@@ -35,7 +35,7 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
                 Id = id,
                 IdApplicationVersion = version.Id,
                 ContentType = "application/yaml",
-                SpecificationText = new ApplicationVersionSpecificationTextEntity {Id = id, Specification = Resources.Swagger_Yaml_Correct },
+                Specification = Resources.Swagger_Yaml_Correct,
                 SpecificationType = SpecificationTypeEntity.Swagger,
                 Code = "SWAGGER",
                 SpecificationTextHash = "HASH"
@@ -69,7 +69,7 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
                 Id = id,
                 IdApplicationVersion = version.Id,
                 ContentType = "application/yaml",
-                SpecificationText = new ApplicationVersionSpecificationTextEntity { Id = id, Specification = Resources.Swagger_Yaml_Invalid },
+                Specification = Resources.Swagger_Yaml_Invalid,
                 SpecificationType = SpecificationTypeEntity.Swagger,
                 SpecificationTextHash = "HASH",
                 Code = "SWAGGER"

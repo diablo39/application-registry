@@ -49,8 +49,9 @@ namespace ApplicationRegistry.Application.Queries
         {
             SwaggerSpecyficationTextQueryResult result = null;
 
-            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSpecifications.Include(e => e.SpecificationText)
-                .FirstOrDefaultAsync(m => m.IdApplicationVersion == query.ApplicationVersionId && m.SpecificationType == SpecificationTypeEntity.Swagger);
+            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>()
+                .FirstOrDefaultAsync(m => m.IdApplicationVersion == query.ApplicationVersionId);
+
             if (applicationVersionSpecificationEntity == null)
             {
                 return OperationResult.Success(result);
@@ -59,7 +60,7 @@ namespace ApplicationRegistry.Application.Queries
             result = new SwaggerSpecyficationTextQueryResult
             {
                 ContentType = applicationVersionSpecificationEntity.ContentType,
-                Text = applicationVersionSpecificationEntity.SpecificationText.Specification
+                Text = applicationVersionSpecificationEntity.Specification
             };
 
             return OperationResult.Success(result);

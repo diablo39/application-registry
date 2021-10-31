@@ -172,11 +172,6 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             modelBuilder.Entity<ApplicationVersionSpecificationEntity>().HasData(
                 new ApplicationVersionSpecificationEntity { Id = specificationId, CreateDate = DateTime.Now, IdApplicationVersion = varsionids[0], ContentType = "application/yaml", SpecificationType = "Swagger", Code = Guid.NewGuid().ToString(), SpecificationTextHash = Resources.SwaggerDemo.CalculateSHA256() });
 
-
-            modelBuilder.Entity<ApplicationVersionSpecificationTextEntity>().HasData(
-                new ApplicationVersionSpecificationTextEntity { Id = specificationId, Specification = Resources.SwaggerDemo, CreateDate = DateTime.UtcNow }
-                );
-
             //modelBuilder.Entity<MapAutorestClientTaskEntity>().HasData(
             //    new MapAutorestClientTaskEntity
             //    {
@@ -196,7 +191,7 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
         public ApplicationRegistryDatabaseContext GetContext()
         {
             var builder = new DbContextOptionsBuilder<ApplicationRegistryDatabaseContext>()
-                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry20;Trusted_Connection=True;MultipleActiveResultSets=true", 
+                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry21;Trusted_Connection=True;MultipleActiveResultSets=true", 
                                 b => b.MigrationsAssembly("ApplicationRegistry.Web").UseHierarchyId());
 
             var options = builder.Options;
