@@ -13,7 +13,7 @@ namespace ApplicationRegistry.Database.EntityConfigurators
             builder.ToTable("Application");
 
             builder.Property(e => e.Name)
-                .RulesForName();
+                .IsName();
 
             builder.Property(e => e.Code)
                 .HasMaxLength(160)
@@ -24,7 +24,7 @@ namespace ApplicationRegistry.Database.EntityConfigurators
                 .HasColumnName("IdSystem");
 
             builder.Property(e => e.Description)
-                .RulesForDescription();
+                .IsDescription();
 
             builder.Property(e => e.Owner)
                 .HasMaxLength(250);

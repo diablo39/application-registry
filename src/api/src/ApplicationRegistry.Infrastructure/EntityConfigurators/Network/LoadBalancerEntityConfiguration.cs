@@ -15,7 +15,7 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.ToTable("LoadBalancer");
 
             builder.Property(e => e.Name)
-                .RulesForName();
+                .IsName();
 
             builder.Property(e => e.Ip)
                 .HasMaxLength(40);
@@ -24,7 +24,7 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
                 .HasMaxLength(40);
 
             builder.Property(e => e.Description)
-                .RulesForDescription();
+                .IsDescription();
 
             builder.Property(e => e.Fqdn)
                 .HasMaxLength(400);

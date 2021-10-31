@@ -13,10 +13,10 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Network
             builder.ToTable("Vlan");
 
             builder.Property(e => e.Name)
-                .RulesForName();
+                .IsName();
 
             builder.Property(e => e.Description)
-                .RulesForDescription();
+                .IsDescription();
 
             builder.Property(e => e.Number);
 

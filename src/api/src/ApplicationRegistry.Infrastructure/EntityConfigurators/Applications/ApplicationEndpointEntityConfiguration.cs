@@ -16,11 +16,11 @@ namespace ApplicationRegistry.Infrastructure.EntityConfigurators.Applications
 
             builder.HasOne(e => e.Environment).WithMany().HasForeignKey(e => e.EnvironmentId);
 
-            builder.Property(e => e.EnvironmentId).HasMaxLength(25).IsRequired();
+            builder.Property(e => e.EnvironmentId).IsEnvironmentId();
             
             builder.Property(e => e.Path).HasMaxLength(400).IsRequired();
 
-            builder.Property(e => e.Comment).RulesForDescription();
+            builder.Property(e => e.Comment).IsDescription();
         }
     }
 }
