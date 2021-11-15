@@ -31,6 +31,8 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public DateTime CreateDate { get; set; }
 
+        public bool IsVirtualDirectory { get; set; } = false;
+
         public VlanEntity(Guid id, string name, DateTime createDate = default)
         {
             Id = id;
