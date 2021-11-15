@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFrameworkCore.SqlServer.HierarchyId" Version="2.1.1" />
-    <PackageReference Include="FluentValidation" Version="9.5.3" />
+    <PackageReference Include="FluentValidation" Version="10.3.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
