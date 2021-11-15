@@ -13,9 +13,9 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  apiImageName: 'diablo39/ApplicationRegistry-API'
-  uiImageName: 'diablo39/ApplicationRegistry-UI'
-  gatewayImageName: 'diablo39/ApplicationRegistry-GATEWAY'
+  apiImageName: 'diablo39/applicationregistry-2-api'
+  uiImageName: 'diablo39/applicationregistry-2-ui'
+  gatewayImageName: 'diablo39/applicationregistry-2-gateway'
 steps:
 
 - task: Docker@2
