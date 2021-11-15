@@ -27,6 +27,7 @@ using FluentValidation;
 using ApplicationRegistry.Application.CommandDecorators;
 using ApplicationRegistry.Application.QueryDecorators;
 using ApplicationRegistry.Web.Swagger;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 
 namespace ApplicationRegistry.Web
 {
@@ -64,11 +65,12 @@ namespace ApplicationRegistry.Web
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-                c.AddFluentValidationRules();
                 c.DescribeAllParametersInCamelCase();
                 c.RequestBodyFilter<SwaggerExcludePropertyBodyFilter>();
                 
             });
+
+            services.AddFluentValidationRulesToSwagger();
         }
 
         public static void RegisterCommandsAndQueries(this IServiceCollection services)
