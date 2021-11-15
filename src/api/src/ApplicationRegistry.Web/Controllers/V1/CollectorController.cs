@@ -48,7 +48,7 @@ namespace ApplicationRegistry.Web.Controllers.Api
         [HttpPost("error")]
         public IActionResult Error([FromServices] ILogger<CollectorController> logger, [FromBody] CollectorError collectorError)
         {
-            logger.LogError("Error reported by collector for application: [{0}] {1}: {2}. Error message: ", collectorError.IdEnvironment, collectorError.ApplicationCode, collectorError.Version, collectorError.ErrorMessage);
+            logger.LogError("Error reported by collector for application: [{0}] {1}: {2}. Error message: {3}", collectorError.IdEnvironment, collectorError.ApplicationCode, collectorError.Version, collectorError.ErrorMessage);
 
             return Ok();
         }
