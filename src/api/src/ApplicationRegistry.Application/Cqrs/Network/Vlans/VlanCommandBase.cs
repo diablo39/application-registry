@@ -19,6 +19,8 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
         public string Description { get; set; }
 
         public string RFC { get; set; }
+
+        public bool IsVirtualDirectory { get; set; }
     }
 
     public abstract class VlanCommandValidatorBase<T> : AbstractValidator<T>
@@ -50,6 +52,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
             item.Name = command.Name;
             item.Number = command.Number;
             item.RFC = command.RFC;
+            item.IsVirtualDirectory = command.IsVirtualDirectory;
         }
     }
 }

@@ -44,6 +44,8 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
         public string RFC { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public bool IsVirtualDirectory { get; set; }
     }
 
 
@@ -76,7 +78,8 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
                 Id = e.Id,
                 Name = e.Name,
                 Number = e.Number,
-                RFC = e.RFC
+                RFC = e.RFC,
+                IsVirtualDirectory = e.IsVirtualDirectory,
             };
         }
     }
