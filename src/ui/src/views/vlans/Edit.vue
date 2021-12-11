@@ -21,6 +21,7 @@
               <v-my-number-field v-model="row.number"></v-my-number-field>
               <v-my-text-field v-model="row.rfc"></v-my-text-field>
               <v-my-textarea v-model="row.description"></v-my-textarea>
+              <v-my-checkbox-field v-model="row.isVirtualDirectory"></v-my-checkbox-field>
             </v-card-text>
           </v-card>
         </v-col>
@@ -123,6 +124,11 @@ export default Vue.extend({
           label: "Description",
           validationRules: [
             ValidationRules.maxLength(1200),
+          ],
+        }),
+        isVirtualDirectory: new form.RowItem({
+          label: "Is virtual directory",
+          validationRules: [
           ],
         }),
       },

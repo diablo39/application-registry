@@ -33,7 +33,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
             if (applicationDependency == null)
             {
-                _logger.LogWarning("ApplicationVersionDependecy: {0} was not found in database. Processing aborted");
+                _logger.LogWarning("ApplicationVersionDependecy: {0} was not found in database. Processing aborted", id);
                 return;
             }
             var applicationVesion = applicationDependency.ApplicationVersion;

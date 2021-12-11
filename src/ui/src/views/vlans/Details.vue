@@ -21,9 +21,16 @@
             <v-view-details-row label="Alias" :value="item.alias"></v-view-details-row>
             <v-view-details-row label="Number" :value="item.number"></v-view-details-row>
 <!--            <v-view-details-row label="Environment" :value="item.env" :to="getEnvDetailsUrl(item)"></v-view-details-row>-->
-
-
             <v-view-details-row label="Description" :value="item.description"></v-view-details-row>
+            <v-row col>
+              <v-col cols="2">
+                <p class="text-right">Is virtual directory:</p>
+              </v-col>
+              <v-col>
+                <v-icon v-if="item.isVirtualDirectory">mdi-checkbox-marked</v-icon>
+                <v-icon v-else>mdi-checkbox-blank-outline</v-icon>
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </v-col>

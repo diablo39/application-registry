@@ -22,6 +22,7 @@
                   :server-items-length="ds.totalItems"
                   :options.sync="ds.options"
                   sort-by="cidr"
+                  :item-class="getRowClass"
               >
                 <template v-slot:body.prepend="{ headers }">
                   <v-my-data-table-search-row :ds="ds" :headers="headers"/>
@@ -31,8 +32,14 @@
                       :to="getDetailsUrl(item)"></v-list-item-details-action-button>
                   <v-list-item-edit-action-button
                       :to="getEditUrl(item)"></v-list-item-edit-action-button>
+                  <v-icon style="margin-left: 10px" v-if="item.isVirtualDirectory" title="Virtual entity - for organization only">mdi-folder-network</v-icon>
                 </template>
-                <template v-slot:item.cidr="{ item }"><router-link :to="getDetailsUrl(item)">{{ item.cidr }}</router-link></template>
+                <template v-slot:item.cidr="{ item }">
+<!--                  <v-icon v-if="item.isVirtualDirectory">mdi-folder-network</v-icon>-->
+<!--                  <v-icon v-else>mdi-subdirectory-arrow-right</v-icon>-->
+                  <router-link :to="getDetailsUrl(item)">{{ item.cidr }}</router-link>
+
+                </template>
                 <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>
                 <template v-slot:item.env="{ item }">
                   <v-column-link-env :env="item.env"></v-column-link-env>
@@ -54,6 +61,24 @@ import Vue from "vue";
 import {HttpClient} from "@/services/httpClient/HttpClient";
 import Paths from '@/router/Paths';
 
+function cidrToHexString(cidr: string): string {
+  const cidrParts = cidr.split("/");
+  const ipParts = cidrParts[0].split('.');
+  const mask = cidrParts[1];
+  let result = "0x";
+
+  for (let i = 0; i < ipParts.length; i++) {
+    const part = ipParts[i];
+    const partHex = parseInt(part).toString(2);
+
+    result += partHex;
+  }
+
+  result += "/" + mask;
+
+  return result;
+}
+
 export default Vue.extend({
   props: {},
   data() {
@@ -67,9 +92,16 @@ export default Vue.extend({
           sortable: false,
           class: "actions",
           filterable: false,
-          width: 100,
+          width: 150,
         },
-        {text: "CIDR", value: "cidr",},
+        {
+          text: "CIDR", value: "cidr", sort: (a, b) => {
+            const ac = cidrToHexString(a);
+            const bc = cidrToHexString(b);
+
+            return (ac || '').localeCompare(bc);
+          }
+        },
         {text: "Name", value: "name",},
         {text: "Alias", value: "alias"},
         {text: "Number", value: "number",},
@@ -90,6 +122,16 @@ export default Vue.extend({
     getEditUrl(item): string {
       return Paths.editVlan(item.id, "list");
     },
+    getRowClass(item) {
+      return item.isVirtualDirectory ? 'is-virtual' : null;
+    },
   },
 });
+
+
 </script>
+<style type="text/css">
+.is-virtual {
+  background-color: #e9f1ff;
+}
+</style>

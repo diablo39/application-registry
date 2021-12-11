@@ -56,6 +56,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
         public DateTime CreateDate { get; set; }
 
         public bool IsVirtualDirectory { get; set; }
+
     }
 
 
