@@ -44,9 +44,11 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
             throw new NotImplementedException();
         }
 
-        public Task<ApplicationEntity> GetWithEndpointsAsync(Guid id)
-        {
-            return _set.Include(e => e.Endpoints).SingleOrDefaultAsync(e => e.Id == id);
+        public async Task<ApplicationEntity> GetWithEndpointsAsync(Guid id)
+        {            
+            var app =  await _context.Applications.Include(e=> e.Endpoints).FirstOrDefaultAsync(e => e.Id == id);
+
+            return app;
         }
 
         private bool CheckApplicationExists(Guid id, string code)

@@ -197,7 +197,7 @@ export default Vue.extend({
       ],
       applicationEndpointsHeaders:[
         {text: "Environment", value: "environmentId", groupable: true, filterable: true,},
-        {text: "Path", value: "path", groupable: false},
+        {text: "Endpoint", value: "path", groupable: false},
         {text: "Comment", value: "comment", groupable: false},
       ]
 

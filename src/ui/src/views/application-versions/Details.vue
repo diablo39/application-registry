@@ -3,8 +3,8 @@
     <v-view-details-header :isError="isError" :isLoading="isLoading"></v-view-details-header>
     <v-view-details-toolbar v-if="dataLoaded" :caption="caption" :goBackUrl="goBackUrl">
       <template slot="endButtons">
-        <router-link :to="`/applications/${item.applicationId}/application-versions/${item.id}/swagger`" class="action-link mr-4">
-          <v-btn color="success" outlined>
+        <router-link  :disabled="!item.hasSwagger" :to="`/applications/${item.applicationId}/application-versions/${item.id}/swagger`" class="action-link mr-4">
+          <v-btn color="success" outlined :disabled="!item.hasSwagger">
             <img src="@/assets/swagger.png" alt="Swagger" style="width: 17px; vertical-align: middle; margin-right: 5px;"/>
             Swagger
           </v-btn>
@@ -130,3 +130,10 @@ export default Vue.extend({
   },
 });
 </script>
+<style type="text/css">
+a[disabled] {
+  pointer-events: none;
+  cursor: crosshair !important;
+  /*cursor: default !important;*/
+}
+</style>

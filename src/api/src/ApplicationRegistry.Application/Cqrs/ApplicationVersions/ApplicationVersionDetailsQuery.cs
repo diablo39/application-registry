@@ -44,6 +44,8 @@ namespace ApplicationRegistry.Application.Queries
         public string ToolsVersion { get; set; }
 
         public string FrameworkVersion { get; set; }
+
+        public bool HasSwagger { get; set; }
     }
 
 
@@ -66,6 +68,14 @@ namespace ApplicationRegistry.Application.Queries
                     .Include(e=> e.Environment)
                     .Include(e=> e.Application)
                 .Where(e => e.Id == query.ApplicationVersionId).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
+
+            var hasSwagger = _queryModel
+                .ApplicationVersionSpecifications
+                .Where(e => e.IdApplicationVersion == query.ApplicationVersionId)
+                .OfType<SwaggerApplicationVersionSpecificationEntity>()
+                .Any();
+
+            result.HasSwagger = hasSwagger;
 
             return OperationResult.Success(result);
         }

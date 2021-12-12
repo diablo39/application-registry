@@ -166,7 +166,7 @@ export default Vue.extend({
           filterable: true,
           validationRules: [ValidationRules.required()],
         },
-        {text: "Path", value: "path", groupable: false, validationRules: [ValidationRules.required()],},
+        {text: "Endpoint", value: "path", groupable: false, validationRules: [ValidationRules.required()],},
         {text: "Comment", value: "comment", groupable: false},
       ],
     };

@@ -35,11 +35,15 @@ namespace ApplicationRegistry.Domain.Entities.Applications
 
             if (string.IsNullOrWhiteSpace(path)) throw new DomainException(nameof(path), "Path is required");
 
+            Id = id;
+
+            EnvironmentId = environmentId;
+
+            ApplicationId = applicationId;
+
             CreateDate = createDate == default ? DateTime.Now : createDate;
 
             Path = path;
-
-            EnvironmentId = environmentId;
         }
     }
 }
