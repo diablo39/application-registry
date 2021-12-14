@@ -53,6 +53,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
             item.Number = command.Number;
             item.RFC = command.RFC;
             item.IsVirtualDirectory = command.IsVirtualDirectory;
+            item.IpAsHexString = command.Cidr.Split('/')[0].ConvertIpToHexString();
         }
     }
 }

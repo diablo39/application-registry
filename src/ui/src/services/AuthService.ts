@@ -18,7 +18,8 @@ export default class AuthService {
             post_logout_redirect_uri: config.authentication.postLogoutRedirectUri,
             userStore: new Oidc.WebStorageStateStore({store: window.localStorage}),
             automaticSilentRenew: true,
-            silent_redirect_uri: config.authentication.silentRedirectUri
+            silent_redirect_uri: config.authentication.silentRedirectUri,
+            loadUserInfo: false,
         });
 
         this.mgr = mgr;

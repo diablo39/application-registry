@@ -101,6 +101,7 @@ namespace ApplicationRegistry.Web
                     options.Authority = Configuration["Authentication:Authority"];
                     options.RequireHttpsMetadata = false;
                     options.Audience = Configuration["Authentication:Audience"];
+                    options.TokenValidationParameters.ValidateIssuer = false;
                 });
             services.AddAuthorization(options =>
             {
@@ -109,35 +110,6 @@ namespace ApplicationRegistry.Web
                     .Build();
             });
 
-
-            //.AddCookie(setup => { })
-            //.AddOpenIdConnect("OIDC", options =>
-            //{
-            //    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
-            //    // Set the authority to your Auth0 domain
-            //    options.Authority = $"https://{Configuration["Auth0:Domain"]}";
-
-            //    // Configure the Auth0 Client ID and Client Secret
-            //    options.ClientId = Configuration["Auth0:ClientId"];
-            //    options.ClientSecret = Configuration["Auth0:ClientSecret"];
-
-            //    // Set response type to code
-            //    options.ResponseType = "code";
-
-            //    // Configure the scope
-            //    options.Scope.Clear();
-            //    options.Scope.Add("openid");
-
-            //    // Set the callback path, so Auth0 will call back to http://localhost:3000/callback
-            //    // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
-            //    options.CallbackPath = new PathString("/api/signin-oidc");
-
-            //    // Configure the Claims Issuer to be Auth0
-            //    options.ClaimsIssuer = "Auth0";
-            //    options.CorrelationCookie.SameSite = SameSiteMode.None;
-            //    options.NonceCookie.SameSite = SameSiteMode.None;
-            //});
         }
 
 

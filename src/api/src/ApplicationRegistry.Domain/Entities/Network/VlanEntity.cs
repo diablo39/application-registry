@@ -33,6 +33,8 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public bool IsVirtualDirectory { get; set; } = false;
 
+        public string IpAsHexString { get; set; }
+
         public VlanEntity(Guid id, string name, DateTime createDate = default)
         {
             Id = id;
