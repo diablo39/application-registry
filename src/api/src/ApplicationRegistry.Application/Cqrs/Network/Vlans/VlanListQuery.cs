@@ -57,6 +57,17 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 
         public bool IsVirtualDirectory { get; set; }
 
+        public string CidrSortField
+        {
+            get
+            {
+                var parts = this.Cidr.Split('/');
+                var ip = parts[0].ConvertIpToHexString();
+                var cidr = parts[1].ConvertIpToHexString();
+                return String.Concat(ip, '/', cidr);
+            }
+        }
+
     }
 
 

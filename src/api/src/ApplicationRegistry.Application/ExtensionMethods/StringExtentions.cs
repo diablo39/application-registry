@@ -11,8 +11,6 @@ namespace System
         {
             var parts = ip.Split('.');
 
-            if (parts.Length != 4) throw new ArgumentException(nameof(ip));
-
             var partsInt = parts.Select(e => int.TryParse(e, out var partInt) ? partInt : throw new ArgumentException(nameof(ip)));
 
             var sb = new StringBuilder("0x");

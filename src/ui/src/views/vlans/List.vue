@@ -22,7 +22,7 @@
                   :server-items-length="ds.totalItems"
                   :options.sync="ds.options"
                   sort-by="cidr"
-                  :item-class="getRowClass"
+                  :custom-sort="customSort"
               >
                 <template v-slot:body.prepend="{ headers }">
                   <v-my-data-table-search-row :ds="ds" :headers="headers"/>
@@ -32,13 +32,12 @@
                       :to="getDetailsUrl(item)"></v-list-item-details-action-button>
                   <v-list-item-edit-action-button
                       :to="getEditUrl(item)"></v-list-item-edit-action-button>
-                  <v-icon style="margin-left: 10px" v-if="item.isVirtualDirectory" title="Virtual entity - for organization only">mdi-folder-network</v-icon>
+                  <v-icon style="margin-left: 10px" v-if="item.isVirtualDirectory"
+                          title="Virtual entity - for organization only">mdi-folder-network
+                  </v-icon>
                 </template>
                 <template v-slot:item.cidr="{ item }">
-<!--                  <v-icon v-if="item.isVirtualDirectory">mdi-folder-network</v-icon>-->
-<!--                  <v-icon v-else>mdi-subdirectory-arrow-right</v-icon>-->
                   <router-link :to="getDetailsUrl(item)">{{ item.cidr }}</router-link>
-
                 </template>
                 <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>
                 <template v-slot:item.env="{ item }">
@@ -61,24 +60,6 @@ import Vue from "vue";
 import {HttpClient} from "@/services/httpClient/HttpClient";
 import Paths from '@/router/Paths';
 
-function cidrToHexString(cidr: string): string {
-  const cidrParts = cidr.split("/");
-  const ipParts = cidrParts[0].split('.');
-  const mask = cidrParts[1];
-  let result = "0x";
-
-  for (let i = 0; i < ipParts.length; i++) {
-    const part = ipParts[i];
-    const partHex = parseInt(part).toString(2);
-
-    result += partHex;
-  }
-
-  result += "/" + mask;
-
-  return result;
-}
-
 export default Vue.extend({
   props: {},
   data() {
@@ -94,14 +75,7 @@ export default Vue.extend({
           filterable: false,
           width: 150,
         },
-        {
-          text: "CIDR", value: "cidr", sort: (a, b) => {
-            const ac = cidrToHexString(a);
-            const bc = cidrToHexString(b);
-
-            return (ac || '').localeCompare(bc);
-          }
-        },
+        {text: "CIDR", value: "cidr"},
         {text: "Name", value: "name",},
         {text: "Alias", value: "alias"},
         {text: "Number", value: "number",},
@@ -122,8 +96,23 @@ export default Vue.extend({
     getEditUrl(item): string {
       return Paths.editVlan(item.id, "list");
     },
-    getRowClass(item) {
-      return item.isVirtualDirectory ? 'is-virtual' : null;
+    customSort(items, index, isDesc) {
+      items.sort((a, b) => {
+        if (index[0] === "cidr") {
+          if (!isDesc[0]) {
+            return a['cidrSortField'] < b['cidrSortField'] ? -1 : 1;
+          } else {
+            return b['cidrSortField'] < a['cidrSortField'] ? -1 : 1;
+          }
+        } else {
+          if (!isDesc[0]) {
+            return a[index] < b[index] ? -1 : 1;
+          } else {
+            return b[index] < a[index] ? -1 : 1;
+          }
+        }
+      });
+      return items;
     },
   },
 });

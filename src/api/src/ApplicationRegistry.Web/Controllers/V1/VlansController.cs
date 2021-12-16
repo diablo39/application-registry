@@ -20,7 +20,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
     public class VlansController : ControllerBase
     {
         // GET: api/vlans
-        [HttpGet(Name ="GetVlanList")]
+        [HttpGet(Name = "GetVlanList")]
         [ProducesResponseType(typeof(VlanListQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<VlanListQuery, VlanListQueryResult> handler,
@@ -59,13 +59,33 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
         [HttpPut("{id}", Name = "UpdateVlan")]
         [ProducesResponseType(typeof(VlanUpdateCommandResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Put([Required] Guid? id, 
-            [FromBody][SwaggerIgnoreProperty("Id")] VlanUpdateCommand command, 
+        public async Task<IActionResult> Put([Required] Guid? id,
+            [FromBody][SwaggerIgnoreProperty("Id")] VlanUpdateCommand command,
             [FromServices] ICommandHandler<VlanUpdateCommand, VlanUpdateCommandResult> handler)
         {
             command.Id = id.Value;
 
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+
+            return result;
+        }
+
+        // GET: api/vlans
+        [HttpGet("{id}/children", Name = "GetVlanChildrenList")]
+        [ProducesResponseType(typeof(VlanChildrenListQueryResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetChildren(
+            [Required] Guid? id,
+            [FromServices] IQueryHandler<VlanChildrenListQuery, VlanChildrenListQueryResult> handler,
+            [FromQuery] string sortBy = null,
+            [FromQuery] bool? sortDesc = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int itemsPerPage = -1
+            )
+        {
+
+            var query = new VlanChildrenListQuery { Id = id, Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
+
+            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
             return result;
         }

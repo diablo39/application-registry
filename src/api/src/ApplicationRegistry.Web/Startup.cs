@@ -1,18 +1,12 @@
 ﻿using ApplicationRegistry.Application;
-using ApplicationRegistry.Application.CommandDecorators;
-using ApplicationRegistry.Application.QueryDecorators;
 using ApplicationRegistry.Application.Services;
-using ApplicationRegistry.CQRS.Abstraction;
-using ApplicationRegistry.Database;
 using ApplicationRegistry.Infrastructure;
 using ApplicationRegistry.Infrastructure.HangfireExtensions;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
 using ApplicationRegistry.Web.Areas.Api.Models;
 using ApplicationRegistry.Web.Models;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
-using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -20,8 +14,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -33,8 +25,6 @@ namespace ApplicationRegistry.Web
         private IConfiguration Configuration { get; }
 
         private IWebHostEnvironment Env { get; }
-
-
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -103,6 +93,7 @@ namespace ApplicationRegistry.Web
                     options.Audience = Configuration["Authentication:Audience"];
                     options.TokenValidationParameters.ValidateIssuer = false;
                 });
+
             services.AddAuthorization(options =>
             {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
@@ -144,8 +135,8 @@ namespace ApplicationRegistry.Web
                 c.DisplayRequestDuration();
             });
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
