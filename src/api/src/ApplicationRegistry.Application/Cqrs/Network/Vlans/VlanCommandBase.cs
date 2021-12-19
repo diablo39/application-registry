@@ -3,6 +3,8 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
+
 
 namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 {
@@ -34,7 +36,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 
             RuleFor(e => e.Alias).MaximumLength(400);
 
-            RuleFor(e => e.Cidr).NotNull().NotEmpty().MaximumLength(40);
+            RuleFor(e => e.Cidr).NotNull().NotEmpty().MaximumLength(40).Must(v => !String.IsNullOrWhiteSpace(v) && v.Contains('/') && v.Split('.').Length == 4 && IPNetwork.TryParse(v, out _)).WithMessage("Provided value is not valid CIDR. Ex. value: 10.0.0.0/8");
 
             RuleFor(e => e.Description).IsDescription();
 
