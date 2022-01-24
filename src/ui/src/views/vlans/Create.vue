@@ -105,6 +105,7 @@ export default Vue.extend({
           label: "Is virtual directory",
           validationRules: [
           ],
+          converter: form.BooleanConverter,
         }),
       },
     };
