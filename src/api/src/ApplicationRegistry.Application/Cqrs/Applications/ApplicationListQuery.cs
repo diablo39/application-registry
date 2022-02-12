@@ -13,7 +13,7 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
 {
     public class ApplicationsListQuery : ListQueryParameters, IQuery
     {
-
+        public Guid? SystemId { get; set; }
     }
 
     public class ApplicationsListQueryValidator : AbstractValidator<ApplicationsListQuery>
@@ -42,9 +42,9 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
 
         public string Name { get; set; }
 
-        public Guid ProjectId { get; set; }
+        public Guid SystemId { get; set; }
 
-        public string ProjectName { get; set; }
+        public string SystemName { get; set; }
 
         public string Description { get; set; }
 
@@ -74,6 +74,11 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
                 .Applications
                 .Select(MappingDomainToQueryResult());
 
+            if(query.SystemId.HasValue && query.SystemId != default)
+            {
+                applicationsQuery = applicationsQuery.Where(e => e.SystemId == query.SystemId);
+            }
+
             var count = await applicationsQuery.CountAsync();
 
             applicationsQuery = applicationsQuery.SortAndPage(query);
@@ -97,8 +102,8 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
                 Description = e.Description,
                 Name = e.Name,
                 Owner = e.Owner,
-                ProjectName = e.System.Name,
-                ProjectId = e.IdSystem,
+                SystemName = e.System.Name,
+                SystemId = e.IdSystem,
                 RepositoryUrl = e.RepositoryUrl,
                 Code = e.Code,
                 Framework = e.Framework ?? "",

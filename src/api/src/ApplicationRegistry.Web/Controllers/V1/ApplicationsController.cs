@@ -28,9 +28,10 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             [FromQuery] string sortBy = null,
             [FromQuery] bool? sortDesc = null,
             [FromQuery] int page = 1,
-            [FromQuery] int itemsPerPage = -1)
+            [FromQuery] int itemsPerPage = -1,
+            [FromQuery] Guid? systemId = null)
         {
-            ApplicationsListQuery query = new ApplicationsListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
+            ApplicationsListQuery query = new ApplicationsListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc, SystemId = systemId };
             var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
             return result;

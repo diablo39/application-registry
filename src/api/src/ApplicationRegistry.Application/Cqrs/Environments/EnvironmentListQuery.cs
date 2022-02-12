@@ -79,11 +79,9 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
             return e => new EnvironmentsListQueryResultItem
             {
                 Id = e.Id,
-                //CreateDate = e.CreateDate,
-                //Description = e.Description
+                CreateDate = e.CreateDate,
+                Description = e.Description
             };
         }
-
-
     }
 }

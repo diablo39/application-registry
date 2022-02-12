@@ -50,7 +50,6 @@ export default {
       presets: [SwaggerUI.presets.apis],
       plugins: [SwaggerUI.plugins.DownloadUrl],
       requestInterceptor: async function(request){
-        debugger;
         const token = await control.$root.mgr.getAccessToken();
         request.headers.Authorization = `Bearer ${token}`;
         return request;

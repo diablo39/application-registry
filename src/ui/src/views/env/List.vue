@@ -5,12 +5,7 @@
         <v-card>
           <v-section-toolbar :caption="caption">
             <template slot="endButtons">
-              <router-link :to="getCreateUrl()" class="action-link">
-                <v-btn color="success">
-                  <v-icon>mdi-plus</v-icon>
-                  Create
-                </v-btn>
-              </router-link>
+              <v-create-button :to="getCreateUrl()"></v-create-button>
             </template>
           </v-section-toolbar>
           <v-ajax-list-data-source :httpPath="httpPath" :options="options" :use-server-side-pagination="false">

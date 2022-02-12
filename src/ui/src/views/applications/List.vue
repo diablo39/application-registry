@@ -36,8 +36,8 @@
                   <router-link :to="getDetailsUrl(item)">{{ item.name }}</router-link>
                 </template>
                 <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>
-                <template v-slot:item.projectName="{ item }">
-                  <router-link :to="getProjectDetailsUrl(item)">{{ item.projectName }}</router-link>
+                <template v-slot:item.systemName="{ item }">
+                  <router-link :to="getProjectDetailsUrl(item)">{{ item.systemName }}</router-link>
                 </template>
                 <template v-slot:no-data v-if="ds.isError">
                   <div v-if="ds.isError">{{ $t('common.errorMessage') }}</div>
@@ -74,7 +74,7 @@ export default Vue.extend({
         {text: "Name", value: "name", groupable: false,},
         {text: "Code", value: "code", groupable: false,},
         {text: "Owner", value: "owner", groupable: false,},
-        {text: "System", value: "projectName" , groupable: true},
+        {text: "System", value: "systemName" , groupable: true},
         {text: "Framework", value: "framework" , groupable: true},
       ],
     };
@@ -90,7 +90,7 @@ export default Vue.extend({
       return Paths.editApplication(item.id, "list");
     },
     getProjectDetailsUrl(item): string {
-      return Paths.getSystemDetails(item.projectId);
+      return Paths.getSystemDetails(item.systemId);
     },
   },
 });
