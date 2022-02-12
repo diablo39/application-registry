@@ -35,18 +35,14 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Redis
         {
             builder.ToTable("Redis", "BulkLoad");
 
-            builder.HasOne(e => e.RedisDeploymentType)
-                    .WithMany()
-                    .HasForeignKey(e => e.RedisDeploymentTypeId);
 
             builder.HasMany(e => e.Endpoints)
                 .WithOne()
                 .HasForeignKey(e => e.RedisId);
 
-            builder
-                .HasOne(a => a.Environment)
-                .WithMany()
-                .HasForeignKey(e => e.IdEnvironment);
+            builder.Property(e => e.RedisDeploymentTypeId).HasMaxLength(450);
+            builder.Property(e => e.IdEnvironment).HasMaxLength(25);
+
         }
     }
 }
