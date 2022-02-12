@@ -3,9 +3,7 @@
     <v-col>
       <v-card>
         <v-toolbar flat>
-          <v-btn v-if="goBackUrl" icon @click="goBack">
-            <v-icon>mdi-arrow-left-bold</v-icon>
-          </v-btn>
+          <v-back-button :goBackUrl="goBackUrl"/>
           <v-toolbar-title class="headline">{{ caption }}</v-toolbar-title>
           <v-spacer></v-spacer>
           <slot name="endButtons"></slot>

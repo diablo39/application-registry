@@ -3,9 +3,7 @@
     <v-col>
       <v-card>
         <v-toolbar flat>
-          <v-btn v-if="goBackUrl" icon @click="goBack">
-            <v-icon>mdi-arrow-left-bold</v-icon>
-          </v-btn>
+          <v-back-button :goBackUrl="goBackUrl"/>
           <v-toolbar-title class="headline">{{ caption }}</v-toolbar-title>
         </v-toolbar>
       </v-card>
@@ -25,10 +23,6 @@ export default Vue.component('v-edit-toolbar', {
       type: String
     },
   },
-  methods: {
-    goBack() {
-      this.$router.push(this.goBackUrl);
-    },
-  },
+
 });
 </script>
