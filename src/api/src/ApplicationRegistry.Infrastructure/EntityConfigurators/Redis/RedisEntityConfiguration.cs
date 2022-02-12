@@ -28,21 +28,4 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Redis
                 .HasForeignKey(e => e.IdEnvironment);
         }
     }
-
-    class BulkLoadRedisEntityConfiguration : EntityTypeConfigurationBase<BulkLoadRedisEntity>
-    {
-        public override void ConfigureEntity(EntityTypeBuilder<BulkLoadRedisEntity> builder)
-        {
-            builder.ToTable("Redis", "BulkLoad");
-
-
-            builder.HasMany(e => e.Endpoints)
-                .WithOne()
-                .HasForeignKey(e => e.RedisId);
-
-            builder.Property(e => e.RedisDeploymentTypeId).HasMaxLength(450);
-            builder.Property(e => e.IdEnvironment).HasMaxLength(25);
-
-        }
-    }
 }
