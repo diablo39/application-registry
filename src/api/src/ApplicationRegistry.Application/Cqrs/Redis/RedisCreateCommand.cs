@@ -41,7 +41,7 @@ namespace ApplicationRegistry.Application.Commands.Redis
         {
             var redis = new RedisEntity
             {
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.UtcNow,
                 Description = command.Description,
                 GroupId = command.GroupId,
                 Id = command.Id,

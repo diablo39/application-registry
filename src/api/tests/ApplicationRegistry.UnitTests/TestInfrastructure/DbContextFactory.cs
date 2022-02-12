@@ -38,11 +38,11 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
                 );
 
             modelBuilder.Entity<EnvironmentEntity>().HasData(
-                new EnvironmentEntity { Id = "INT", CreateDate = DateTime.Now, Description = "INT env" }
-                , new EnvironmentEntity { Id = "UAT", CreateDate = DateTime.Now, Description = "UAT env" }
-                , new EnvironmentEntity { Id = "QUA", CreateDate = DateTime.Now, Description = "QUA env" }
-                , new EnvironmentEntity { Id = "PRD", CreateDate = DateTime.Now, Description = "PRD env" }
-                , new EnvironmentEntity { Id = "Analytics", CreateDate = DateTime.Now, Description = "Unused env. To be removed" }
+                new EnvironmentEntity { Id = "INT", CreateDate = DateTime.UtcNow, Description = "INT env" }
+                , new EnvironmentEntity { Id = "UAT", CreateDate = DateTime.UtcNow, Description = "UAT env" }
+                , new EnvironmentEntity { Id = "QUA", CreateDate = DateTime.UtcNow, Description = "QUA env" }
+                , new EnvironmentEntity { Id = "PRD", CreateDate = DateTime.UtcNow, Description = "PRD env" }
+                , new EnvironmentEntity { Id = "Analytics", CreateDate = DateTime.UtcNow, Description = "Unused env. To be removed" }
                 );
             var applications = new Guid[]{
                 Guid.Parse("{EA1F66CB-FBC0-42E6-8021-FB424020F15F}"),
@@ -96,21 +96,21 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             };
 
             modelBuilder.Entity<ApplicationVersionEntity>().HasData(
-                new ApplicationVersionEntity { Id = varsionids[0], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[1], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.0_12345", CreateDate = DateTime.Now, IsArchived = true },
-                new ApplicationVersionEntity { Id = varsionids[2], IdApplication = applications[0], IdEnvironment = "UAT", Version = "1.0_12345", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[3], IdApplication = applications[0], IdEnvironment = "QUA", Version = "1.0_12345", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[4], IdApplication = applications[0], IdEnvironment = "PRD", Version = "1.0_12345", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[5], IdApplication = applications[1], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[6], IdApplication = applications[3], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[7], IdApplication = applications[4], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[8], IdApplication = applications[5], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[9], IdApplication = applications[2], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[10], IdApplication = applications[6], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[11], IdApplication = applications[7], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[12], IdApplication = applications[8], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[13], IdApplication = applications[9], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.Now, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[14], IdApplication = applications[0], IdEnvironment = "Analytics", Version = "RODO", CreateDate = DateTime.Now, IsArchived = false }
+                new ApplicationVersionEntity { Id = varsionids[0], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[1], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = true },
+                new ApplicationVersionEntity { Id = varsionids[2], IdApplication = applications[0], IdEnvironment = "UAT", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[3], IdApplication = applications[0], IdEnvironment = "QUA", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[4], IdApplication = applications[0], IdEnvironment = "PRD", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[5], IdApplication = applications[1], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[6], IdApplication = applications[3], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[7], IdApplication = applications[4], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[8], IdApplication = applications[5], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[9], IdApplication = applications[2], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[10], IdApplication = applications[6], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[11], IdApplication = applications[7], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[12], IdApplication = applications[8], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[13], IdApplication = applications[9], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
+                new ApplicationVersionEntity { Id = varsionids[14], IdApplication = applications[0], IdEnvironment = "Analytics", Version = "RODO", CreateDate = DateTime.UtcNow, IsArchived = false }
                 );
 
             //var simpleDependencies = new[] {
@@ -126,8 +126,8 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             //};
 
             //modelBuilder.Entity<DependencyVersionEntity>().HasData(
-            //    new DependencyVersionEntity { Id = dependencyVersion[0], IdDependency = string.Concat("NUGET", ":", "System"), Version = "2.1.0", CreateDate = DateTime.Now, },
-            //    new DependencyVersionEntity { Id = dependencyVersion[1], IdDependency = string.Concat("NUGET", ":", "Microsoft.Extensions.Logging"), Version = "1.1.4", CreateDate = DateTime.Now }
+            //    new DependencyVersionEntity { Id = dependencyVersion[0], IdDependency = string.Concat("NUGET", ":", "System"), Version = "2.1.0", CreateDate = DateTime.UtcNow, },
+            //    new DependencyVersionEntity { Id = dependencyVersion[1], IdDependency = string.Concat("NUGET", ":", "Microsoft.Extensions.Logging"), Version = "1.1.4", CreateDate = DateTime.UtcNow }
             //);
 
 
@@ -170,7 +170,7 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             var specificationId = Guid.Parse("{FFE22DAE-443D-4AFD-8CAE-DCA4F1F7883B}");
 
             modelBuilder.Entity<ApplicationVersionSpecificationEntity>().HasData(
-                new ApplicationVersionSpecificationEntity { Id = specificationId, CreateDate = DateTime.Now, IdApplicationVersion = varsionids[0], ContentType = "application/yaml", SpecificationType = "Swagger", Code = Guid.NewGuid().ToString(), SpecificationTextHash = Resources.SwaggerDemo.CalculateSHA256() });
+                new ApplicationVersionSpecificationEntity { Id = specificationId, CreateDate = DateTime.UtcNow, IdApplicationVersion = varsionids[0], ContentType = "application/yaml", SpecificationType = "Swagger", Code = Guid.NewGuid().ToString(), SpecificationTextHash = Resources.SwaggerDemo.CalculateSHA256() });
 
             //modelBuilder.Entity<MapAutorestClientTaskEntity>().HasData(
             //    new MapAutorestClientTaskEntity

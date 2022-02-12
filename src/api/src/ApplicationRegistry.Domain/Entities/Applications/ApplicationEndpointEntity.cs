@@ -41,7 +41,7 @@ namespace ApplicationRegistry.Domain.Entities.Applications
 
             ApplicationId = applicationId;
 
-            CreateDate = createDate == default ? DateTime.Now : createDate;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
 
             Path = path;
         }

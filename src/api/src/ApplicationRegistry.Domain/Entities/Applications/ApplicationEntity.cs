@@ -56,7 +56,7 @@ namespace ApplicationRegistry.Database.Entities
             Name = name;
             Code = code;
             IdSystem = idSystem;
-            CreateDate = createDate == default ? DateTime.Now : createDate;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
 
             Endpoints = new List<ApplicationEndpointEntity>();
         }

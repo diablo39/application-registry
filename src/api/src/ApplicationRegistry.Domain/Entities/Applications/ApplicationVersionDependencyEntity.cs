@@ -51,7 +51,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public static ApplicationVersionDependencyEntity Create(Guid idApplicationVersion, string idDependency, string idDependencyVersion = null)
         {
-            return new ApplicationVersionDependencyEntity { Id = Guid.NewGuid(), CreateDate = DateTime.Now, IdApplicationVersion = idApplicationVersion, IdDependency = idDependency, IdDependencyVersion = idDependencyVersion };
+            return new ApplicationVersionDependencyEntity { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, IdApplicationVersion = idApplicationVersion, IdDependency = idDependency, IdDependencyVersion = idDependencyVersion };
         }
     }
 }

@@ -56,7 +56,7 @@ namespace ApplicationRegistry.Application.Commands
 
             var logEntry = new CollectorLogEntity
             {
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.UtcNow,
                 Application = command.Application,
                 Message = command.Message,
                 Version = command.Version,

@@ -31,7 +31,7 @@ namespace ApplicationRegistry.Database.Entities
 
             Name = name;
 
-            CreateDate = createDate == default ? DateTime.Now : createDate;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
         }
     }
 }

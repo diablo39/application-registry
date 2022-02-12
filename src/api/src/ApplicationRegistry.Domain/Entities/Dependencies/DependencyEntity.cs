@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Database.Entities
         internal DependencyEntity(string name, string idDependencyType)
             : this()
         {
-            CreateDate = DateTime.Now;
+            CreateDate = DateTime.UtcNow;
             IdDependencyType = idDependencyType;
             Name = name;
             Id = string.Concat(idDependencyType, ":", name);
@@ -37,7 +37,7 @@ namespace ApplicationRegistry.Database.Entities
         internal DependencyEntity(string id, string name, string idDependencyType)
             : this()
         {
-            CreateDate = DateTime.Now;
+            CreateDate = DateTime.UtcNow;
             IdDependencyType = idDependencyType;
             Name = name;
             Id = id;
@@ -45,7 +45,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public static DependencyEntity CreateDependencyEntity(string name, string idDependencyType)
         {
-            return new DependencyEntity { CreateDate = DateTime.Now, IdDependencyType = idDependencyType, Name = name, Id = string.Concat(idDependencyType, ":", name) };
+            return new DependencyEntity { CreateDate = DateTime.UtcNow, IdDependencyType = idDependencyType, Name = name, Id = string.Concat(idDependencyType, ":", name) };
         }
 
         public static DependencyEntity CreateApplicationDependency(string name, Guid idApplication)

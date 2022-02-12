@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Domain.Entities.Network
         {
             Id = id;
             Name = name;
-            CreateDate = createDate == default ? DateTime.Now : createDate;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
         }
     }
 }
