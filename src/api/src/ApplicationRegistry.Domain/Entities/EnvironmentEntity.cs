@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace ApplicationRegistry.Database.Entities
+﻿namespace ApplicationRegistry.Database.Entities
 {
     public class EnvironmentEntity : IEntity<string>
     {
-        [Required]
-        [MaxLength(25)]
         public string Id { get; set; }
 
         public string Description { get; set; }
 
-        public DateTimeOffset CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; }
+
+        public EnvironmentEntity(string id, string description = default, DateTimeOffset createDate = default)
+        {
+            Id = id;
+            Description = description;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
+        }
     }
 }

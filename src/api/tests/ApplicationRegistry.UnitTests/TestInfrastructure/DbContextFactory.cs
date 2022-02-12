@@ -38,11 +38,11 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
                 );
 
             modelBuilder.Entity<EnvironmentEntity>().HasData(
-                new EnvironmentEntity { Id = "INT", CreateDate = DateTime.UtcNow, Description = "INT env" }
-                , new EnvironmentEntity { Id = "UAT", CreateDate = DateTime.UtcNow, Description = "UAT env" }
-                , new EnvironmentEntity { Id = "QUA", CreateDate = DateTime.UtcNow, Description = "QUA env" }
-                , new EnvironmentEntity { Id = "PRD", CreateDate = DateTime.UtcNow, Description = "PRD env" }
-                , new EnvironmentEntity { Id = "Analytics", CreateDate = DateTime.UtcNow, Description = "Unused env. To be removed" }
+                new EnvironmentEntity("INT") { Description = "INT env" }
+                , new EnvironmentEntity("UAT") { Description = "UAT env" }
+                , new EnvironmentEntity("QUA") { Description = "QUA env" }
+                , new EnvironmentEntity("PRD") { Description = "PRD env" }
+                , new EnvironmentEntity("Analytics") { Description = "Unused env. To be removed" }
                 );
             var applications = new Guid[]{
                 Guid.Parse("{EA1F66CB-FBC0-42E6-8021-FB424020F15F}"),
@@ -191,7 +191,7 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
         public ApplicationRegistryDatabaseContext GetContext()
         {
             var builder = new DbContextOptionsBuilder<ApplicationRegistryDatabaseContext>()
-                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry21;Trusted_Connection=True;MultipleActiveResultSets=true", 
+                                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationRegistry21;Trusted_Connection=True;MultipleActiveResultSets=true",
                                 b => b.MigrationsAssembly("ApplicationRegistry.Web").UseHierarchyId());
 
             var options = builder.Options;

@@ -41,7 +41,7 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
 
         public async Task<OperationResult<EnvironmentCreateCommandResult>> ExecuteAsync(EnvironmentCreateCommand command)
         {
-            var env = new EnvironmentEntity { CreateDate = DateTime.UtcNow, Description = command.Description, Id = command.Id };
+            var env = new EnvironmentEntity(command.Id, command.Description);
 
             _context.EnvironmentsRepository.Add(env);
 

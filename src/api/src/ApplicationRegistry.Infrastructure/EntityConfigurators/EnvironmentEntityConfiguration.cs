@@ -9,6 +9,8 @@ namespace ApplicationRegistry.Database.EntityConfigurators
         public override void ConfigureEntity(EntityTypeBuilder<EnvironmentEntity> builder)
         {
             builder.ToTable("Environment");
+
+            builder.Property(e=> e.Id).IsRequired().HasMaxLength(25);
         }
     }
 }

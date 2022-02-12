@@ -44,7 +44,7 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
 
             if (env == null)
             {
-                env = new EnvironmentEntity { Id = command.Id, CreateDate = DateTime.UtcNow };
+                env = new EnvironmentEntity(command.Id);
                 _context.EnvironmentsRepository.Add(env);
             }
 

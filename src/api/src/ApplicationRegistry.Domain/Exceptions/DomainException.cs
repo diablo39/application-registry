@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApplicationRegistry.Domain.Exceptions
+﻿namespace ApplicationRegistry.Domain.Exceptions
 {
     public class DomainException : Exception
     {

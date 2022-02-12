@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApplicationRegistry.Database
+﻿namespace ApplicationRegistry.Database
 {
     public interface IEntity
     {
