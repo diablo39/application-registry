@@ -34,7 +34,7 @@ namespace ApplicationRegistry.Application.Queries
 
         public string Code { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Description { get; set; }
 

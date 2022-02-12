@@ -9,7 +9,7 @@ namespace ApplicationRegistry.Domain.Entities.Redis
 
         public Guid RedisId { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Host { get; set; }
 

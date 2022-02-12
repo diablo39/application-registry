@@ -54,7 +54,7 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
 
         public string BuildProcessUrls { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Framework { get; set; }
     }

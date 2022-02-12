@@ -9,7 +9,7 @@ namespace ApplicationRegistry.Domain.Entities
     {
         public long Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Application { get; set; }
 

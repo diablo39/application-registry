@@ -22,7 +22,7 @@ namespace ApplicationRegistry.Domain.Entities
 
         public string ProcessName { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
     }
 }

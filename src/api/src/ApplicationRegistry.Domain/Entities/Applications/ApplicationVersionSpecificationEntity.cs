@@ -13,7 +13,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public string SpecificationType { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         [Required]
         public string SpecificationTextHash { get; set; }

@@ -6,6 +6,6 @@ namespace ApplicationRegistry.Database
 {
     static class Consts
     {
-        public static DateTime CreateDate = new DateTime(2019, 01, 01);
+        public static DateTimeOffset CreateDate = new DateTime(2019, 01, 01);
     }
 }

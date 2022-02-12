@@ -8,7 +8,7 @@ namespace ApplicationRegistry.Database.Entities
     public class DependencyEntity : IEntity<string>
     {
         public string Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         [Required]
         public string Name { get; set; }

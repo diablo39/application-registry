@@ -15,7 +15,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public string ExtraProperties { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public Guid IdApplicationVersion { get; set; }
 

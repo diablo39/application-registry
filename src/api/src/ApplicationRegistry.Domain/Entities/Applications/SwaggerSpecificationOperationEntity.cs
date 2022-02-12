@@ -7,7 +7,7 @@ namespace ApplicationRegistry.Database.Entities
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
+        public DateTimeOffset CreateDate { get; set; } = DateTime.UtcNow;
 
         public Guid IdApplicationVersionSpecification { get; set; }
 

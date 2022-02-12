@@ -29,7 +29,7 @@ namespace ApplicationRegistry.Application.Queries
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Name { get; set; }
 

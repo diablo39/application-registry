@@ -55,7 +55,7 @@ namespace ApplicationRegistry.Application.Cqrs.Network.Vlans
 
         public string RFC { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public bool IsVirtualDirectory { get; set; }
 

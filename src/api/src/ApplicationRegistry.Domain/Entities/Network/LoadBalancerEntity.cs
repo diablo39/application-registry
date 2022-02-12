@@ -11,7 +11,7 @@ namespace ApplicationRegistry.Domain.Entities.Network
         [Required]
         public Guid Id { get; private set; }
 
-        public DateTime CreateDate { get; private set; }
+        public DateTimeOffset CreateDate { get; private set; }
 
         [Required]
         public string Name { get; set; }
@@ -24,11 +24,11 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public string Fqdn { get; set; }
 
-        public LoadBalancerEntity(Guid id, string name, DateTime createDate = default)
+        public LoadBalancerEntity(Guid id, string name, DateTimeOffset createDate = default)
         {
             Id = id;
             Name = name;
-            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
+            CreateDate = createDate == default ? DateTimeOffset.UtcNow : createDate;
         }
     }
 }

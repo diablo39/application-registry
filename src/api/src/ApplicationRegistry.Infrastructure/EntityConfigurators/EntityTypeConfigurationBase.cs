@@ -17,7 +17,7 @@ namespace ApplicationRegistry.Database.EntityConfigurators
                 .Property(e => e.CreateDate)
                 .ValueGeneratedOnAddOrUpdate()
                 .IsRequired(true)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
 
             ConfigureEntity(builder);
         }

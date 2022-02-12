@@ -6,7 +6,7 @@ namespace ApplicationRegistry.Database
 {
     public interface IEntity
     {
-        DateTime CreateDate { get; }
+        DateTimeOffset CreateDate { get; }
     }
 
     public interface IEntity<T>: IEntity

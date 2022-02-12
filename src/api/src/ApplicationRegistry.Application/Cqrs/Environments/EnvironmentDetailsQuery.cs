@@ -28,10 +28,8 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
         public string Id { get; set; }
         public string Description { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
     }
-
-
 
     public class EnvironmentDetailsQueryHandler : IQueryHandler<EnvironmentDetailsQuery, EnvironmentDetailsQueryResult>
     {

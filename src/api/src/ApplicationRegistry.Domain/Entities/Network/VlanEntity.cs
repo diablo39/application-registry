@@ -29,17 +29,17 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public string RFC { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public bool IsVirtualDirectory { get; set; } = false;
 
         public string IpAsHexString { get; set; }
 
-        public VlanEntity(Guid id, string name, DateTime createDate = default)
+        public VlanEntity(Guid id, string name, DateTimeOffset createDate = default)
         {
             Id = id;
             Name = name;
-            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
+            CreateDate = createDate == default ? DateTimeOffset.UtcNow : createDate;
         }
     }
 }

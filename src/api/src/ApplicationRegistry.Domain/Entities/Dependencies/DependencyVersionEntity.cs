@@ -17,7 +17,7 @@ namespace ApplicationRegistry.Database.Entities
     {
         public string Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         [Required]
         public string IdDependency { get; set; }

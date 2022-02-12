@@ -13,7 +13,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Name { get; set; }
 
@@ -21,7 +21,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public List<ApplicationEntity> Applications { get; set; }
 
-        public SystemEntity(Guid id, string name, DateTime createDate = default)
+        public SystemEntity(Guid id, string name, DateTimeOffset createDate = default)
         {
             if (id == default) throw new DomainException(nameof(id), "");
 
@@ -31,7 +31,7 @@ namespace ApplicationRegistry.Database.Entities
 
             Name = name;
 
-            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
+            CreateDate = createDate == default ? DateTimeOffset.UtcNow : createDate;
         }
     }
 }

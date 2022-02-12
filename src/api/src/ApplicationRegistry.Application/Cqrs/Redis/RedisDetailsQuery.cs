@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Application.Queries.Redis
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Name { get; set; }
 
@@ -55,7 +55,7 @@ namespace ApplicationRegistry.Application.Queries.Redis
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string Host { get; set; }
 

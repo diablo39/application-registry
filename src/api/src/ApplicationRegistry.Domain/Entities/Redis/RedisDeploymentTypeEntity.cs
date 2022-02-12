@@ -9,6 +9,6 @@ namespace ApplicationRegistry.Domain.Entities.Redis
 
         public string Description { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
     }
 }

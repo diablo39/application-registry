@@ -46,7 +46,7 @@ namespace ApplicationRegistry.Application.Queries
 
         public string Version { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string IdCommit { get; set; }
 

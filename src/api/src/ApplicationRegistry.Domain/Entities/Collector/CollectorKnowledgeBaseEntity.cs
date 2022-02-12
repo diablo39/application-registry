@@ -7,7 +7,7 @@ namespace ApplicationRegistry.Database.Entities
     {
         public Guid Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTimeOffset CreateDate { get; set; }
 
         public string ClientType { get; set; }
 

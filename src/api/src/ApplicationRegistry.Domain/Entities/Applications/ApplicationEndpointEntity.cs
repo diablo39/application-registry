@@ -11,7 +11,7 @@ namespace ApplicationRegistry.Domain.Entities.Applications
     {
         public Guid Id { get; private set; }
 
-        public DateTime CreateDate { get; private set; }
+        public DateTimeOffset CreateDate { get; private set; }
 
         public Guid ApplicationId { get; set; }
 
@@ -25,7 +25,7 @@ namespace ApplicationRegistry.Domain.Entities.Applications
 
         public ApplicationEntity Application {get; set;}
 
-        public ApplicationEndpointEntity(Guid id, string environmentId, Guid applicationId, string path, DateTime createDate = default)
+        public ApplicationEndpointEntity(Guid id, string environmentId, Guid applicationId, string path, DateTimeOffset createDate = default)
         {
             if (id == default) throw new DomainException(nameof(id), "Id cant be default value for GUID");
 

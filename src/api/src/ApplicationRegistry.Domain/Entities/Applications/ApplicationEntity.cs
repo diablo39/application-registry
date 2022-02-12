@@ -20,7 +20,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public Guid IdSystem { get; set; }
 
-        public DateTime CreateDate { get; private set; }
+        public DateTimeOffset CreateDate { get; private set; }
 
         public string Description { get; set; }
 
@@ -42,7 +42,7 @@ namespace ApplicationRegistry.Database.Entities
 
         #endregion
 
-        public ApplicationEntity(Guid id, string name, string code, Guid idSystem = default, DateTime createDate = default)
+        public ApplicationEntity(Guid id, string name, string code, Guid idSystem = default, DateTimeOffset createDate = default)
         {
             if (id == default) throw new DomainException(nameof(id), "");
 
