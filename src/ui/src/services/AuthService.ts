@@ -36,11 +36,11 @@ export default class AuthService {
         mgr.events.addAccessTokenExpired(function () {
             console.log('AccessToken Expired：', arguments);
             alert('Session expired. Going out!');
-            mgr.signoutRedirect().then(function (resp) {
-                console.log('signed out', resp);
-            }).catch(function (err) {
-                console.log(err)
-            })
+            // mgr.signoutRedirect().then(function (resp) {
+            //     console.log('signed out', resp);
+            // }).catch(function (err) {
+            //     console.log(err)
+            // })
         });
 
         mgr.events.addSilentRenewError(function () {
