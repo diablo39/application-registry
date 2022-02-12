@@ -101,8 +101,9 @@ namespace ApplicationRegistry.Web
                     .Build();
             });
 
-        }
+            services.AddHangfireServer(backgroundServer => backgroundServer.WorkerCount = 5);
 
+        }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,8 +136,8 @@ namespace ApplicationRegistry.Web
                 c.DisplayRequestDuration();
             });
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -144,8 +145,6 @@ namespace ApplicationRegistry.Web
             });
 
             app.ApplicationServices.CreateScope().ServiceProvider.GetService<ApplicationRegistryDatabaseContext>().Database.Migrate();
-
-            app.UseHangfireServer(new BackgroundJobServerOptions { WorkerCount = 5 });
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions
             {
