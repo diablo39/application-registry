@@ -36,10 +36,14 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row v-if="item.isVirtualDirectory">
+    <v-row>
       <v-col>
         <v-card>
-          <v-section-toolbar caption="vlans.childrenSectionHeader"></v-section-toolbar>
+          <v-section-toolbar caption="vlans.childrenSectionHeader">
+            <template slot="endButtons">
+              <v-create-button :to="getCreateUrl()"/>
+            </template>
+          </v-section-toolbar>
           <v-ajax-list-data-source :httpPath="httpPath">
             <template slot-scope="{ ds }">
               <v-my-data-table
@@ -79,40 +83,6 @@
         </v-card>
       </v-col>
     </v-row>
-    <!--    <v-row>-->
-    <!--      <v-col>-->
-    <!--        <v-card>-->
-    <!--          <v-section-toolbar caption="vlans.machinesHeader"></v-section-toolbar>-->
-    <!--          <v-in-memory-list-data-source :items="item.machines" :is-error="isError" :is-loading="isLoading">-->
-    <!--            <template slot-scope="{ ds }">-->
-    <!--              <v-my-data-table-->
-    <!--                  :headers="headers"-->
-    <!--                  :items="ds.filteredItems"-->
-    <!--                  :loading="ds.isLoading"-->
-    <!--                  :server-items-length="ds.totalItems"-->
-    <!--                  :options.sync="ds.options"-->
-    <!--                  sort-by="name"-->
-    <!--              >-->
-    <!--                <template v-slot:body.prepend="{ headers }">-->
-    <!--                  <v-my-data-table-search-row :ds="ds" :headers="headers"/>-->
-    <!--                </template>-->
-    <!--                <template v-slot:item.actions="{ item }">-->
-    <!--                  <v-list-item-details-action-button :to="`/machines/${item.fqdn}`"></v-list-item-details-action-button>-->
-    <!--                </template>-->
-    <!--                <template v-slot:item.name="{ item }"><router-link :to="`/machines/${item.fqdn}`">{{ item.name }}</router-link></template>-->
-    <!--                <template v-slot:item.createDate="{ item }">{{ $formatDateTime(item.createDate) }}</template>-->
-    <!--                <template v-slot:item.operatingSystem="{ item }">{{ item['operating-system-distribution'] }}-->
-    <!--                  {{ item['operating-system-version'] }}-->
-    <!--                </template>-->
-    <!--                <template v-slot:no-data v-if="isError">-->
-    <!--                  <div v-if="isError">{{ $t('common.errorMessage') }}</div>-->
-    <!--                </template>-->
-    <!--              </v-my-data-table>-->
-    <!--            </template>-->
-    <!--          </v-in-memory-list-data-source>-->
-    <!--        </v-card>-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
   </v-container>
 </template>
 
@@ -145,30 +115,9 @@ export default Vue.extend({
         {text: "Name", value: "name",},
         {text: "Alias", value: "alias"},
         {text: "Number", value: "number",},
-        // {text: "Environment", value: "env", groupable: true,},
-        // {text: "Machines count", value: "machines-count",},
-        // {text: "Description", value: "description", groupable: false,},
       ],
-      // headers: [
-      //   {
-      //     text: this.$t("common.fieldNames.actions"),
-      //     value: "actions",
-      //     sortable: false,
-      //     class: "actions",
-      //     filterable: false,
-      //     width: 100,
-      //   },
-      //   {text: "Name", value: "name", groupable: true,},
-      //   {text: "FQDN", value: "fqdn", groupable: true,},
-      //   {text: "Environment", value: "env", groupable: true,},
-      //   {text: "Group", value: "group", groupable: true,},
-      //   {text: "CPU", value: "vcpu", groupable: true,},
-      //   {text: "Memory", value: "memory", groupable: true,},
-      //   {text: "Operating system", value: "operatingSystem", groupable: true,},
-      // ],
     };
   },
-
   mounted() {
     this.loadData();
   },
@@ -181,6 +130,9 @@ export default Vue.extend({
     },
   },
   methods: {
+    getCreateUrl(): string {
+      return Paths.createVlan();
+    },
     loadData() {
       this.isLoading = true;
       const id: string = this.$route.params.id;
@@ -206,14 +158,14 @@ export default Vue.extend({
     },
     customSort(items, index, isDesc) {
       items.sort((a, b) => {
-        if (index === "cidr") {
-          if (!isDesc) {
+        if (index[0] === "cidr") {
+          if (!isDesc[0]) {
             return a['cidrSortField'] < b['cidrSortField'] ? -1 : 1;
           } else {
             return b['cidrSortField'] < a['cidrSortField'] ? -1 : 1;
           }
         } else {
-          if (!isDesc) {
+          if (!isDesc[0]) {
             return a[index] < b[index] ? -1 : 1;
           } else {
             return b[index] < a[index] ? -1 : 1;
@@ -221,7 +173,7 @@ export default Vue.extend({
         }
       });
       return items;
-    }
+    },
   },
 });
 </script>
