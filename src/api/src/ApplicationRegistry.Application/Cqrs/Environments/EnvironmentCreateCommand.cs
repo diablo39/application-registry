@@ -21,7 +21,8 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
     {
         public EnvironmentCreateCommandValidator()
         {
-            RuleFor(e => e.Id).NotNull().NotEmpty();
+            RuleFor(e => e.Id).NotNull().NotEmpty().MaximumLength(25);
+            RuleFor(e => e.Description).IsDescription();
         }
     }
 

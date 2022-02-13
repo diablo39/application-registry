@@ -20,7 +20,8 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
     {
         public EnvironmentUpdateCommandValidator()
         {
-            RuleFor(e => e.Id).NotNull().NotEmpty();
+            RuleFor(e => e.Id).NotNull().NotEmpty().MaximumLength(25);
+            RuleFor(e => e.Description).IsDescription();
         }
     }
 

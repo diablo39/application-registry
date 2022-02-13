@@ -19,7 +19,7 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
     {
         public EnvironmentDetailsQueryValidator()
         {
-            RuleFor(e => e.Id).NotEmpty();
+            RuleFor(e => e.Id).NotNull().NotEmpty().MaximumLength(25);
         }
     }
 

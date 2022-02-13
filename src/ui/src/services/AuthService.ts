@@ -35,7 +35,7 @@ export default class AuthService {
 
         mgr.events.addAccessTokenExpired(function () {
             console.log('AccessToken Expired：', arguments);
-            
+
             mgr.signinRedirect().catch(function (err) {
                 console.log(err)
             });

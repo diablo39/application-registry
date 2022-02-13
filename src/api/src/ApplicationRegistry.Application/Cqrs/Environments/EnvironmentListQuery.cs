@@ -33,7 +33,6 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
         {
 
         }
-
     }
 
     public class EnvironmentsListQueryResultItem
@@ -71,8 +70,6 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
 
             return OperationResult.Success(result);
         }
-
-
 
         internal static Expression<Func<EnvironmentEntity, EnvironmentsListQueryResultItem>> MappingDomainToQueryResult()
         {

@@ -67,7 +67,9 @@ export default Vue.extend({
         }),
         description: new form.RowItem({
           label: "Description",
-          validationRules: [],
+          validationRules: [
+            ValidationRules.maxLength(1200)
+          ],
         }),
       },
     };
