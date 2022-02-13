@@ -37,8 +37,8 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public VlanEntity(Guid id, string name, DateTimeOffset createDate = default)
         {
-            Guard.IsNotDefault(id, nameof(id));
-            Guard.IsNotNullOrWhiteSpace(name, nameof(name));
+            MyGuard.IsNotDefault(id, nameof(id));
+            MyGuard.IsNotNullOrWhiteSpace(name, nameof(name));
 
             Id = id;
             Name = name;

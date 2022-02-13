@@ -1,4 +1,5 @@
-﻿namespace ApplicationRegistry.Database.Entities
+﻿
+namespace ApplicationRegistry.Database.Entities
 {
     public class EnvironmentEntity : IEntity<string>
     {
@@ -10,7 +11,7 @@
 
         public EnvironmentEntity(string id, string description = default, DateTimeOffset createDate = default)
         {
-            Guard.IsNotNullOrWhiteSpace(id, nameof(id));
+            MyGuard.IsNotNullOrWhiteSpace(id, nameof(id));
 
             Id = id;
             Description = description;
