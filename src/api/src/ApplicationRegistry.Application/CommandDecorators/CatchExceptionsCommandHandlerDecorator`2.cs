@@ -30,7 +30,7 @@ namespace ApplicationRegistry.Application.CommandDecorators
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Exception while invoking command handler: {0}", _next.GetType());
+                _logger.LogError(ex, "Exception while invoking command handler: {handler}", _next.GetType());
                 return OperationResult.ServerError<TOut>(ex);
             }
         }
