@@ -10,6 +10,8 @@
 
         public EnvironmentEntity(string id, string description = default, DateTimeOffset createDate = default)
         {
+            Guard.IsNotNullOrWhiteSpace(id, nameof(id));
+
             Id = id;
             Description = description;
             CreateDate = createDate == default ? DateTime.UtcNow : createDate;

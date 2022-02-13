@@ -37,6 +37,9 @@ namespace ApplicationRegistry.Domain.Entities.Network
 
         public VlanEntity(Guid id, string name, DateTimeOffset createDate = default)
         {
+            Guard.IsNotDefault(id, nameof(id));
+            Guard.IsNotNullOrWhiteSpace(name, nameof(name));
+
             Id = id;
             Name = name;
             CreateDate = createDate == default ? DateTimeOffset.UtcNow : createDate;
