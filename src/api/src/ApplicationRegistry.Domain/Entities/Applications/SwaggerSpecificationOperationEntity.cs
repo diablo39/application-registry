@@ -17,6 +17,6 @@ namespace ApplicationRegistry.Database.Entities
 
         public string HttpMethod { get; set; }
 
-        public SwaggerApplicationVersionSpecificationEntity Specification { get; set; }
+        public ApplicationVersionSwaggerSpecificationEntity Specification { get; set; }
     }
 }

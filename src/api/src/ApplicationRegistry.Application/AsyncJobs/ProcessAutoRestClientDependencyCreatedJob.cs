@@ -96,7 +96,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
             var operationIdsStringified = string.Concat("|", string.Join("|", operations.Select(e => e.OperationId).OrderBy(e => e)), "|");
 
-            var query = _context.ApplicationVersionSpecifications
+            var query = _context.ApplicationVersionSwaggerSpecifications
                 .Where(e => e.OperationsStringified == operationIdsStringified);
 
             var queryResult = query.Include(e => e.ApplicationVersion).ToList();
@@ -120,7 +120,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
             Console.WriteLine("Haha");
         }
 
-        private void SuitableApplicationFound(Guid id, ApplicationVersionDependencyEntity applicationDependency, Database.Entities.ApplicationEntity application, List<SwaggerApplicationVersionSpecificationEntity> queryResult)
+        private void SuitableApplicationFound(Guid id, ApplicationVersionDependencyEntity applicationDependency, Database.Entities.ApplicationEntity application, List<ApplicationVersionSwaggerSpecificationEntity> queryResult)
         {
             var childIdDependency = ApplicationDependencyEntity.GetApplicationDependencyId(queryResult[0].ApplicationVersion.IdApplication);
 

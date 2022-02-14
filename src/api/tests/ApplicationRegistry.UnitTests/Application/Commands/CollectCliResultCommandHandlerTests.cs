@@ -87,7 +87,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
 
             result.IsSuccess.Should().BeTrue();
 
-            var application = context.Applications.Include(e => e.Versions).ThenInclude(e => e.Specifications).FirstOrDefault(a => a.Code == applicationCode);
+            var application = context.Applications.Include(e => e.Versions).ThenInclude(e => e.SwaggerSpecifications).FirstOrDefault(a => a.Code == applicationCode);
             application.Should().NotBeNull("new application should be created");
             application.IdSystem.Should().Be(SystemEntity.UnasignedApplications, "application should be added to default project");
 
@@ -95,7 +95,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             version.Should().NotBeNull("Version should be created");
             version.Version.Should().Be(command.Version);
 
-            var specification = version.Specifications.FirstOrDefault();
+            var specification = version.SwaggerSpecifications.FirstOrDefault();
 
             specification.Should().NotBeNull();
             specification.SpecificationTextHash.Should().NotBeNull();
@@ -177,7 +177,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                 .Include(e => e.Versions)
                     .ThenInclude(e => e.ApplicationVersionNugetPackageDependencies)
                 .Include(e => e.Versions)
-                    .ThenInclude(e => e.Specifications)
+                    .ThenInclude(e => e.SwaggerSpecifications)
                 .FirstOrDefault(a => a.Code == applicationCode);
             application.Should().NotBeNull("new application should be created");
 
@@ -185,7 +185,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             applicationVersion.Should().NotBeNull("Version should be created");
             applicationVersion.Version.Should().Be(command.Version);
 
-            var specification = applicationVersion.Specifications.FirstOrDefault();
+            var specification = applicationVersion.SwaggerSpecifications.FirstOrDefault();
 
             specification.Should().NotBeNull();
             specification.SpecificationTextHash.Should().NotBeNull();
@@ -208,15 +208,15 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             var idEnvironment = "INT";
 
             var existingApplication = context.Applications
-                .Include(e => e.Versions).ThenInclude(e => e.Specifications)
-                .Where(e => e.Versions.Any(v => v.Specifications.Any() && v.IdEnvironment == idEnvironment))
+                .Include(e => e.Versions).ThenInclude(e => e.SwaggerSpecifications)
+                .Where(e => e.Versions.Any(v => v.SwaggerSpecifications.Any() && v.IdEnvironment == idEnvironment))
                 .First();
 
             var applicationCode = existingApplication.Code;
 
-            var ss = existingApplication.Versions.FirstOrDefault(e => e.IdEnvironment == idEnvironment && e.Specifications != null && e.Specifications.Any());
+            var ss = existingApplication.Versions.FirstOrDefault(e => e.IdEnvironment == idEnvironment && e.SwaggerSpecifications != null && e.SwaggerSpecifications.Any());
             var version = ss.Version;
-            var specificationCode = ss.Specifications[0].Code;
+            var specificationCode = ss.SwaggerSpecifications[0].Code;
 
             var command = new CollectCliResultCommand
             {

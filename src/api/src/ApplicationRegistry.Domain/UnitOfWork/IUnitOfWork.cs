@@ -25,7 +25,7 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationVersionEntity> ApplicationVersions { get; }
 
-        DbSet<SwaggerApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
+        DbSet<ApplicationVersionSwaggerSpecificationEntity> ApplicationVersionSwaggerSpecifications { get; }
 
         DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; }
 
@@ -72,7 +72,7 @@ namespace ApplicationRegistry.Database
         #region Leagacy DBSets
         DbSet<CollectorLogEntity> CollectorLogs { get; }
 
-        DbSet<SwaggerApplicationVersionSpecificationEntity> ApplicationVersionSpecifications { get; }
+        DbSet<ApplicationVersionSwaggerSpecificationEntity> ApplicationVersionSwaggerSpecifications { get; }
 
         DbSet<DependencyEntity> Dependencies { get; }
 

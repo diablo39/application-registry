@@ -30,7 +30,7 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
             var dbContext = _factory.GetContext();
             var version = dbContext.ApplicationVersions.First();
 
-            var specification = new SwaggerApplicationVersionSpecificationEntity
+            var specification = new ApplicationVersionSwaggerSpecificationEntity
             {
                 Id = id,
                 IdApplicationVersion = version.Id,
@@ -63,7 +63,7 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
             var dbContext = _factory.GetContext();
             var version = dbContext.ApplicationVersions.First();
 
-            var specification = new SwaggerApplicationVersionSpecificationEntity
+            var specification = new ApplicationVersionSwaggerSpecificationEntity
             {
                 Id = id,
                 IdApplicationVersion = version.Id,

@@ -93,7 +93,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                 IsArchived = false,
                 Version = command.Version,
                 Dependencies = new List<ApplicationVersionDependencyEntity>(),
-                Specifications = new List<SwaggerApplicationVersionSpecificationEntity>(),
+                SwaggerSpecifications = new List<ApplicationVersionSwaggerSpecificationEntity>(),
                 ToolsVersion = command.ToolsVersion,
                 CollectorBatchStatuses = JsonConvert.SerializeObject(command.BatchStatuses, Formatting.Indented),
                 CollectorExecutionDuration = command.ExecutionDuration,
@@ -111,7 +111,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                     if (specification.SpecificationType == SpecificationTypes.Swagger)
                     {
                         var id = Guid.NewGuid();
-                        var specyfication = new SwaggerApplicationVersionSpecificationEntity
+                        var specyfication = new ApplicationVersionSwaggerSpecificationEntity
                         {
                             Id = id,
                             ContentType = specification.ContentType,
@@ -120,11 +120,11 @@ namespace ApplicationRegistry.Application.CommandHandlers
                             Code = specification.Code
                         };
 
-                        entity.Specifications.Add(specyfication);
+                        entity.SwaggerSpecifications.Add(specyfication);
 
                         swaggerSpecifications.Add(id);
 
-                        _context.ApplicationVersionSpecifications.Add(specyfication);
+                        _context.ApplicationVersionSwaggerSpecifications.Add(specyfication);
                     }
                 }
             }
@@ -228,7 +228,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
         {
             var entity = _context.ApplicationVersions
                 .Include(e => e.Dependencies)
-                .Include(e => e.Specifications)
+                .Include(e => e.SwaggerSpecifications)
                 .FirstOrDefault(v => v.IdApplication == idApplication && v.IdEnvironment == idEnvironment && v.Version == version);
 
             return entity;

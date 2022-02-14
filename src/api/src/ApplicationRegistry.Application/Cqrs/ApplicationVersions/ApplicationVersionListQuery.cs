@@ -93,7 +93,7 @@ namespace ApplicationRegistry.Application.Queries
               .ApplicationVersions
               .Include(e => e.Application).ThenInclude(e => e.System)
               .Include(e => e.Environment)
-              .Include(e => e.Specifications)
+              .Include(e => e.SwaggerSpecifications)
               .Where(e => e.IdApplication == applicationEntity.Id && (query.ShowArchived == true || e.IsArchived == false));
 
             var count = await dbQuery.CountAsync();
@@ -117,7 +117,7 @@ namespace ApplicationRegistry.Application.Queries
                 ToolsVersion = e.ToolsVersion,
                 Version = e.Version,
                 ApplicationName = e.Application.Name,
-                HasSwaggerSpecification = e.Specifications.Any(),
+                HasSwaggerSpecification = e.SwaggerSpecifications.Any(),
                 CollectorBatchStatuses = e.CollectorBatchStatuses,
                 CollectorExecutionDuration = e.CollectorExecutionDuration,
                 CollectorExecutionSucceeded = e.CollectorExecutionSucceeded,

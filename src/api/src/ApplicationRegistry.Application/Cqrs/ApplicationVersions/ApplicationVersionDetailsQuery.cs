@@ -70,7 +70,7 @@ namespace ApplicationRegistry.Application.Queries
                 .Where(e => e.Id == query.ApplicationVersionId).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
 
             var hasSwagger = _queryModel
-                .ApplicationVersionSpecifications
+                .ApplicationVersionSwaggerSpecifications
                 .Where(e => e.IdApplicationVersion == query.ApplicationVersionId)
                 .Any();
 

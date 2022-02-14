@@ -53,11 +53,11 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
         private void HandleImplementation(Guid id)
         {
-            var specification = _context.ApplicationVersionSpecifications.FirstOrDefault(e => e.Id == id);
+            var specification = _context.ApplicationVersionSwaggerSpecifications.FirstOrDefault(e => e.Id == id);
 
             if (specification != null)
             {
-                var versionSpecification = _context.ApplicationVersionSpecifications.FirstOrDefault(e => e.Id == id);
+                var versionSpecification = _context.ApplicationVersionSwaggerSpecifications.FirstOrDefault(e => e.Id == id);
 
                 var result = new List<SwaggerSpecificationOperationEntity>();
 
@@ -97,14 +97,14 @@ namespace ApplicationRegistry.Application.AsyncJobs
             }
         }
 
-        private void RemoveAllOldOperations(SwaggerApplicationVersionSpecificationEntity specification)
+        private void RemoveAllOldOperations(ApplicationVersionSwaggerSpecificationEntity specification)
         {
             var itemsToRemove = _context.SwaggerSpecificationOperations.Where(e => e.IdApplicationVersionSpecification == specification.Id).ToList();
 
             _context.SwaggerSpecificationOperations.RemoveRange(itemsToRemove);
         }
 
-        private void GetSwaggerOperations(SwaggerApplicationVersionSpecificationEntity specification, List<SwaggerSpecificationOperationEntity> result, string text)
+        private void GetSwaggerOperations(ApplicationVersionSwaggerSpecificationEntity specification, List<SwaggerSpecificationOperationEntity> result, string text)
         {
             var swagger = JObject.Parse(text);
 

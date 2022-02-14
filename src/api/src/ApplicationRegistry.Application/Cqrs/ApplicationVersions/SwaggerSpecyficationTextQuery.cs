@@ -1,16 +1,7 @@
 ﻿using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
-using ApplicationRegistry.Database.Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Queries
 {
@@ -49,7 +40,7 @@ namespace ApplicationRegistry.Application.Queries
         {
             SwaggerSpecyficationTextQueryResult result = null;
 
-            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSpecifications
+            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSwaggerSpecifications
                 .FirstOrDefaultAsync(m => m.IdApplicationVersion == query.ApplicationVersionId);
 
             if (applicationVersionSpecificationEntity == null)
