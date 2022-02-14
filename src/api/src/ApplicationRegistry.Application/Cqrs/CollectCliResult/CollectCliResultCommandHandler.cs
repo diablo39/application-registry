@@ -103,30 +103,29 @@ namespace ApplicationRegistry.Application.CommandHandlers
 
             _context.ApplicationVersions.Add(entity);
 
-            if (command.Specifications != null)
+            if (command.Specifications != null) // TODO: execute only if swagger
             {
                 for (int i = 0; i < command.Specifications.Count; i++)
                 {
                     var specification = command.Specifications[i];
-                    var id = Guid.NewGuid();
-                    var specyfication = new SwaggerApplicationVersionSpecificationEntity
+                    if (specification.SpecificationType == SpecificationTypes.Swagger)
                     {
-                        Id = id,
-                        ContentType = specification.ContentType,
-                        SpecificationType = specification.SpecificationType,
-                        Specification = specification.Specification,
-                        SpecificationTextHash = specification.Specification.CalculateSHA256(),
-                        Code = specification.Code
-                    };
+                        var id = Guid.NewGuid();
+                        var specyfication = new SwaggerApplicationVersionSpecificationEntity
+                        {
+                            Id = id,
+                            ContentType = specification.ContentType,
+                            Specification = specification.Specification,
+                            SpecificationTextHash = specification.Specification.CalculateSHA256(),
+                            Code = specification.Code
+                        };
 
-                    entity.Specifications.Add(specyfication);
+                        entity.Specifications.Add(specyfication);
 
-                    if (specification.SpecificationType == SpecificationTypeEntity.Swagger)
-                    {
                         swaggerSpecifications.Add(id);
-                    }
 
-                    _context.ApplicationVersionSpecifications.Add(specyfication);
+                        _context.ApplicationVersionSpecifications.Add(specyfication);
+                    }
                 }
             }
 

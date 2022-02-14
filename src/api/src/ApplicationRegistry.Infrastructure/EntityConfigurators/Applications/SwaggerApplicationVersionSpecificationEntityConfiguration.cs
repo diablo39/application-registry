@@ -16,13 +16,13 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Specyfic
                 .WithMany(e => e.Specifications)
                 .HasForeignKey(e => e.IdApplicationVersion);
 
-            builder.HasDiscriminator<string>("SpecificationType")
-                .HasValue<SwaggerApplicationVersionSpecificationEntity>(SpecificationTypeEntity.Swagger);
+            //builder.HasDiscriminator<string>("SpecificationType")
+            //    .HasValue<SwaggerApplicationVersionSpecificationEntity>(SpecificationTypeEntity.Swagger);
 
-            builder
-                .HasOne<SpecificationTypeEntity>()
-                .WithMany()
-                .HasForeignKey(e => e.SpecificationType);
+            //builder
+            //    .HasOne<SpecificationTypeEntity>()
+            //    .WithMany()
+            //    .HasForeignKey(e => e.SpecificationType);
         }
     }
 }

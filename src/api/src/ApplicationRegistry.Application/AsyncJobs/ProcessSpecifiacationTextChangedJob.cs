@@ -55,7 +55,7 @@ namespace ApplicationRegistry.Application.AsyncJobs
         {
             var specification = _context.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>().FirstOrDefault(e => e.Id == id);
 
-            if (specification != null && specification.SpecificationType == SpecificationTypeEntity.Swagger)
+            if (specification != null)
             {
                 var versionSpecification = _context.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>().FirstOrDefault(e => e.Id == id);
 

@@ -39,7 +39,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                     new CollectCliResultCommand.ApplicationVersionSpecification
                     {
                         ContentType = "application/yaml",
-                        SpecificationType = SpecificationTypeEntity.Swagger,
+                        SpecificationType = SpecificationTypes.Swagger,
                         Specification = "swagger: '2.0'",
                         Code = specificationCode
                     }
@@ -127,7 +127,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                     new CollectCliResultCommand.ApplicationVersionSpecification
                     {
                         ContentType = "application/yaml",
-                        SpecificationType = SpecificationTypeEntity.Swagger,
+                        SpecificationType = SpecificationTypes.Swagger,
                         Specification = "swagger: '2.0'",
                         Code = specificationCode
                     }
@@ -228,7 +228,7 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                     new CollectCliResultCommand.ApplicationVersionSpecification
                     {
                         ContentType = "application/yaml",
-                        SpecificationType = SpecificationTypeEntity.Swagger,
+                        SpecificationType = SpecificationTypes.Swagger,
                         Specification = Guid.NewGuid().ToString(),
                         Code = specificationCode
                     }

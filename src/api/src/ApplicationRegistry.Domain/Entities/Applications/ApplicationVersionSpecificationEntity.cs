@@ -11,8 +11,6 @@ namespace ApplicationRegistry.Database.Entities
 
         public string ContentType { get; set; }
 
-        public string SpecificationType { get; set; }
-
         public DateTimeOffset CreateDate { get; set; }
 
         [Required]
@@ -30,7 +28,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public SwaggerApplicationVersionSpecificationEntity()
         {
-            SpecificationType = SpecificationTypeEntity.Swagger;
+
         }
     }
 }
