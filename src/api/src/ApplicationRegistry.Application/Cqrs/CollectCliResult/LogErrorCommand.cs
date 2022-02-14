@@ -1,18 +1,7 @@
 ﻿using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
-using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Entities;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Application.Commands
 {
