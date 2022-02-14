@@ -41,7 +41,7 @@ namespace ApplicationRegistry.Database.Entities
 
         public EnvironmentEntity Environment { get; set; }
 
-        public List<ApplicationVersionSpecificationEntity> Specifications { get; set; }
+        public List<SwaggerApplicationVersionSpecificationEntity> Specifications { get; set; }
 
         public List<ApplicationVersionDependencyEntity> Dependencies { get; set; }
 

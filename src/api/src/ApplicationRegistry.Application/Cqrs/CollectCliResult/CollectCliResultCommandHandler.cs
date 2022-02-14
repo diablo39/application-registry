@@ -93,7 +93,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                 IsArchived = false,
                 Version = command.Version,
                 Dependencies = new List<ApplicationVersionDependencyEntity>(),
-                Specifications = new List<ApplicationVersionSpecificationEntity>(),
+                Specifications = new List<SwaggerApplicationVersionSpecificationEntity>(),
                 ToolsVersion = command.ToolsVersion,
                 CollectorBatchStatuses = JsonConvert.SerializeObject(command.BatchStatuses, Formatting.Indented),
                 CollectorExecutionDuration = command.ExecutionDuration,
@@ -109,7 +109,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                 {
                     var specification = command.Specifications[i];
                     var id = Guid.NewGuid();
-                    var specyfication = new ApplicationVersionSpecificationEntity
+                    var specyfication = new SwaggerApplicationVersionSpecificationEntity
                     {
                         Id = id,
                         ContentType = specification.ContentType,

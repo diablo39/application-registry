@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApplicationRegistry.Database.Entities
 {
-    public class ApplicationVersionSpecificationEntity : IEntity<Guid>
+    public class SwaggerApplicationVersionSpecificationEntity : IEntity<Guid>
     {
         public Guid Id { get; set; }
 
@@ -26,10 +26,6 @@ namespace ApplicationRegistry.Database.Entities
         // navigation properties
         public ApplicationVersionEntity ApplicationVersion { get; set; }
 
-    }
-
-    public class SwaggerApplicationVersionSpecificationEntity : ApplicationVersionSpecificationEntity
-    {
         public string OperationsStringified { get; set; }
 
         public SwaggerApplicationVersionSpecificationEntity()

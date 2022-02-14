@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Specyfications
 {
-    class ApplicationVersionSpecificationEntityConfiguration : EntityTypeConfigurationBase<ApplicationVersionSpecificationEntity>
+    class SwaggerApplicationVersionSpecificationEntityConfiguration : EntityTypeConfigurationBase<SwaggerApplicationVersionSpecificationEntity>
     {
-        public override void ConfigureEntity(EntityTypeBuilder<ApplicationVersionSpecificationEntity> builder)
+        public override void ConfigureEntity(EntityTypeBuilder<SwaggerApplicationVersionSpecificationEntity> builder)
         {
             builder.ToTable("ApplicationVersionSpecification");
 

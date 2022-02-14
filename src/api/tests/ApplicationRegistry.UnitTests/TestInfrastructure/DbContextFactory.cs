@@ -169,8 +169,8 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
 
             var specificationId = Guid.Parse("{FFE22DAE-443D-4AFD-8CAE-DCA4F1F7883B}");
 
-            modelBuilder.Entity<ApplicationVersionSpecificationEntity>().HasData(
-                new ApplicationVersionSpecificationEntity { Id = specificationId, CreateDate = DateTime.UtcNow, IdApplicationVersion = varsionids[0], ContentType = "application/yaml", SpecificationType = "Swagger", Code = Guid.NewGuid().ToString(), SpecificationTextHash = Resources.SwaggerDemo.CalculateSHA256() });
+            modelBuilder.Entity<SwaggerApplicationVersionSpecificationEntity>().HasData(
+                new SwaggerApplicationVersionSpecificationEntity { Id = specificationId, CreateDate = DateTime.UtcNow, IdApplicationVersion = varsionids[0], ContentType = "application/yaml", SpecificationType = "Swagger", Code = Guid.NewGuid().ToString(), SpecificationTextHash = Resources.SwaggerDemo.CalculateSHA256() });
 
             //modelBuilder.Entity<MapAutorestClientTaskEntity>().HasData(
             //    new MapAutorestClientTaskEntity
