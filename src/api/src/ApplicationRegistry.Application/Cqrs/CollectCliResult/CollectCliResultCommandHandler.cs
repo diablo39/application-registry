@@ -160,11 +160,9 @@ namespace ApplicationRegistry.Application.CommandHandlers
             _context.SaveChanges();
 
             StartProcessSwaggerSpecificationChangedJob(swaggerSpecifications);
-            StartProcessAutoRestClientDependencyCreatedJob(autorestClientDependencies);
 
             return CommandHandlerResult.Success();
         }
-
 
         private static ApplicationVersionDependencyEntity CreateNewApplicationVersiondependency(CollectCliResultCommand.ApplicationVersionDependency dependency, string idDependency, string idDependencyVersion)
         {
@@ -234,15 +232,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
             return entity;
         }
 
-        private void StartProcessAutoRestClientDependencyCreatedJob(List<Guid> autorestDependencies)
-        {
-            //for (int i = 0; i < autorestDependencies.Count; i++)
-            //{
-            //    var id = autorestDependencies[i];
 
-            //    _scheduler.Enqueue<ProcessAutoRestClientDependencyCreatedJob>(e => e.Handle(id));
-            //}
-        }
         private void StartProcessSwaggerSpecificationChangedJob(List<Guid> swaggerSpecifications)
         {
             for (int i = 0; i < swaggerSpecifications.Count; i++)
