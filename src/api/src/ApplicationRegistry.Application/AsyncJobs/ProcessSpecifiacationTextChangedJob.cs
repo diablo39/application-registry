@@ -53,11 +53,11 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
         private void HandleImplementation(Guid id)
         {
-            var specification = _context.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>().FirstOrDefault(e => e.Id == id);
+            var specification = _context.ApplicationVersionSpecifications.FirstOrDefault(e => e.Id == id);
 
             if (specification != null)
             {
-                var versionSpecification = _context.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>().FirstOrDefault(e => e.Id == id);
+                var versionSpecification = _context.ApplicationVersionSpecifications.FirstOrDefault(e => e.Id == id);
 
                 var result = new List<SwaggerSpecificationOperationEntity>();
 

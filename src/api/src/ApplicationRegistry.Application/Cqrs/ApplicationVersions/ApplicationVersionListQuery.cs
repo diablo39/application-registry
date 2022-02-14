@@ -117,7 +117,7 @@ namespace ApplicationRegistry.Application.Queries
                 ToolsVersion = e.ToolsVersion,
                 Version = e.Version,
                 ApplicationName = e.Application.Name,
-                HasSwaggerSpecification = e.Specifications.OfType<SwaggerApplicationVersionSpecificationEntity>().Any(),
+                HasSwaggerSpecification = e.Specifications.Any(),
                 CollectorBatchStatuses = e.CollectorBatchStatuses,
                 CollectorExecutionDuration = e.CollectorExecutionDuration,
                 CollectorExecutionSucceeded = e.CollectorExecutionSucceeded,

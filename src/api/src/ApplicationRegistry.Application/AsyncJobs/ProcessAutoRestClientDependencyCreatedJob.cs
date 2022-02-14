@@ -97,7 +97,6 @@ namespace ApplicationRegistry.Application.AsyncJobs
             var operationIdsStringified = string.Concat("|", string.Join("|", operations.Select(e => e.OperationId).OrderBy(e => e)), "|");
 
             var query = _context.ApplicationVersionSpecifications
-                .OfType<SwaggerApplicationVersionSpecificationEntity>()
                 .Where(e => e.OperationsStringified == operationIdsStringified);
 
             var queryResult = query.Include(e => e.ApplicationVersion).ToList();

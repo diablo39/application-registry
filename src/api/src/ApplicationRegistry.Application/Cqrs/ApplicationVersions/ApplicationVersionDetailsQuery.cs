@@ -72,7 +72,6 @@ namespace ApplicationRegistry.Application.Queries
             var hasSwagger = _queryModel
                 .ApplicationVersionSpecifications
                 .Where(e => e.IdApplicationVersion == query.ApplicationVersionId)
-                .OfType<SwaggerApplicationVersionSpecificationEntity>()
                 .Any();
 
             result.HasSwagger = hasSwagger;

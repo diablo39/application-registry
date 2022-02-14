@@ -49,7 +49,7 @@ namespace ApplicationRegistry.Application.Queries
         {
             SwaggerSpecyficationTextQueryResult result = null;
 
-            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSpecifications.OfType<SwaggerApplicationVersionSpecificationEntity>()
+            var applicationVersionSpecificationEntity = await _queryModel.ApplicationVersionSpecifications
                 .FirstOrDefaultAsync(m => m.IdApplicationVersion == query.ApplicationVersionId);
 
             if (applicationVersionSpecificationEntity == null)
