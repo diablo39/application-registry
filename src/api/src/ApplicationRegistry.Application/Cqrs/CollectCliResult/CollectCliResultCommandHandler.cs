@@ -103,7 +103,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
 
             _context.ApplicationVersions.Add(entity);
 
-            if (command.Specifications != null) // TODO: execute only if swagger
+            if (command.Specifications != null)
             {
                 for (int i = 0; i < command.Specifications.Count; i++)
                 {
