@@ -16,7 +16,5 @@ namespace ApplicationRegistry.Database.Entities
 
         public bool CanBeAddedManualy { get; set; }
 
-
-        public List<DependencyEntity> Dependencies { get; internal set; }
     }
 }

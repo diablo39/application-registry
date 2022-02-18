@@ -27,6 +27,5 @@ namespace ApplicationRegistry.Database.Entities
 
         public ValidationStatus ValidationStatus { get; set; }
 
-        public DependencyEntity Dependency { get; set; }
     }
 }

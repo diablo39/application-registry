@@ -22,8 +22,6 @@ namespace ApplicationRegistry.Database.Entities
         //Navigation Properties
         public ApplicationVersionEntity ApplicationVersion { get; set; }
 
-        public DependencyEntity Dependency { get; set; }
-
         public DependencyVersionEntity DependencyVersion { get; set; }
 
         public Guid? IdParent { get; set; }
@@ -40,11 +38,6 @@ namespace ApplicationRegistry.Database.Entities
             IdApplicationVersion = idApplicationVersion;
             IdDependency = idDependency;
             IdDependencyVersion = idDependencyVersion;
-        }
-
-        public override string ToString()
-        {
-            return Dependency.Id;
         }
 
         public static ApplicationVersionDependencyEntity Create(Guid idApplicationVersion, string idDependency, string idDependencyVersion = null)

@@ -23,8 +23,6 @@ namespace ApplicationRegistry.Infrastructure.UnitOfWork
 
         public DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; set; }
 
-        public DbSet<DependencyEntity> Dependencies { get; set; }
-
         public DbSet<DependencyVersionEntity> DependencyVersions { get; set; }
 
         public DbSet<EnvironmentEntity> Environments { get; set; }

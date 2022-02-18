@@ -29,8 +29,6 @@ namespace ApplicationRegistry.Database
 
         DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; }
 
-        DbSet<DependencyEntity> Dependencies { get; }
-
         DbSet<DependencyVersionEntity> DependencyVersions { get; }
 
         DbSet<EnvironmentEntity> Environments { get; }
@@ -73,8 +71,6 @@ namespace ApplicationRegistry.Database
         DbSet<CollectorLogEntity> CollectorLogs { get; }
 
         DbSet<ApplicationVersionSwaggerSpecificationEntity> ApplicationVersionSwaggerSpecifications { get; }
-
-        DbSet<DependencyEntity> Dependencies { get; }
 
         DbSet<DependencyVersionEntity> DependencyVersions { get; }
 

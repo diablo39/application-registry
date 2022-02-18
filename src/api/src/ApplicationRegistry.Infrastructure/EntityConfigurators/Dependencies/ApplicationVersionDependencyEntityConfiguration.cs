@@ -20,14 +20,8 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
                 .HasForeignKey(e => e.IdApplicationVersion);
 
             builder
-                .HasOne(e => e.Dependency)
-                .WithMany()
-                .HasForeignKey(e => e.IdDependency);
-
-            builder
                 .Property(e => e.IdDependency)
                 .HasConversion(s => s, s => s.ToLower());
-
 
             builder
                 .HasOne(e => e.DependencyVersion)

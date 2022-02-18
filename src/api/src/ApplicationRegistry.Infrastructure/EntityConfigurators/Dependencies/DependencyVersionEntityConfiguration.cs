@@ -21,11 +21,6 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
             builder
                 .Property(e => e.ValidationStatus)
                 .HasDefaultValueSql("(0)");
-
-            builder
-                .HasOne(e => e.Dependency)
-                .WithMany(e => e.Versions)
-                .HasForeignKey(e => e.IdDependency);
         }
     }
 }
