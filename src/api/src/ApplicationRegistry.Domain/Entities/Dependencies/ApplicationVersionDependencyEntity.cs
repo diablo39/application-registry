@@ -22,8 +22,6 @@ namespace ApplicationRegistry.Database.Entities
         //Navigation Properties
         public ApplicationVersionEntity ApplicationVersion { get; set; }
 
-        public DependencyVersionEntity DependencyVersion { get; set; }
-
         public Guid? IdParent { get; set; }
    
 

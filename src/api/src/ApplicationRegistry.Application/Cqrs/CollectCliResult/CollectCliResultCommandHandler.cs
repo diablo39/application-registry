@@ -91,7 +91,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
                 IdEnvironment = command.IdEnvironment,
                 IsArchived = false,
                 Version = command.Version,
-                Dependencies = new List<ApplicationVersionDependencyEntity>(),
                 SwaggerSpecifications = new List<ApplicationVersionSwaggerSpecificationEntity>(),
                 ToolsVersion = command.ToolsVersion,
                 CollectorBatchStatuses = JsonConvert.SerializeObject(command.BatchStatuses, Formatting.Indented),

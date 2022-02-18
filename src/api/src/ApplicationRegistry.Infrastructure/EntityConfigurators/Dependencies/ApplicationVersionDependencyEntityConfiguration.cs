@@ -24,11 +24,6 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
                 .HasConversion(s => s, s => s.ToLower());
 
             builder
-                .HasOne(e => e.DependencyVersion)
-                .WithMany()
-                .HasForeignKey(e => e.IdDependencyVersion);
-
-            builder
                 .Property(e => e.IdDependencyVersion)
                 .HasConversion(s => s, s => s.ToLower());
         }
