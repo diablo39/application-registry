@@ -19,8 +19,6 @@ namespace ApplicationRegistry.Infrastructure.UnitOfWork
 
         public DbSet<ApplicationVersionSwaggerSpecificationEntity> ApplicationVersionSwaggerSpecifications { get; set; }
 
-        public DbSet<CollectorKnowledgeBaseEntity> CollectorKnowledgeBase { get; set; }
-
         public DbSet<EnvironmentEntity> Environments { get; set; }
 
         public DbSet<SystemEntity> Systems { get; set; }
