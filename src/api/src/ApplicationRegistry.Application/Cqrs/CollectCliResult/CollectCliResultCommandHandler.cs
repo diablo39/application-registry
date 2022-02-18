@@ -25,13 +25,13 @@ namespace ApplicationRegistry.Application.CommandHandlers
         {
             return new CommandHandlerResult { IsSuccess = false };
         }
-
     }
 
     public class CollectCliResultCommandHandler
     {
         private readonly IScheduler _scheduler;
         private IUnitOfWork _context;
+
         public CollectCliResultCommandHandler(IUnitOfWork context, IScheduler scheduler)
         {
             _context = context;
@@ -137,17 +137,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
                         ProcessNugetPackage(entity, dependency);
                         continue;
                     }
-
-                    var idDependency = $"{dependency.DependencyType}:{dependency.Name}";
-                    var idDependencyVersion = $"{idDependency}:{dependency.Version}";
-
-                    EnsureDependencyExists(dependency, idDependency, idDependencyVersion);
-
-                    ApplicationVersionDependencyEntity applicationVersionDependency = CreateNewApplicationVersiondependency(dependency, idDependency, idDependencyVersion);
-
-                    entity.Dependencies.Add(applicationVersionDependency);
-
-                    _context.Add(applicationVersionDependency);
                 }
             }
 
@@ -156,17 +145,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
             StartProcessSwaggerSpecificationChangedJob(swaggerSpecifications);
 
             return CommandHandlerResult.Success();
-        }
-
-        private static ApplicationVersionDependencyEntity CreateNewApplicationVersiondependency(CollectCliResultCommand.ApplicationVersionDependency dependency, string idDependency, string idDependencyVersion)
-        {
-            return new ApplicationVersionDependencyEntity
-            {
-                Id = Guid.NewGuid(),
-                IdDependency = idDependency,
-                IdDependencyVersion = idDependencyVersion,
-                ExtraProperties = dependency.VersionExtraProperties == null ? null : JsonConvert.SerializeObject(dependency.VersionExtraProperties),
-            };
         }
 
         private Database.Entities.ApplicationEntity CreateNewApplication(CollectCliResultCommand command)
@@ -183,39 +161,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
             return application;
         }
 
-        private void EnsureDependencyExists(CollectCliResultCommand.ApplicationVersionDependency dependency, string idDependency, string idDependencyVersion)
-        {
-            var dependencyEntity = _context.Dependencies.Local.FirstOrDefault(e => e.Id == idDependency) ?? _context.Dependencies.FirstOrDefault(e => e.Id == idDependency);
-
-            if (dependencyEntity == null)
-            {
-                dependencyEntity = new DependencyEntity
-                {
-                    IdDependencyType = dependency.DependencyType,
-                    ExtraProperties = dependency.ExtraProperties == null ? null : JsonConvert.SerializeObject(dependency.ExtraProperties),
-                    Id = idDependency,
-                    Name = dependency.Name,
-                    //Versions = new List<DependencyVersionEntity>()
-                };
-
-                _context.Dependencies.Add(dependencyEntity);
-            }
-
-            var dependencyVersionEntity = _context.DependencyVersions.Local.FirstOrDefault(e => e.Id == idDependencyVersion) ?? _context.DependencyVersions.FirstOrDefault(e => e.Id == idDependencyVersion);
-
-            if (dependencyVersionEntity == null)
-            {
-                dependencyVersionEntity = new DependencyVersionEntity
-                {
-                    IdDependency = idDependency,
-                    Id = idDependencyVersion,
-                    Version = dependency.Version
-                };
-
-                _context.DependencyVersions.Add(dependencyVersionEntity);
-            }
-        }
-
         private ApplicationVersionEntity GetVersionFromDatabase(Guid idApplication, string idEnvironment, string version)
         {
             var entity = _context.ApplicationVersions
@@ -225,7 +170,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
 
             return entity;
         }
-
 
         private void StartProcessSwaggerSpecificationChangedJob(List<Guid> swaggerSpecifications)
         {
