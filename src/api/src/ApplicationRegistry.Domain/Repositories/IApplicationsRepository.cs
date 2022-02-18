@@ -8,7 +8,7 @@ namespace ApplicationRegistry.Domain.Persistency
 {
     public interface IApplicationsRepository : IRepository<ApplicationEntity>
     {
-        ApplicationEntity Get(string idOrCode);
+        ApplicationEntity Get(string code);
 
         Task<ApplicationEntity> GetWithEndpointsAsync(Guid Id);
     }

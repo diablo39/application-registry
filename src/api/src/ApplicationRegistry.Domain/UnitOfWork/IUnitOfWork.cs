@@ -68,11 +68,9 @@ namespace ApplicationRegistry.Database
 
         DbSet<ApplicationVersionEntity> ApplicationVersions { get; }
 
-        DbSet<ApplicationEntity> Applications { get; }
-
         DbSet<SwaggerSpecificationOperationEntity> SwaggerSpecificationOperations { get; }
-
         #endregion
+
         IApplicationsRepository ApplicationsRepository { get; }
 
         INugetPackageRepository NugetPackageRepository { get; }
@@ -140,6 +138,5 @@ namespace ApplicationRegistry.Database
         ///     loaded into memory.
         /// </exception>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-
     }
 }

@@ -34,17 +34,17 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
                 throw new DomainException(new KeyValuePair<string, string>(nameof(application.IdSystem), $"Project with id: {application.IdSystem} does not exist."));
             }
 
-            _context.Applications.Add(application);
+            _set.Add(application);
         }
 
-        public ApplicationEntity Get(string idOrCode)
+        public ApplicationEntity Get(string code)
         {
-            throw new NotImplementedException();
+            return this._set.FirstOrDefault(x => x.Code == code);
         }
 
         public async Task<ApplicationEntity> GetWithEndpointsAsync(Guid id)
         {            
-            var app =  await _context.Applications.Include(e=> e.Endpoints).FirstOrDefaultAsync(e => e.Id == id);
+            var app =  await _set.Include(e=> e.Endpoints).FirstOrDefaultAsync(e => e.Id == id);
 
             return app;
         }

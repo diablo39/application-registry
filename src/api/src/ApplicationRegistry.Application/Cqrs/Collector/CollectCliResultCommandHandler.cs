@@ -42,7 +42,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
         {
             CommandHandlerResult result;
 
-            var application = _context.Applications.FirstOrDefault(a => a.Code == command.ApplicationCode);
+            var application = _context.ApplicationsRepository.Get(command.ApplicationCode);
 
             if (application == null)
             {
@@ -153,7 +153,7 @@ namespace ApplicationRegistry.Application.CommandHandlers
                 RepositoryUrl = command.RepositoryUrl
             };
 
-            _context.Applications.Add(application);
+            _context.ApplicationsRepository.Add(application);
 
             return application;
         }

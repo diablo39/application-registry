@@ -45,9 +45,9 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             //act
 
             var handlerResult = await handler.ExecuteAsync(applicationCommand);
-            var application = dbcontext.Applications.FirstOrDefault(e=> e.Code == applicationCommand.Code);
 
             //assert
+            var application = dbcontext.Applications.FirstOrDefault(e=> e.Code == applicationCommand.Code);
             handlerResult.Should().BeAssignableTo(typeof(ISuccessResult<>));
             application.Endpoints.Should().NotBeEmpty();
         }
