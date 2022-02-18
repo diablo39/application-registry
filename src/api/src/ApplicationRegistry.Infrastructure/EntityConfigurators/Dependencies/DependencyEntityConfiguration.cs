@@ -22,8 +22,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
 
             builder
                 .HasDiscriminator<string>("IdDependencyType")
-                    .HasValue<DependencyEntity>(DependencyTypes.Nuget)
-                    .HasValue<ApplicationDependencyEntity>(DependencyTypes.Application);
+                    .HasValue<DependencyEntity>(DependencyTypes.Nuget);
         }
     }
 }

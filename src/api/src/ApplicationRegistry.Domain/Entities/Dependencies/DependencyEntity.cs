@@ -47,10 +47,5 @@ namespace ApplicationRegistry.Database.Entities
         {
             return new DependencyEntity { CreateDate = DateTime.UtcNow, IdDependencyType = idDependencyType, Name = name, Id = string.Concat(idDependencyType, ":", name) };
         }
-
-        public static DependencyEntity CreateApplicationDependency(string name, Guid idApplication)
-        {
-            return new ApplicationDependencyEntity(name, idApplication);
-        }
     }
 }

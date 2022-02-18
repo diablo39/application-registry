@@ -35,8 +35,6 @@ namespace ApplicationRegistry.Infrastructure.Domain.Persistency
             }
 
             _context.Applications.Add(application);
-
-            _context.Dependencies.Add(new ApplicationDependencyEntity(application.Name, application.Id));
         }
 
         public ApplicationEntity Get(string idOrCode)

@@ -156,8 +156,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
 
             _context.Applications.Add(application);
 
-            _context.Dependencies.Add(new ApplicationDependencyEntity(application.Name, application.Id));
-
             return application;
         }
 
