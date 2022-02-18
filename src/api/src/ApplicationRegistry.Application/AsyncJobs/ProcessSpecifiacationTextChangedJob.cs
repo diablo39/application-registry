@@ -56,8 +56,6 @@ namespace ApplicationRegistry.Application.AsyncJobs
             {
                 var versionSpecification = _context.ApplicationVersionSwaggerSpecifications.FirstOrDefault(e => e.Id == id);
 
-                var result = new List<SwaggerSpecificationOperationEntity>();
-
                 var text = specification.Specification;
 
                 var contextType = specification.ContentType;
@@ -67,15 +65,15 @@ namespace ApplicationRegistry.Application.AsyncJobs
                 if (!isjson)
                     text = ConvertToJson(text);
 
-                GetSwaggerOperations(specification, result, text);
+                var swaggerOperations = GetSwaggerOperations(specification, text);
 
-                if (result.Any())
+                if (swaggerOperations.Any())
                 {
                     RemoveAllOldOperations(specification);
 
-                    _context.SwaggerSpecificationOperations.AddRange(result);
+                    _context.SwaggerSpecificationOperations.AddRange(swaggerOperations);
 
-                    var stringified = string.Concat("|", string.Join("|", result.Select(e => e.Path).OrderBy(e => e).Distinct()), "|");
+                    var stringified = string.Concat("|", string.Join("|", swaggerOperations.Select(e => e.Path).OrderBy(e => e).Distinct()), "|");
 
                     versionSpecification.OperationsStringified = stringified.CalculateSHA256();
 
@@ -91,8 +89,10 @@ namespace ApplicationRegistry.Application.AsyncJobs
             _context.SwaggerSpecificationOperations.RemoveRange(itemsToRemove);
         }
 
-        private void GetSwaggerOperations(ApplicationVersionSwaggerSpecificationEntity specification, List<SwaggerSpecificationOperationEntity> result, string text)
+        private List<SwaggerSpecificationOperationEntity> GetSwaggerOperations(ApplicationVersionSwaggerSpecificationEntity specification, string text)
         {
+            var result = new List<SwaggerSpecificationOperationEntity>();
+
             var swagger = JObject.Parse(text);
 
             var paths = swagger["paths"];
@@ -120,6 +120,8 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
                 }
             }
+
+            return result;
         }
 
         public string ConvertToJson(string specification)
