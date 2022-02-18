@@ -15,8 +15,6 @@ namespace ApplicationRegistry.Infrastructure.UnitOfWork
     {
         public DbSet<ApplicationEntity> Applications { get; set; }
 
-        public DbSet<ApplicationVersionDependencyEntity> ApplicationVersionDependencies { get; set; }
-
         public DbSet<ApplicationVersionEntity> ApplicationVersions { get; set; }
 
         public DbSet<ApplicationVersionSwaggerSpecificationEntity> ApplicationVersionSwaggerSpecifications { get; set; }

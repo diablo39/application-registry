@@ -43,8 +43,6 @@ namespace ApplicationRegistry.Database.Entities
 
         public List<ApplicationVersionSwaggerSpecificationEntity> SwaggerSpecifications { get; set; }
 
-        public List<ApplicationVersionDependencyEntity> Dependencies { get; set; }
-
         public List<ApplicationVersionNugetPackageDependency> ApplicationVersionNugetPackageDependencies { get; set; }
 
         public ApplicationVersionEntity()

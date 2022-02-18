@@ -161,7 +161,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
         private ApplicationVersionEntity GetVersionFromDatabase(Guid idApplication, string idEnvironment, string version)
         {
             var entity = _context.ApplicationVersions
-                .Include(e => e.Dependencies)
                 .Include(e => e.SwaggerSpecifications)
                 .FirstOrDefault(v => v.IdApplication == idApplication && v.IdEnvironment == idEnvironment && v.Version == version);
 
