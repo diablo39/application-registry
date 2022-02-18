@@ -18,8 +18,6 @@ namespace ApplicationRegistry.Application.AsyncJobs
 
         private readonly ILogger<ProcessSpecifiacationTextChangedJob> _logger;
 
-        private readonly IScheduler _scheduler;
-
         private readonly string[] _httpMethods = new[] {
             "get",
             "put",
@@ -31,11 +29,10 @@ namespace ApplicationRegistry.Application.AsyncJobs
             "trace"
         };
 
-        public ProcessSpecifiacationTextChangedJob(IUnitOfWork context, ILogger<ProcessSpecifiacationTextChangedJob> logger, IScheduler scheduler)
+        public ProcessSpecifiacationTextChangedJob(IUnitOfWork context, ILogger<ProcessSpecifiacationTextChangedJob> logger)
         {
             _context = context;
             _logger = logger;
-            _scheduler = scheduler;
         }
 
         public void Handle(Guid id)
@@ -83,16 +80,6 @@ namespace ApplicationRegistry.Application.AsyncJobs
                     versionSpecification.OperationsStringified = stringified.CalculateSHA256();
 
                     _context.SaveChanges();
-
-                    //var autorestApplicationDependencies = _context.ApplicationVersionDependencies.AsNoTracking()
-                    //    .Where(d => d.Dependency.IdDependencyType == DependencyTypes.AutorestClient)
-                    //    .Where(e => !_context.ApplicationVersionDependencies.Any(a => a.IdParent == e.Id))
-                    //    .Select(e => e.Id);
-
-                    //foreach (var autorestApplicationDependencyId in autorestApplicationDependencies)
-                    //{
-                    //    _scheduler.Enqueue<ProcessAutoRestClientDependencyCreatedJob>(e => e.Handle(autorestApplicationDependencyId));
-                    //}
                 }
             }
         }

@@ -12,7 +12,6 @@ namespace ApplicationRegistry.Application
     {
         public static void RegisterApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<ProcessAutoRestClientDependencyCreatedJob>();
             services.AddScoped<ProcessSpecifiacationTextChangedJob>();
 
             services.AddTransient<IValidator<CollectCliResultCommand>, CollectCliResultCommandValidator>();

@@ -51,27 +51,6 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                         DependencyType = DependencyTypes.Nuget,
                         Name = "Microsoft.Extensions.Logging",
                         Version = "12"
-                    },
-                    new CollectCliResultCommand.ApplicationVersionDependency
-                    {
-                        DependencyType = DependencyTypes.AutorestClient,
-                        Name = "MyApplication.Contracts.MyClient",
-                        Version = "New version",
-                        VersionExtraProperties = new Dictionary<string, object>
-                        {
-                            {
-                                "Operations",
-                                new List<AutorestClientDependency.Operation>
-                                {
-                                    new AutorestClientDependency.Operation
-                                    {
-                                        IsInUse = false,
-                                        OperationId = "GetValue",
-                                        Path = "/value"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             };
@@ -139,27 +118,6 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                         DependencyType = DependencyTypes.Nuget,
                         Name = "Microsoft.Extensions.Logging",
                         Version = "12"
-                    },
-                    new CollectCliResultCommand.ApplicationVersionDependency
-                    {
-                        DependencyType = DependencyTypes.AutorestClient,
-                        Name = "MyApplication.Contracts.MyClient",
-                        Version = "New version",
-                        VersionExtraProperties = new Dictionary<string, object>
-                        {
-                            {
-                                "Operations",
-                                new List<AutorestClientDependency.Operation>
-                                {
-                                    new AutorestClientDependency.Operation
-                                    {
-                                        IsInUse = false,
-                                        OperationId = "GetValue",
-                                        Path = "/value"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             };
@@ -240,27 +198,6 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
                         DependencyType = DependencyTypes.Nuget,
                         Name = "Microsoft.Extensions.Logging",
                         Version = "12"
-                    },
-                    new CollectCliResultCommand.ApplicationVersionDependency
-                    {
-                        DependencyType = DependencyTypes.AutorestClient,
-                        Name = "MyApplication.Contracts.MyClient",
-                        Version = "New version",
-                        VersionExtraProperties = new Dictionary<string, object>
-                        {
-                            {
-                                "Operations",
-                                new List<AutorestClientDependency.Operation>
-                                {
-                                    new AutorestClientDependency.Operation
-                                    {
-                                        IsInUse = false,
-                                        OperationId = "GetValue",
-                                        Path = "/value"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             };

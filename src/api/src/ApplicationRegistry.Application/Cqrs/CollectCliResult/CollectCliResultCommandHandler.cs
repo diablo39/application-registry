@@ -83,7 +83,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
         internal CommandHandlerResult InsertVersion(CollectCliResultCommand command, Database.Entities.ApplicationEntity application)
         {
             var swaggerSpecifications = new List<Guid>();
-            var autorestClientDependencies = new List<Guid>();
 
             var entity = new ApplicationVersionEntity
             {
@@ -149,11 +148,6 @@ namespace ApplicationRegistry.Application.CommandHandlers
                     entity.Dependencies.Add(applicationVersionDependency);
 
                     _context.Add(applicationVersionDependency);
-
-                    if (dependency.DependencyType == DependencyTypes.AutorestClient)
-                    {
-                        autorestClientDependencies.Add(applicationVersionDependency.Id);
-                    }
                 }
             }
 

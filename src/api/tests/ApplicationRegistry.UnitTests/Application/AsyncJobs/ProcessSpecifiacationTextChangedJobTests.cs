@@ -43,8 +43,7 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
             dbContext.Add(specification);
             dbContext.SaveChanges();
             var loggerMoq = new Moq.Mock<ILogger<ProcessSpecifiacationTextChangedJob>>();
-            var schedulerMoq = new Moq.Mock<IScheduler>();
-            var eventHandler = new ProcessSpecifiacationTextChangedJob(dbContext, loggerMoq.Object, schedulerMoq.Object);
+            var eventHandler = new ProcessSpecifiacationTextChangedJob(dbContext, loggerMoq.Object);
 
             // act
             eventHandler.Handle(id);
@@ -77,9 +76,8 @@ namespace ApplicationRegistry.UnitTests.Application.EventHandlers
             dbContext.SaveChanges();
 
             var loggerMoq = new Moq.Mock<ILogger<ProcessSpecifiacationTextChangedJob>>();
-            var schedulerMoq = new Moq.Mock<IScheduler>();
 
-            var eventHandler = new ProcessSpecifiacationTextChangedJob(dbContext, loggerMoq.Object, schedulerMoq.Object);
+            var eventHandler = new ProcessSpecifiacationTextChangedJob(dbContext, loggerMoq.Object);
 
             // act
             eventHandler.Handle(id);

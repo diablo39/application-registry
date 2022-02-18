@@ -23,8 +23,7 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
             builder
                 .HasDiscriminator<string>("IdDependencyType")
                     .HasValue<DependencyEntity>(DependencyTypes.Nuget)
-                    .HasValue<ApplicationDependencyEntity>(DependencyTypes.Application)
-                    .HasValue<AutorestClientDependency>(DependencyTypes.AutorestClient);
+                    .HasValue<ApplicationDependencyEntity>(DependencyTypes.Application);
         }
     }
 }

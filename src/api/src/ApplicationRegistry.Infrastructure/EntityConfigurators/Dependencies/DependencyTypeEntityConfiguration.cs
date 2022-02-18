@@ -14,10 +14,13 @@ namespace ApplicationRegistry.Infrastructure.Domain.EntityConfigurators.Dependen
         {
             builder.ToTable("DependencyType");
 
-            builder.HasData(
-                new DependencyTypeEntity { Id = DependencyTypesEnum.Application, CreateDate = Consts.CreateDate, Name = "Application", CanBeAddedManualy = true },
-                new DependencyTypeEntity { Id = DependencyTypesEnum.AutorestClient, CreateDate = Consts.CreateDate, Name = "AutoRest Client" }
-                );
+            builder.HasData(new DependencyTypeEntity
+            {
+                Id = DependencyTypesEnum.Application,
+                CreateDate = Consts.CreateDate,
+                Name = "Application",
+                CanBeAddedManualy = true
+            });
         }
     }
 }
