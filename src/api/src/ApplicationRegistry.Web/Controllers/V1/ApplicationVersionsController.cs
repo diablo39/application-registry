@@ -15,30 +15,14 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status500InternalServerError)]
     public class ApplicationVersionsController : ControllerBase
     {
         // GET: api/<ApplicationsController>
-        [HttpGet()]
-        [ProducesResponseType(typeof(ApplicationVersionListQueryResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromServices] IQueryHandler<ApplicationVersionListQuery, ApplicationVersionListQueryResult> handler)
-        {
-            var query = new ApplicationVersionListQuery
-            {
-
-            };
-
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
-
-            return result;
-        }
-
-        // GET: api/<ApplicationsController>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApplicationVersionDetailsQueryResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationVersionDetailsQuery, ApplicationVersionDetailsQueryResult> handler)
+        public async Task<IActionResult> Get(
+            [FromRoute] Guid id, 
+            [FromServices] IQueryHandler<ApplicationVersionDetailsQuery, ApplicationVersionDetailsQueryResult> handler)
         {
             var query = new ApplicationVersionDetailsQuery
             {

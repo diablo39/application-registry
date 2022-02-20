@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ApplicationRegistry.Application.Queries;
+﻿using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
-using ApplicationRegistry.Web.Areas.Api.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationRegistry.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status500InternalServerError)]
     public class FirewallRulesController : ControllerBase
     {
         // GET: api/<ApplicationsController>

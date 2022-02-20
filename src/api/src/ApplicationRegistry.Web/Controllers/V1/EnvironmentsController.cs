@@ -11,8 +11,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status500InternalServerError)]
     public class EnvironmentsController : ControllerBase
     {
         [HttpGet()]

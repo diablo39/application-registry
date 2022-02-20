@@ -17,7 +17,6 @@ namespace ApplicationRegistry.Web.Controllers.Api
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType]
         public IActionResult Post(
             [FromServices] CollectCliResultCommandHandler handler,
             [FromServices] ILogger<CollectorController> logger,
@@ -37,7 +36,6 @@ namespace ApplicationRegistry.Web.Controllers.Api
         // POST api/<ApplicationsController>
         [HttpPost("logs")]
         [ProducesResponseType(typeof(LogErrorCommandResult), StatusCodes.Status202Accepted)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Post([FromBody] LogErrorCommand command, [FromServices] ICommandHandler<LogErrorCommand, LogErrorCommandResult> handler)
         {
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext, System.Net.HttpStatusCode.Accepted);

@@ -15,8 +15,6 @@ namespace ApplicationRegistry.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
     public class RedisController : ControllerBase
     {
         [HttpGet(Name ="GetRedisList")]

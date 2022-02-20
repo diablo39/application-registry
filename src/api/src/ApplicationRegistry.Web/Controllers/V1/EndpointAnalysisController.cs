@@ -12,13 +12,10 @@ namespace ApplicationRegistry.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
     public class EndpointAnalysisController : ControllerBase
     {
         [HttpGet("DrillDown")]
         [ProducesResponseType(typeof(EndpointAnalysisDrillDownQueryResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> GetDrillDown(
             [FromQuery] Guid idVersion,
             [FromQuery] String httpMethod,
@@ -39,7 +36,6 @@ namespace ApplicationRegistry.Web.Controllers
 
         [HttpGet("DrillUp")]
         [ProducesResponseType(typeof(EndpointAnalysisDrillUpQueryResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> GetDrillUp(
            [FromQuery] Guid idVersion,
            [FromQuery] String httpMethod,

@@ -12,8 +12,6 @@ namespace ApplicationRegistry.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status500InternalServerError)]
     public class NugetPackagesController : ControllerBase
     {
         // GET: api/<ApplicationsController>

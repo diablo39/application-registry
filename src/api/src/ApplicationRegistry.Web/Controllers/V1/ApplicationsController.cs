@@ -1,15 +1,9 @@
 ﻿using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.Application.Queries.ApplicationsList;
-using ApplicationRegistry.Web.Areas.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ApplicationRegistry.CQRS.Abstraction;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ApplicationRegistry.Web.Areas.Api.Controllers
 {
@@ -22,7 +16,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         // GET: api/<ApplicationsController>
         [HttpGet(Name = "GetApplicationList")]
         [ProducesResponseType(typeof(ApplicationsListQueryResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Get(
             [FromServices] IQueryHandler<ApplicationsListQuery, ApplicationsListQueryResult> handler,
             [FromQuery] string sortBy = null,
@@ -38,10 +31,8 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         // GET api/<ApplicationsController>/5
-
         [HttpGet("{idOrCode}", Name = "GetApplicationDetails")]
         [ProducesResponseType(typeof(ApplicationDetailsQueryResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Get(
             [FromRoute] string idOrCode, 
             [FromServices] IQueryHandler<ApplicationDetailsQuery, ApplicationDetailsQueryResult> queryHandler)
@@ -56,7 +47,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         // GET: api/<ApplicationsController>
         [HttpGet("{idOrCode}/versions", Name = "GetApplicationVersions")]
         [ProducesResponseType(typeof(ApplicationVersionListQueryResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Get(
             [FromRoute] string idOrCode, 
             [FromServices] IQueryHandler<ApplicationVersionListQuery, ApplicationVersionListQueryResult> handler)
@@ -76,7 +66,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         // POST api/<ApplicationsController>
         [HttpPost(Name = "CreateApplication")]
         [ProducesResponseType(typeof(ApplicationCreateCommandResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Post(
             [FromBody] ApplicationCreateCommand command, 
             [FromServices] ICommandHandler<ApplicationCreateCommand, ApplicationCreateCommandResult> handler)
@@ -89,7 +78,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         // PUT api/<ApplicationsController>/5
         [HttpPut("{idOrCode}", Name = "UpdateApplication")]
         [ProducesResponseType(typeof(ApplicationUpdateCommandResult), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         public async Task<IActionResult> Put(
             [FromRoute] Guid idOrCode, 
             [FromBody] ApplicationUpdateCommand command, 
@@ -101,6 +89,5 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
             return result;
         }
-
     }
 }

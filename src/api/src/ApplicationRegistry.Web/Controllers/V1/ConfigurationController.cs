@@ -17,15 +17,12 @@ namespace ApplicationRegistry.Web.Controllers.V1
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ApiErrorModel), StatusCodes.Status422UnprocessableEntity)]
 
     public class ConfigurationController : ControllerBase
     {
         // GET: api/<ApplicationsController>
         [HttpGet("frontendConfiguration", Name = "GetFrontendConfiguration")]
         [ProducesResponseType(typeof(FrontendConfigurationModel), StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType(typeof(ApiErrorModel))]
         [AllowAnonymous]
         
         public Task<IActionResult> Get([FromServices] IOptions<ApplicationConfiguration> applicationConfigurationOptions)
