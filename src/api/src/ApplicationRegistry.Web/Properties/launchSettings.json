@@ -18,8 +18,6 @@
     },
     "ApplicationRegistry.Web - Local": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5010/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

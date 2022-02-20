@@ -17,6 +17,7 @@ namespace ApplicationRegistry.Web.Controllers.Api
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Post(
             [FromServices] CollectCliResultCommandHandler handler,
             [FromServices] ILogger<CollectorController> logger,
