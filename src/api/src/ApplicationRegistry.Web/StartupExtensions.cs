@@ -2,15 +2,11 @@
 using ApplicationRegistry.Application.QueryDecorators;
 using ApplicationRegistry.Application.Services;
 using ApplicationRegistry.CQRS.Abstraction;
-using ApplicationRegistry.Web.Swagger;
 using FluentValidation;
-using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 using System.IO.Compression;
-using System.Reflection;
 
 namespace ApplicationRegistry.Web
 {
@@ -32,28 +28,6 @@ namespace ApplicationRegistry.Web
         public static void InitializeServices(this IServiceProvider provider)
         {
             provider.GetRequiredService<SotDataProvider>();
-        }
-
-        public static void AddSwagger(this IServiceCollection services)
-        {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Application Registry API",
-                    Description = "A simple example ASP.NET Core Web API",
-                });
-
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-                c.DescribeAllParametersInCamelCase();
-                c.RequestBodyFilter<SwaggerExcludePropertyBodyFilter>();
-                
-            });
-
-            services.AddFluentValidationRulesToSwagger();
         }
 
         public static void RegisterCommandsAndQueries(this IServiceCollection services)

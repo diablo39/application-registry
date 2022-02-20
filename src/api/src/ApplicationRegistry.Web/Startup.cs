@@ -5,8 +5,10 @@ using ApplicationRegistry.Infrastructure.HangfireExtensions;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
 using ApplicationRegistry.Web.Areas.Api.Models;
 using ApplicationRegistry.Web.Models;
+using ApplicationRegistry.Web.Swagger;
 using FluentValidation.AspNetCore;
 using Hangfire;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +18,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ApplicationRegistry.Web
 {
@@ -34,6 +37,10 @@ namespace ApplicationRegistry.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<SotDataProviderConfiguration>(Configuration.GetSection("SotDataProvider"));
+
+            services.Configure<ApplicationConfiguration>(Configuration);
+
             services.AddCompression();
 
             services.AddRouting(options =>
@@ -41,7 +48,10 @@ namespace ApplicationRegistry.Web
                 options.LowercaseUrls = true;
             });
 
-            services.AddSwagger();
+            services
+                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>()
+                .AddSwaggerGen()
+                .AddFluentValidationRulesToSwagger();
 
             services.AddMvc(options =>
                 {
@@ -63,9 +73,6 @@ namespace ApplicationRegistry.Web
 
             services.AddLocalization();
 
-            services.Configure<SotDataProviderConfiguration>(Configuration.GetSection("SotDataProvider"));
-
-            services.Configure<ApplicationConfiguration>(Configuration);
 
             services.AddDbContext<ApplicationRegistryDatabaseContext>(options =>
                 options
@@ -124,16 +131,16 @@ namespace ApplicationRegistry.Web
 
             app.UseRouting();
 
-            app.UseSwagger(c =>
-            {
-                //c.SerializeAsV2 = true;
-            });
+            app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
+                c.SwaggerEndpoint("v1/swagger.json", "API");
                 c.DisplayOperationId();
                 c.DisplayRequestDuration();
+                c.OAuthClientId(Configuration["Authentication:ClientId"]);
+                c.OAuthScopes(Configuration["Authentication:Scope"].Split(" "));
+                c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> { { "audience", Configuration["Authentication:Audience"] } });
             });
 
             app.UseAuthentication();
