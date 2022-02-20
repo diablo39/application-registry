@@ -10,34 +10,6 @@ using System.Threading.Tasks;
 
 namespace ApplicationRegistry.Web.Swagger
 {
-    //public class SwaggerExcludePropertySchemaFilter : ISchemaFilter
-    //{
-    //    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
-    //    {
-    //        if (schema?.Properties == null)
-    //        {
-    //            return;
-    //        }
-
-    //        var excludedProperties = context.Type.GetCustomAttributes<SwaggerIgnorePropertyAttribute>()?.ToList();
-
-    //        if (excludedProperties != null && excludedProperties.Count > 0)
-
-    //            foreach (var excludedProperty in excludedProperties)
-    //            {
-    //                foreach (var excludedPropertyName in excludedProperty.Names)
-    //                {
-    //                    var propertyToRemove = schema.Properties.Keys.SingleOrDefault(x => string.Equals(x, excludedPropertyName, StringComparison.OrdinalIgnoreCase));
-
-    //                    if (propertyToRemove != null)
-    //                    {
-    //                        schema.Properties.Remove(propertyToRemove);
-    //                    }
-    //                }
-    //            }
-    //    }
-    //}
-
     public class SwaggerExcludePropertyBodyFilter : IRequestBodyFilter
     {
         public void Apply(OpenApiRequestBody requestBody, RequestBodyFilterContext context)
