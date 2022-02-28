@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Web.Controllers
             [FromQuery] int itemsPerPage = -1)
         {
             RedisListQuery query = new RedisListQuery { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -44,7 +44,7 @@ namespace ApplicationRegistry.Web.Controllers
             [FromQuery] int itemsPerPage = -1)
         {
             var query = new RedisDeploymentTypeQuery { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -59,7 +59,7 @@ namespace ApplicationRegistry.Web.Controllers
             RedisDetailsQuery query = new RedisDetailsQuery { Id = id };
 
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -69,7 +69,7 @@ namespace ApplicationRegistry.Web.Controllers
             [FromBody] RedisCreateCommand command, 
             [FromServices] ICommandHandler<RedisCreateCommand, RedisCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -82,7 +82,7 @@ namespace ApplicationRegistry.Web.Controllers
         {
             command.Id = id;
 
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

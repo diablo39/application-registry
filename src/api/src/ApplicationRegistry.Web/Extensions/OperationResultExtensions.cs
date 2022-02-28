@@ -1,17 +1,13 @@
 ﻿using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Web.Areas.Api.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using System;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc
 {
     public static class OperationResultExtensions
     {
-        public static async Task<IActionResult> ToApiActionResult<R>(this Task<OperationResult<R>> resultTask, 
+        public static async Task<IActionResult> ToApiActionResultAsync<R>(this Task<OperationResult<R>> resultTask, 
             HttpContext context, 
             Func<ISuccessResult<R>, IActionResult> mapSuccess)
         {
@@ -36,7 +32,7 @@ namespace Microsoft.AspNetCore.Mvc
             }
         }
 
-        public static async Task<IActionResult> ToApiActionResult<R>(this Task<OperationResult<R>> resultTask, 
+        public static async Task<IActionResult> ToApiActionResultAsync<R>(this Task<OperationResult<R>> resultTask, 
             HttpContext context, 
             HttpStatusCode successCode = HttpStatusCode.OK)
         {

@@ -25,7 +25,7 @@ namespace ApplicationRegistry.Web.Controllers
         {
             NugetPackageListQuery query = new NugetPackageListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -49,7 +49,7 @@ namespace ApplicationRegistry.Web.Controllers
             var query = new NugetPackageVersionListQuery { Id = id };
 
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -60,7 +60,7 @@ namespace ApplicationRegistry.Web.Controllers
         {
             var query = new NugetPackageApplicationListQuery { Name = id };
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -75,7 +75,7 @@ namespace ApplicationRegistry.Web.Controllers
                 Version = packageVersion
             };
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

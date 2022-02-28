@@ -44,11 +44,11 @@ namespace ApplicationRegistry.Database.Entities
 
         public ApplicationEntity(Guid id, string name, string code, Guid idSystem = default, DateTimeOffset createDate = default)
         {
-            if (id == default) throw new DomainException(nameof(id), "");
+            Guard.IsNotDefault(id, nameof(id));
+         
+            Guard.IsNotNullOrWhiteSpace(name, nameof(name));
 
-            if (string.IsNullOrWhiteSpace(name)) throw new DomainException(nameof(name), "Name is required");
-
-            if (string.IsNullOrWhiteSpace(code)) throw new DomainException(nameof(code), "Code is required");
+            Guard.IsNotNullOrWhiteSpace(code, nameof(code));
 
             if (idSystem == default) idSystem = SystemEntity.UnasignedApplications;
 

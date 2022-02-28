@@ -24,7 +24,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
             [FromQuery] Guid? systemId = null)
         {
             var query = new ApplicationsListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc, SystemId = systemId };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -38,7 +38,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
         {
             var query = new ApplicationDetailsQuery { IdOrCode = idOrCode };
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -55,7 +55,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
                 IdOrCode = idOrCode
             };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -69,7 +69,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
             [FromBody] ApplicationCreateCommand command,
             [FromServices] ICommandHandler<ApplicationCreateCommand, ApplicationCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -84,7 +84,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
         {
             command.Id = idOrCode;
 
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

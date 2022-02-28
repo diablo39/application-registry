@@ -51,7 +51,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         {
             var query = new LoadBalancerListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -61,7 +61,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         {
             var query = new LoadBalancerDetailsQuery() { Id = id };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -72,7 +72,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             [FromBody] LoadBalancerCreateCommand command,
             [FromServices] ICommandHandler<LoadBalancerCreateCommand, LoadBalancerCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -85,7 +85,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         {
             command.Id = id;
 
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

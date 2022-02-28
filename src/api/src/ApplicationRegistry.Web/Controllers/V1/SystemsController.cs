@@ -18,7 +18,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         public async Task<IActionResult> Get([FromServices] IQueryHandler<SystemsListQuery, SystemsListQueryResult> handler)
         {
             var query = new SystemsListQuery();
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
             return result;
         }
 
@@ -27,7 +27,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         public async Task<IActionResult> Get(Guid id, [FromServices] IQueryHandler<SystemDetailsQuery, SystemDetailsQueryResult> handler)
         {
             var query = new SystemDetailsQuery { Id = id };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
             return result;
         }
 
@@ -35,7 +35,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpPost(Name ="CreateSystem")]
         public async Task<IActionResult> Post([FromBody] SystemCreateCommand command, [FromServices] ICommandHandler<SystemCreateCommand, SystemCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -45,7 +45,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         {
             command.Id = id;
 
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

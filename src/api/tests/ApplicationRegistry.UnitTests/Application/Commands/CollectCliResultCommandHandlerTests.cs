@@ -2,6 +2,7 @@
 using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Infrastructure.Abstractions.Scheduler;
+using ApplicationRegistry.Infrastructure.ApplicationSevices;
 using ApplicationRegistry.UnitTests.TestInfrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +59,9 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             var commandjson = JsonConvert.SerializeObject(command);
             var schedulerMoq = new Moq.Mock<IScheduler>();
             var schedulerObject = schedulerMoq.Object;
-            var handler = new CollectCliResultCommandHandler(context, schedulerObject);
+            var guidGenerator = new GuidGenerator();
+
+            var handler = new CollectCliResultCommandHandler(context, schedulerObject, guidGenerator);
             //Act
             var result = handler.Handle(command);
 
@@ -123,7 +126,8 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             };
 
             var schedulerMoq = new Moq.Mock<IScheduler>();
-            var handler = new CollectCliResultCommandHandler(context, schedulerMoq.Object);
+            var guidGenerator = new GuidGenerator();
+            var handler = new CollectCliResultCommandHandler(context, schedulerMoq.Object, guidGenerator);
             //Act
             var result = handler.Handle(command);
 
@@ -205,7 +209,8 @@ namespace ApplicationRegistry.UnitTests.Application.Commands
             Console.WriteLine(commandstr);
 
             var schedulerMoq = new Moq.Mock<IScheduler>();
-            var handler = new CollectCliResultCommandHandler(context, schedulerMoq.Object);
+            var guidGenerator = new GuidGenerator();
+            var handler = new CollectCliResultCommandHandler(context, schedulerMoq.Object, guidGenerator);
 
             //Act
             var result = handler.Handle(command);

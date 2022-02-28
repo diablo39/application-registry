@@ -28,6 +28,10 @@ namespace ApplicationRegistry.Application.CommandDecorators
             {
                 return OperationResult.BusinessError<TOut>(ex.ValidationErrors);
             }
+            catch (ArgumentException ex)
+            {
+                return OperationResult.BusinessError<TOut>(new KeyValuePair<string, string>(ex.ParamName, ex.Message));
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Exception while invoking command handler: {handler}", _next.GetType());

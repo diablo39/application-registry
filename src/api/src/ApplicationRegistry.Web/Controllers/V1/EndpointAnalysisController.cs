@@ -29,7 +29,7 @@ namespace ApplicationRegistry.Web.Controllers
                 Path = path
             };
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -49,7 +49,7 @@ namespace ApplicationRegistry.Web.Controllers
                 Path = path
             };
 
-            var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await queryHandler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

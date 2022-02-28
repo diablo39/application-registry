@@ -24,7 +24,7 @@ namespace ApplicationRegistry.Web.Controllers
         {
             var query = new MachineListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -34,7 +34,7 @@ namespace ApplicationRegistry.Web.Controllers
         {
             var query = new MachineDetailsQuery() { Id = id };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

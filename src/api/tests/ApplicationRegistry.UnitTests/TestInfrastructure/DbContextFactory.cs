@@ -96,21 +96,21 @@ namespace ApplicationRegistry.UnitTests.TestInfrastructure
             };
 
             modelBuilder.Entity<ApplicationVersionEntity>().HasData(
-                new ApplicationVersionEntity { Id = varsionids[0], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[1], IdApplication = applications[0], IdEnvironment = "INT", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = true },
-                new ApplicationVersionEntity { Id = varsionids[2], IdApplication = applications[0], IdEnvironment = "UAT", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[3], IdApplication = applications[0], IdEnvironment = "QUA", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[4], IdApplication = applications[0], IdEnvironment = "PRD", Version = "1.0_12345", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[5], IdApplication = applications[1], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[6], IdApplication = applications[3], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[7], IdApplication = applications[4], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[8], IdApplication = applications[5], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[9], IdApplication = applications[2], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[10], IdApplication = applications[6], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[11], IdApplication = applications[7], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[12], IdApplication = applications[8], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[13], IdApplication = applications[9], IdEnvironment = "PRD", Version = "1.1_12332", CreateDate = DateTime.UtcNow, IsArchived = false },
-                new ApplicationVersionEntity { Id = varsionids[14], IdApplication = applications[0], IdEnvironment = "Analytics", Version = "RODO", CreateDate = DateTime.UtcNow, IsArchived = false }
+                new ApplicationVersionEntity(varsionids[0], applications[0], "INT", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[1], applications[0], "INT", "1.0_12345", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[2], applications[0], "UAT", "1.0_12345", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[3], applications[0], "QUA", "1.0_12345", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[4], applications[0], "PRD", "1.0_12345", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[5], applications[1], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[6], applications[3], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[7], applications[4], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[8], applications[5], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[9], applications[2], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[10], applications[6], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[11], applications[7], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[12], applications[8], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[13], applications[9], "PRD", "1.1_12332", DateTime.UtcNow),
+                new ApplicationVersionEntity(varsionids[14], applications[0], "Analytics", "RODO", DateTime.UtcNow)
                 );
 
             //var simpleDependencies = new[] {

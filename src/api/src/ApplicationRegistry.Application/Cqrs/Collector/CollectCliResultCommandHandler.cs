@@ -1,5 +1,6 @@
 ﻿using ApplicationRegistry.Application.AsyncJobs;
 using ApplicationRegistry.Application.Commands;
+using ApplicationRegistry.Application.Services;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
 using ApplicationRegistry.Domain.Entities.Applications;
@@ -30,12 +31,14 @@ namespace ApplicationRegistry.Application.CommandHandlers
     public class CollectCliResultCommandHandler
     {
         private readonly IScheduler _scheduler;
+        private readonly IGuidGenerator _guidGenerator;
         private IUnitOfWork _context;
 
-        public CollectCliResultCommandHandler(IUnitOfWork context, IScheduler scheduler)
+        public CollectCliResultCommandHandler(IUnitOfWork context, IScheduler scheduler, IGuidGenerator guidGenerator)
         {
             _context = context;
             _scheduler = scheduler;
+            _guidGenerator = guidGenerator;
         }
 
         public CommandHandlerResult Handle(CollectCliResultCommand command)
@@ -84,13 +87,10 @@ namespace ApplicationRegistry.Application.CommandHandlers
         {
             var swaggerSpecifications = new List<Guid>();
 
-            var entity = new ApplicationVersionEntity
+            var entity = new ApplicationVersionEntity(_guidGenerator.CreateNewSequentialGuid(), application.Id, command.IdEnvironment, command.Version)
             {
-                IdApplication = application.Id,
                 IdCommit = command.IdCommit,
-                IdEnvironment = command.IdEnvironment,
                 IsArchived = false,
-                Version = command.Version,
                 SwaggerSpecifications = new List<ApplicationVersionSwaggerSpecificationEntity>(),
                 ToolsVersion = command.ToolsVersion,
                 CollectorBatchStatuses = JsonConvert.SerializeObject(command.BatchStatuses, Formatting.Indented),

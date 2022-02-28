@@ -28,6 +28,10 @@ namespace ApplicationRegistry.Application.QueryDecorators
             {
                 return OperationResult.BusinessError<TOut>(ex.ValidationErrors);
             }
+            catch (ArgumentException ex)
+            {
+                return OperationResult.BusinessError<TOut>(new KeyValuePair<string, string>(ex.ParamName, ex.Message));
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error while processing query");

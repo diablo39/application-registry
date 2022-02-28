@@ -28,7 +28,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             {
                 ApplicationVersionId = id,
             };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -37,7 +37,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [ProducesResponseType(typeof(ApplicationVersionCreateCommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateApplicationVersion([FromBody] ApplicationVersionCreateCommand command, [FromServices] ICommandHandler<ApplicationVersionCreateCommand, ApplicationVersionCreateCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -50,7 +50,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             {
                 ApplicationVersionId = id,
             };
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -64,12 +64,26 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
                 ApplicationVersionId = id
             };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext, success =>
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext, success =>
             {
                 if (success == null || success.Result == null) return new NotFoundObjectResult(new { });
 
                 return Content(success.Result.Text, new MediaTypeHeaderValue(success.Result.ContentType).ToString());
             });
+
+            return result;
+        }
+
+        [HttpGet("{id}/specifications/swaggers", Name = nameof(ApplicationVersionsController.GetSwaggers))]
+
+        public async Task<IActionResult> GetSwaggers([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationVersionSwaggerListQuery, ApplicationVersionSwaggerListQueryResult> handler)
+        {
+            var query = new ApplicationVersionSwaggerListQuery
+            {
+                ApplicationVersionId = id
+            };
+
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }
@@ -83,7 +97,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
                 IdVersion = id
             };
 
-            var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
 
             return result;
         }

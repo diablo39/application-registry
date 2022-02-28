@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.CQRS.Abstraction;
+﻿using ApplicationRegistry.Application.Services;
+using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Database;
 using ApplicationRegistry.Database.Entities;
 
@@ -35,21 +36,21 @@ namespace ApplicationRegistry.Application.Cqrs.ApplicationVersions
     public class ApplicationVersionCreateCommandHandler : ICommandHandler<ApplicationVersionCreateCommand, ApplicationVersionCreateCommandResult>
     {
         private readonly IUnitOfWork _context;
+        private readonly IGuidGenerator _guidGenerator;
 
-        public ApplicationVersionCreateCommandHandler(IUnitOfWork context)
+        public ApplicationVersionCreateCommandHandler(IUnitOfWork context, IGuidGenerator guidGenerator)
         {
             _context = context;
+            _guidGenerator = guidGenerator;
         }
 
         public async Task<OperationResult<ApplicationVersionCreateCommandResult>> ExecuteAsync(ApplicationVersionCreateCommand command)
         {
-            var applicationVersion = new ApplicationVersionEntity
+            var applicationVersion = new ApplicationVersionEntity(_guidGenerator.CreateNewSequentialGuid(), command.ApplicationId, command.EnvironmentId, command.Version)
             {
-                IdApplication = command.ApplicationId,
-                IdEnvironment = command.EnvironmentId,
-                Version = command.Version,
                 FrameworkVersion = command.FrameworkVersion,
             };
+
             _context.ApplicationVersions.Add(applicationVersion);
 
             await _context.SaveChangesAsync();

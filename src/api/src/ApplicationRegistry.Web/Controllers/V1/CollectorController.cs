@@ -39,7 +39,7 @@ namespace ApplicationRegistry.Web.Controllers.Api
         [ProducesResponseType(typeof(LogErrorCommandResult), StatusCodes.Status202Accepted)]
         public async Task<IActionResult> Post([FromBody] LogErrorCommand command, [FromServices] ICommandHandler<LogErrorCommand, LogErrorCommandResult> handler)
         {
-            var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext, System.Net.HttpStatusCode.Accepted);
+            var result = await handler.ExecuteAsync(command).ToApiActionResultAsync(HttpContext, System.Net.HttpStatusCode.Accepted);
 
             return result;
         }

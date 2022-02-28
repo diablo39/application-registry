@@ -11,7 +11,7 @@ namespace ApplicationRegistry.Database.Entities
     {
         public Guid Id { get; set; }
 
-        public Guid IdApplication { get; set; }
+        public Guid IdApplication { get; }
 
         public string IdEnvironment { get; set; }
 
@@ -45,10 +45,20 @@ namespace ApplicationRegistry.Database.Entities
 
         public List<ApplicationVersionNugetPackageDependency> ApplicationVersionNugetPackageDependencies { get; set; }
 
-        public ApplicationVersionEntity()
+        public ApplicationVersionEntity(Guid id, Guid applicationId, string environmentId, string version, DateTimeOffset createDate = default)
         {
-            Id = Guid.NewGuid();
+            Guard.IsNotDefault(id, nameof(id));
+            Guard.IsNotDefault(applicationId, nameof(applicationId));
+            Guard.IsNotNullOrWhiteSpace(environmentId, nameof(environmentId));
+            Guard.IsNotNullOrWhiteSpace(version, nameof(version));
 
+
+            Id = id;
+            IdApplication = applicationId;
+            IdEnvironment = environmentId;
+            Version = version;
+            IsArchived = false;
+            CreateDate = createDate == default ? DateTime.UtcNow : createDate;
             ApplicationVersionNugetPackageDependencies = new List<ApplicationVersionNugetPackageDependency>();
         }
     }
