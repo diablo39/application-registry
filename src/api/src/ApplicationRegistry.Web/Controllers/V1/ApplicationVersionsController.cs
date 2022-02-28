@@ -1,4 +1,3 @@
-using ApplicationRegistry.Application.Commands;
 using ApplicationRegistry.Application.Cqrs.ApplicationVersions;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
