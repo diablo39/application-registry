@@ -20,7 +20,7 @@ namespace ApplicationRegistry.Application.Queries.ApplicationsList
     {
         public ApplicationsListQueryValidator()
         {
-
+            this.RuleFor(e => e.Page).GreaterThan(0);
         }
     }
 

@@ -11,10 +11,8 @@ namespace ApplicationRegistry.Web.Controllers.V1
     {
         [HttpGet(Name = "GetEnvironments")]
         [ProducesResponseType(typeof(EnvironmentsListQueryResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromQuery] ListQueryParameters listQuery, [FromServices] IQueryHandler<EnvironmentsListQuery, EnvironmentsListQueryResult> handler)
+        public async Task<IActionResult> Get([FromQuery] EnvironmentsListQuery query, [FromServices] IQueryHandler<EnvironmentsListQuery, EnvironmentsListQueryResult> handler)
         {
-            EnvironmentsListQuery query = new EnvironmentsListQuery();
-            query.AssignListQueryParameters(listQuery);
             var handlerResult = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
             return handlerResult;
         }
@@ -23,7 +21,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
         [ProducesResponseType(typeof(EnvironmentDetailsQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromServices] IQueryHandler<EnvironmentDetailsQuery, EnvironmentDetailsQueryResult> handler, string id)
         {
-            EnvironmentDetailsQuery query = new EnvironmentDetailsQuery { Id = id };
+            var query = new EnvironmentDetailsQuery { Id = id };
             var handlerResult = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
             return handlerResult;
         }
@@ -36,7 +34,7 @@ namespace ApplicationRegistry.Web.Controllers.V1
             return result;
         }
 
-        [HttpPut("{id}", Name = "UpdateEnvironments")]
+        [HttpPut("{id}", Name = "UpdateEnvironment")]
         public async Task<IActionResult> Put(string id, [FromBody] EnvironmentUpdateCommand command, [FromServices] ICommandHandler<EnvironmentUpdateCommand, EnvironmentUpdateCommandResult> handler)
         {
             command.Id = id;

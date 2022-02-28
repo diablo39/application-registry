@@ -24,7 +24,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             [FromQuery] int itemsPerPage = -1,
             [FromQuery] Guid? systemId = null)
         {
-            ApplicationsListQuery query = new ApplicationsListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc, SystemId = systemId };
+            var query = new ApplicationsListQuery() { Page = page, ItemsPerPage = itemsPerPage, SortBy = sortBy, SortDesc = sortDesc, SystemId = systemId };
             var result = await handler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
             return result;

@@ -18,7 +18,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
     public class ApplicationVersionsController : ControllerBase
     {
         // GET: api/<ApplicationsController>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetApplicationVersion")]
         [ProducesResponseType(typeof(ApplicationVersionDetailsQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
             [FromRoute] Guid id, 

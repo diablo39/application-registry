@@ -22,7 +22,7 @@ namespace ApplicationRegistry.Application.Cqrs.Environments
     {
         public EnvironmentsListQueryValidator()
         {
-
+            this.RuleFor(e => e.Page).GreaterThan(0);
         }
     }
 
