@@ -10,8 +10,6 @@ namespace ApplicationRegistry.Web.Controllers.V1
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Produces("application/json")]
-    [Consumes("application/json")]
     public class ApplicationsController : ControllerBase
     {
         // GET: api/<ApplicationsController>
