@@ -1,19 +1,15 @@
 ﻿using ApplicationRegistry.Application.Cqrs.Environments;
 using ApplicationRegistry.CQRS.Abstraction;
-using ApplicationRegistry.Web.Areas.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ApplicationRegistry.Web.Areas.Api.Controllers
+namespace ApplicationRegistry.Web.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
     public class EnvironmentsController : ControllerBase
     {
-        [HttpGet()]
+        [HttpGet(Name = "GetEnvironments")]
         [ProducesResponseType(typeof(EnvironmentsListQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromQuery] ListQueryParameters listQuery, [FromServices] IQueryHandler<EnvironmentsListQuery, EnvironmentsListQueryResult> handler)
         {
@@ -23,7 +19,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return handlerResult;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEnvironmentDetails")]
         [ProducesResponseType(typeof(EnvironmentDetailsQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromServices] IQueryHandler<EnvironmentDetailsQuery, EnvironmentDetailsQueryResult> handler, string id)
         {
@@ -32,7 +28,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return handlerResult;
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateEnvironment")]
         public async Task<IActionResult> Post([FromBody] EnvironmentCreateCommand command, [FromServices] ICommandHandler<EnvironmentCreateCommand, EnvironmentCreateCommandResult> handler)
         {
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
@@ -40,7 +36,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name = "UpdateEnvironments")]
         public async Task<IActionResult> Put(string id, [FromBody] EnvironmentUpdateCommand command, [FromServices] ICommandHandler<EnvironmentUpdateCommand, EnvironmentUpdateCommandResult> handler)
         {
             command.Id = id;
