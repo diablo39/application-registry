@@ -69,6 +69,11 @@ namespace ApplicationRegistry.Application.Queries
                     .Include(e=> e.Application)
                 .Where(e => e.Id == query.ApplicationVersionId).Select(MappingDomainToQueryResult()).SingleOrDefaultAsync();
 
+            if(result == null)
+            {
+                return OperationResult.Success(result);
+            }
+
             var hasSwagger = _queryModel
                 .ApplicationVersionSwaggerSpecifications
                 .Where(e => e.IdApplicationVersion == query.ApplicationVersionId)

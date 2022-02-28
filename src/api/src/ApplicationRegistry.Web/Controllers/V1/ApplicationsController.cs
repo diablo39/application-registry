@@ -4,8 +4,9 @@ using ApplicationRegistry.Application.Queries.ApplicationsList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ApplicationRegistry.CQRS.Abstraction;
+using ApplicationRegistry.Application.Attributes;
 
-namespace ApplicationRegistry.Web.Areas.Api.Controllers
+namespace ApplicationRegistry.Web.Controllers.V1
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -34,10 +35,10 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpGet("{idOrCode}", Name = "GetApplicationDetails")]
         [ProducesResponseType(typeof(ApplicationDetailsQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
-            [FromRoute] string idOrCode, 
+            [FromRoute] string idOrCode,
             [FromServices] IQueryHandler<ApplicationDetailsQuery, ApplicationDetailsQueryResult> queryHandler)
         {
-            ApplicationDetailsQuery query = new ApplicationDetailsQuery { IdOrCode = idOrCode };
+            var query = new ApplicationDetailsQuery { IdOrCode = idOrCode };
 
             var result = await queryHandler.ExecuteAsync(query).ToApiActionResult(HttpContext);
 
@@ -48,7 +49,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpGet("{idOrCode}/versions", Name = "GetApplicationVersions")]
         [ProducesResponseType(typeof(ApplicationVersionListQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
-            [FromRoute] string idOrCode, 
+            [FromRoute] string idOrCode,
             [FromServices] IQueryHandler<ApplicationVersionListQuery, ApplicationVersionListQueryResult> handler)
         {
             var query = new ApplicationVersionListQuery
@@ -67,7 +68,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpPost(Name = "CreateApplication")]
         [ProducesResponseType(typeof(ApplicationCreateCommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Post(
-            [FromBody] ApplicationCreateCommand command, 
+            [FromBody] ApplicationCreateCommand command,
             [FromServices] ICommandHandler<ApplicationCreateCommand, ApplicationCreateCommandResult> handler)
         {
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
@@ -79,8 +80,8 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpPut("{idOrCode}", Name = "UpdateApplication")]
         [ProducesResponseType(typeof(ApplicationUpdateCommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Put(
-            [FromRoute] Guid idOrCode, 
-            [FromBody] ApplicationUpdateCommand command, 
+            [FromRoute] Guid idOrCode,
+            [FromBody][SwaggerIgnoreProperty(nameof(ApplicationUpdateCommand.Id))] ApplicationUpdateCommand command,
             [FromServices] ICommandHandler<ApplicationUpdateCommand, ApplicationUpdateCommandResult> handler)
         {
             command.Id = idOrCode;

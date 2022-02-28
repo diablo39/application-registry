@@ -1,4 +1,5 @@
-﻿using ApplicationRegistry.Application.Cqrs.Environments;
+﻿using ApplicationRegistry.Application.Attributes;
+using ApplicationRegistry.Application.Cqrs.Environments;
 using ApplicationRegistry.CQRS.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,10 @@ namespace ApplicationRegistry.Web.Controllers.V1
         }
 
         [HttpPut("{id}", Name = "UpdateEnvironment")]
-        public async Task<IActionResult> Put(string id, [FromBody] EnvironmentUpdateCommand command, [FromServices] ICommandHandler<EnvironmentUpdateCommand, EnvironmentUpdateCommandResult> handler)
+        public async Task<IActionResult> Put(
+            string id, 
+            [FromBody][SwaggerIgnoreProperty(nameof(EnvironmentUpdateCommand.Id))] EnvironmentUpdateCommand command, 
+            [FromServices] ICommandHandler<EnvironmentUpdateCommand, EnvironmentUpdateCommandResult> handler)
         {
             command.Id = id;
 

@@ -1,4 +1,5 @@
 using ApplicationRegistry.Application.Commands;
+using ApplicationRegistry.Application.Cqrs.ApplicationVersions;
 using ApplicationRegistry.Application.Queries;
 using ApplicationRegistry.CQRS.Abstraction;
 using ApplicationRegistry.Web.Areas.Api.Models;
@@ -33,16 +34,16 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpPost]
+        [HttpPost(Name = nameof(ApplicationVersionsController.CreateApplicationVersion))]
         [ProducesResponseType(typeof(ApplicationVersionCreateCommandResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Post([FromBody] ApplicationVersionCreateCommand command, [FromServices] ICommandHandler<ApplicationVersionCreateCommand, ApplicationVersionCreateCommandResult> handler)
+        public async Task<IActionResult> CreateApplicationVersion([FromBody] ApplicationVersionCreateCommand command, [FromServices] ICommandHandler<ApplicationVersionCreateCommand, ApplicationVersionCreateCommandResult> handler)
         {
             var result = await handler.ExecuteAsync(command).ToApiActionResult(HttpContext);
 
             return result;
         }
 
-        [HttpGet("{id}/dependencies/nugets")]
+        [HttpGet("{id}/dependencies/nugets", Name = nameof(ApplicationVersionsController.GetNugetDependencies))]
         [ProducesResponseType(typeof(ApplicationVersionNugetDependencyListQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetNugetDependencies([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationVersionNugetDependencyListQuery, ApplicationVersionNugetDependencyListQueryResult> handler)
         {
@@ -55,7 +56,8 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpGet("{id}/specifications/swagger")]
+        [HttpGet("{id}/specifications/swagger", Name = nameof(ApplicationVersionsController.GetSwaggerSpecyfication))]
+        [Obsolete]
         public async Task<IActionResult> GetSwaggerSpecyfication([FromRoute] Guid id, [FromServices] IQueryHandler<SwaggerSpecyficationTextQuery, SwaggerSpecyficationTextQueryResult> handler)
         {
             var query = new SwaggerSpecyficationTextQuery
@@ -73,11 +75,11 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpGet("{id}/endpoints")]
-        [ProducesResponseType(typeof(ApplicationEndpointListQueryResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Get([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationEndpointListQuery, ApplicationEndpointListQueryResult> handler)
+        [HttpGet("{id}/endpoints", Name = nameof(ApplicationVersionsController.GetEndpoints))]
+        [ProducesResponseType(typeof(ApplicationVersionEndpointListQueryResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetEndpoints([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationVersionEndpointListQuery, ApplicationVersionEndpointListQueryResult> handler)
         {
-            var query = new ApplicationEndpointListQuery
+            var query = new ApplicationVersionEndpointListQuery
             {
                 IdVersion = id
             };
