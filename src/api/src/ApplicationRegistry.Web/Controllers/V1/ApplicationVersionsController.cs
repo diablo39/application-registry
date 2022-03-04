@@ -9,10 +9,8 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-
 namespace ApplicationRegistry.Web.Areas.Api.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public class ApplicationVersionsController : ControllerBase
@@ -21,7 +19,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         [HttpGet("{id}", Name = "GetApplicationVersion")]
         [ProducesResponseType(typeof(ApplicationVersionDetailsQueryResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get(
-            [FromRoute] Guid id, 
+            [FromRoute] Guid id,
             [FromServices] IQueryHandler<ApplicationVersionDetailsQuery, ApplicationVersionDetailsQueryResult> handler)
         {
             var query = new ApplicationVersionDetailsQuery
@@ -75,7 +73,6 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
         }
 
         [HttpGet("{id}/specifications/swaggers", Name = nameof(ApplicationVersionsController.GetSwaggers))]
-
         public async Task<IActionResult> GetSwaggers([FromRoute] Guid id, [FromServices] IQueryHandler<ApplicationVersionSwaggerListQuery, ApplicationVersionSwaggerListQueryResult> handler)
         {
             var query = new ApplicationVersionSwaggerListQuery
@@ -84,6 +81,25 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             };
 
             var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
+
+            return result;
+        }
+
+        [HttpGet("{id}/specifications/swaggers/{idApplicationVersion}/text", Name = nameof(ApplicationVersionsController.GetSwaggerSpecyficationText))]
+        public async Task<IActionResult> GetSwaggerSpecyficationText([FromRoute] Guid id, [FromRoute] Guid idApplicationVersion, [FromServices] IQueryHandler<ApplicationVersionSwaggerSpecificationTextQueryQuery, ApplicationVersionSwaggerSpecificationTextQueryQueryResult> handler)
+        {
+            var query = new ApplicationVersionSwaggerSpecificationTextQueryQuery
+            {
+                ApplicationVersionId = idApplicationVersion,
+                Id = id,
+            };
+
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext, success =>
+            {
+                if (success == null || success.Result == null) return new NotFoundObjectResult(new { });
+
+                return Content(success.Result.Text, new MediaTypeHeaderValue(success.Result.ContentType).ToString());
+            });
 
             return result;
         }

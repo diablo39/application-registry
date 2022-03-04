@@ -73,14 +73,12 @@ namespace ApplicationRegistry.Web
 
             services.AddLocalization();
 
-
             services.AddDbContext<ApplicationRegistryDatabaseContext>(options =>
                 options
                     .UseSqlServer(Configuration.GetConnectionString("ApplicationRegistry"), b => b.MigrationsAssembly("ApplicationRegistry.Web").UseHierarchyId())
                 .EnableSensitiveDataLogging()
                 //.ConfigureWarnings(e => e.Ignore(CoreEventId.IncompatibleMatchingForeignKeyProperties))
                 , ServiceLifetime.Scoped);
-
 
             services.AddHangfire(x => x
                 .UseSqlServerStorage(Configuration.GetConnectionString("ApplicationRegistry"))
@@ -109,9 +107,7 @@ namespace ApplicationRegistry.Web
             });
 
             services.AddHangfireServer(backgroundServer => backgroundServer.WorkerCount = 5);
-
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IServiceProvider provider)
