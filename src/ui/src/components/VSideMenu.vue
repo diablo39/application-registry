@@ -73,12 +73,12 @@
         </v-list-item-icon>
         <v-list-item-title>Applications</v-list-item-title>
       </v-list-item>
-      <v-list-item link to="/redis">
-        <v-list-item-icon>
-          <v-icon>mdi-alpha-r</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>Redis</v-list-item-title>
-      </v-list-item>
+<!--      <v-list-item link to="/redis">-->
+<!--        <v-list-item-icon>-->
+<!--          <v-icon>mdi-alpha-r</v-icon>-->
+<!--        </v-list-item-icon>-->
+<!--        <v-list-item-title>Redis</v-list-item-title>-->
+<!--      </v-list-item>-->
 
       <v-list-group prepend-icon="mdi-package">
         <template v-slot:activator>

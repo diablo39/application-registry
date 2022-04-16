@@ -4,6 +4,7 @@ using ApplicationRegistry.Infrastructure;
 using ApplicationRegistry.Infrastructure.HangfireExtensions;
 using ApplicationRegistry.Infrastructure.UnitOfWork;
 using ApplicationRegistry.Web.Areas.Api.Models;
+using ApplicationRegistry.Web.Authentication;
 using ApplicationRegistry.Web.Models;
 using ApplicationRegistry.Web.Swagger;
 using FluentValidation.AspNetCore;
@@ -97,10 +98,14 @@ namespace ApplicationRegistry.Web
                     options.RequireHttpsMetadata = false;
                     options.Audience = Configuration["Authentication:Audience"];
                     options.TokenValidationParameters.ValidateIssuer = false;
-                });
+                })
+                .AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationDefaults.AuthenticationScheme, options => { });
 
             services.AddAuthorization(options =>
             {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();

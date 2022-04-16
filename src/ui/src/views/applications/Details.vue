@@ -33,9 +33,16 @@
             ></v-view-details-row>
             <v-view-details-row label="Framework" :value="application.framework"></v-view-details-row>
             <v-view-details-row label="Owner" :value="application.owner"></v-view-details-row>
-            <v-view-details-row label="Repository url" :value="application.repositoryUrl"></v-view-details-row>
-            <v-view-details-row label="Build Process Urls" :value="application.buildProcessUrls"></v-view-details-row>
-
+            <v-view-details-row label="Repository url" :value="application.repositoryUrl" :to="application.repositoryUrl"></v-view-details-row>
+            <v-row col>
+              <v-col cols="2">
+                <p class="text-right">Build Process Urls:</p>
+              </v-col>
+              <v-col>
+                <a v-for="(buildProcess, index) in applicationBuildProcesses" :key="index" :href="buildProcess"
+                   class="view-detail-row-text" style="white-space: pre; display: block; width: fit-content">{{ buildProcess }}</a>
+              </v-col>
+            </v-row>
             <v-view-details-row label="Description" :value="application.description"></v-view-details-row>
             <v-view-details-row
                 label="Create date"
@@ -65,6 +72,9 @@
                 <template v-slot:item.environmentId="{ item }">
                   <v-column-link-env :env="item.environmentId"></v-column-link-env>
                 </template>
+                <template v-slot:item.path="{ item }">
+                  <a :href="item.path">{{ item.path }}</a>
+                </template>
                 <template v-slot:no-data v-if="isError">
                   <div v-if="isError">{{ $t('common.errorMessage') }}</div>
                 </template>
@@ -89,7 +99,6 @@
                   :options.sync="ds.options"
                   sort-by="idEnvironment"
                   :show-group-by="true"
-
               >
                 <template v-slot:body.prepend="{ headers }">
                   <v-my-data-table-search-row :ds="ds" :headers="headers"/>
@@ -120,7 +129,7 @@
                       title="Details"
                       class="action-link"
                   >
-                    {{ item.version}}
+                    {{ item.version }}
                   </router-link>
                 </template>
                 <template v-slot:item.collectorExecutionSucceeded="{ item }">
@@ -142,10 +151,10 @@
                       <v-card-title class="headline">
                         Collector details
                       </v-card-title>
-                      <v-card-text>Collector execution duration [s]: {{item.collectorExecutionDuration}}</v-card-text>
+                      <v-card-text>Collector execution duration [s]: {{ item.collectorExecutionDuration }}</v-card-text>
                       <v-card-text>Collector batches statuses:</v-card-text>
                       <v-card-text>
-                        <pre>{{item.collectorBatchStatuses}}</pre>
+                        <pre>{{ item.collectorBatchStatuses }}</pre>
                       </v-card-text>
 
                     </v-card>
@@ -169,6 +178,7 @@
 import Vue from "vue";
 import {HttpClient} from "@/services/httpClient/HttpClient";
 import Paths from '@/router/Paths';
+import applicationDetails from "@/views/applications/applicationDetails";
 
 export default Vue.extend({
   data() {
@@ -179,7 +189,7 @@ export default Vue.extend({
       goBackUrl: "/applications",
       isLoading: true,
       isError: false,
-      application: {},
+      application: {} as applicationDetails,
       applicationVersionsHeaders: [
         {
           text: "Actions",
@@ -195,7 +205,7 @@ export default Vue.extend({
         {text: "Tools version", value: "toolsVersion", groupable: false},
         {text: "Create date", value: "createDate", groupable: false, filterable: false},
       ],
-      applicationEndpointsHeaders:[
+      applicationEndpointsHeaders: [
         {text: "Environment", value: "environmentId", groupable: true, filterable: true,},
         {text: "Endpoint", value: "path", groupable: false},
         {text: "Comment", value: "comment", groupable: false},
@@ -213,7 +223,17 @@ export default Vue.extend({
     paths(): any {
       return Paths;
     },
+    applicationBuildProcesses(): Array<string> {
+      if(this.application){
+        const bp = this.application.buildProcessUrls;
+        if(bp != null) {
+          const urls = (bp as string).split('\n');
+          return urls;
+        }
+      }
 
+      return [];
+    }
   },
   async mounted() {
     try {
@@ -230,7 +250,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    getColor (collectorExecutionSucceeded) {
+    getColor(collectorExecutionSucceeded) {
       if (collectorExecutionSucceeded) return 'green'
       else return 'red'
     },
