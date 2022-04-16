@@ -3,9 +3,12 @@
     <v-view-details-header :isError="isError" :isLoading="isLoading"></v-view-details-header>
     <v-view-details-toolbar v-if="dataLoaded" :caption="caption" :goBackUrl="goBackUrl">
       <template slot="endButtons">
-        <router-link  :disabled="!item.hasSwagger" :to="`/applications/${item.applicationId}/application-versions/${item.id}/swagger`" class="action-link mr-4">
+        <router-link :disabled="!item.hasSwagger"
+                     :to="`/applications/${item.applicationId}/application-versions/${item.id}/swagger`"
+                     class="action-link mr-4">
           <v-btn color="success" outlined :disabled="!item.hasSwagger">
-            <img src="@/assets/swagger.png" alt="Swagger" style="width: 17px; vertical-align: middle; margin-right: 5px;"/>
+            <img src="@/assets/swagger.png" alt="Swagger"
+                 style="width: 17px; vertical-align: middle; margin-right: 5px;"/>
             Swagger
           </v-btn>
         </router-link>
@@ -34,42 +37,65 @@
     <v-row v-if="dataLoaded">
       <v-col>
         <v-card>
-          <v-section-toolbar caption="applicationVersionDependencies.dependenciesHeader"></v-section-toolbar>
-          <v-tabs vertical>
-            <v-tab class="text-left">
-              <v-icon left>
-                mdi-application
-              </v-icon>
-              Applications
-            </v-tab>
-            <v-tab class="text-left">
-              <span>
-                <img src="@/assets/NuGet-Logo.svg" alt="Nuget" style="width: 25px; vertical-align: middle"/>
-                Nugets
-              </span>
-            </v-tab>
-
-            <v-tab-item>
-              <application-dependencies></application-dependencies>
-            </v-tab-item>
-
-            <v-tab-item>
-              <nuget-dependencies></nuget-dependencies>
-            </v-tab-item>
-
-          </v-tabs>
+          <v-section-toolbar caption="applicationVersionDependencies.specificationsHeader">
+            <template slot="startButtons">
+              <v-tooltip right>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                      dark
+                      small
+                      fab
+                      color="success"
+                      class="mr-2">
+                    <v-icon v-bind="attrs" v-on="on">mdi-plus</v-icon>
+                  </v-btn>
+                </template>
+                <span>{{ $t('common.buttons.addRow') }}</span>
+              </v-tooltip>
+            </template>
+          </v-section-toolbar>
         </v-card>
       </v-col>
     </v-row>
+    <!--    <v-row v-if="dataLoaded">-->
+    <!--      <v-col>-->
+    <!--        <v-card>-->
+    <!--          <v-section-toolbar caption="applicationVersionDependencies.dependenciesHeader"></v-section-toolbar>-->
+    <!--          <v-tabs vertical>-->
+    <!--            <v-tab class="text-left">-->
+    <!--              <v-icon left>-->
+    <!--                mdi-application-->
+    <!--              </v-icon>-->
+    <!--              Applications-->
+    <!--            </v-tab>-->
+    <!--            <v-tab class="text-left">-->
+    <!--              <span>-->
+    <!--                <img src="@/assets/NuGet-Logo.svg" alt="Nuget" style="width: 25px; vertical-align: middle"/>-->
+    <!--                Nugets-->
+    <!--              </span>-->
+    <!--            </v-tab>-->
 
-    <v-row>
-      <v-col>
-        <v-card>
-          <v-section-toolbar caption="applicationVersionDependencies.endpointsHeader"></v-section-toolbar>
-          <endpoints :application-version-id="id" :environment="item.environmentId"></endpoints>
-        </v-card>
-      </v-col>
-    </v-row>
+    <!--            <v-tab-item>-->
+    <!--              <application-dependencies></application-dependencies>-->
+    <!--            </v-tab-item>-->
+
+    <!--            <v-tab-item>-->
+    <!--              <nuget-dependencies></nuget-dependencies>-->
+    <!--            </v-tab-item>-->
+
+    <!--          </v-tabs>-->
+    <!--        </v-card>-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
+
+    <!--    <v-row>-->
+    <!--      <v-col>-->
+    <!--        <v-card>-->
+    <!--          <v-section-toolbar caption="applicationVersionDependencies.endpointsHeader"></v-section-toolbar>-->
+    <!--          <endpoints :application-version-id="id" :environment="item.environmentId"></endpoints>-->
+    <!--        </v-card>-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
   </v-container>
 </template>
 
@@ -79,6 +105,7 @@ import {HttpClient} from "@/services/httpClient/HttpClient";
 import NugetDependencies from './dependencies-views/NugetDependencies.vue';
 import ApplicationDependencies from "@/views/application-versions/dependencies-views/ApplicationDependencies.vue";
 import Endpoints from "@/views/application-versions/_Endpoints.vue";
+
 export default Vue.extend({
   data() {
     return {
@@ -124,9 +151,9 @@ export default Vue.extend({
     },
   },
   components: {
-    NugetDependencies,
-    ApplicationDependencies,
-    Endpoints,
+    //NugetDependencies,
+    //ApplicationDependencies,
+    //Endpoints,
   },
 });
 </script>

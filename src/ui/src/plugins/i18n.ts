@@ -49,6 +49,7 @@ const messages = {
         applicationVersionDependencies: {
             dependenciesHeader: "Dependencies",
             endpointsHeader: "Endpoint analysis",
+            specificationsHeader: "Specifications",
         },
         vlans: {
             header: "VLANs",

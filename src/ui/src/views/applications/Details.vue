@@ -88,7 +88,25 @@
     <v-row v-if="dataLoaded">
       <v-col>
         <v-card>
-          <v-section-toolbar caption="applications.versionsHeader"></v-section-toolbar>
+          <v-section-toolbar caption="applications.versionsHeader">
+            <template slot="startButtons">
+              <v-tooltip right>
+                <template v-slot:activator="{ on, attrs }">
+                  <router-link :to="`/applications/${application.id}/application-versions/create`" class="action-link mr-4" v-bind="attrs" v-on="on">
+                    <v-btn
+                        dark
+                        small
+                        fab
+                        color="success"
+                        class="mr-2">
+                      <v-icon v-bind="attrs" v-on="on">mdi-plus</v-icon>
+                    </v-btn>
+                  </router-link>
+                </template>
+                <span>{{ $t('common.buttons.addRow') }}</span>
+              </v-tooltip>
+            </template>
+          </v-section-toolbar>
           <v-ajax-list-data-source :httpPath="httpPath">
             <template slot-scope="{ ds }">
               <v-my-data-table

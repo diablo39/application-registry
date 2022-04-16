@@ -6,7 +6,7 @@ export default class {
         label: "Code",
         validationRules: [
             ValidationRules.required(),
-            ValidationRules.maxLength(25),
+            ValidationRules.maxLength(160),
         ],
     });
 

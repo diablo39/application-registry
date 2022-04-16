@@ -37,7 +37,7 @@
         <v-list-item-icon>
           <v-icon>mdi-lan</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>VLAN</v-list-item-title>
+        <v-list-item-title>VLAN / IP</v-list-item-title>
       </v-list-item>
 <!--      <v-list-item link to="/load-balancers">-->
 <!--        <v-list-item-icon>-->
