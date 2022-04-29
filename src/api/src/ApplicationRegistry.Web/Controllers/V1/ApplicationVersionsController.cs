@@ -117,5 +117,29 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
             return result;
         }
+
+        [HttpGet("{id}/specifications", Name = nameof(ApplicationVersionsController.GetSpecifications))]
+        [ProducesResponseType(typeof(ApplicationVersionsSpecificationsListQueryResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetSpecifications(
+            [FromServices] IQueryHandler<ApplicationVersionsSpecificationsListQuery, ApplicationVersionsSpecificationsListQueryResult> handler,
+            [FromQuery] string sortBy = null,
+            [FromQuery] bool? sortDesc = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int itemsPerPage = -1,
+            [FromRoute] Guid? id = null)
+        {
+            var query = new ApplicationVersionsSpecificationsListQuery
+            {
+                IdVersion = id,
+                ItemsPerPage = itemsPerPage,
+                Page = page,
+                SortBy = sortBy,
+                SortDesc = sortDesc
+            };
+
+            var result = await handler.ExecuteAsync(query).ToApiActionResultAsync(HttpContext);
+
+            return result;
+        }
     }
 }

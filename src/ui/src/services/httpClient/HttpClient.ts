@@ -52,6 +52,10 @@ class HttpClientImplementation {
 
     getApplicationsPath = `/api/Applications`;
 
+    getApplicationVersionSpecificationsPath(applicationVersionId): string {
+        return `/api/applicationversions/${applicationVersionId}/specifications`;
+    }
+
     getApplications(pagingInfo: PagingInfo = PagingInfo.Default) {
         return this.HTTP.get(`/api/Applications`, {params: this.pagingInfoToQueryStringParams(pagingInfo)});
     }

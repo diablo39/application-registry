@@ -39,7 +39,10 @@
         <v-card>
           <v-section-toolbar caption="applicationVersionDependencies.specificationsHeader">
             <template slot="startButtons">
-              <v-tooltip right>
+              <v-dialog
+                  v-model="dialog"
+                  width="500"
+              >
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                       dark
@@ -50,10 +53,58 @@
                     <v-icon v-bind="attrs" v-on="on">mdi-plus</v-icon>
                   </v-btn>
                 </template>
-                <span>{{ $t('common.buttons.addRow') }}</span>
-              </v-tooltip>
+
+                <v-card>
+                  <v-toolbar color="primary" dark>
+                    Add new specification to the application version
+                  </v-toolbar>
+                  <br>
+                  <v-card-text>
+                    <div>
+                      <v-btn dark small fab color="success" class="mr-2">
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                      <span>Swagger specification</span>
+                    </div>
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" text @click="dialog = false">
+                      Close
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </template>
           </v-section-toolbar>
+          <v-ajax-list-data-source :httpPath="applicationVersionSpecificationsPath">
+            <template slot-scope="{ ds }">
+              <v-my-data-table
+                  :headers="applicationSpecificationsHeaders"
+                  :items="ds.filteredItems"
+                  :loading="ds.isLoading"
+                  :server-items-length="ds.totalItems"
+                  :options.sync="ds.options"
+                  multi-sort
+                  sort-by="['type', 'name']"
+                  :show-group-by="true"
+              >
+                <template v-slot:body.prepend="{ headers }">
+                  <v-my-data-table-search-row :ds="ds" :headers="headers"/>
+                </template>
+                <template v-slot:item.environmentId="{ item }">
+                  <v-column-link-env :env="item.environmentId"></v-column-link-env>
+                </template>
+                <template v-slot:item.path="{ item }">
+                  <a :href="item.path">{{ item.path }}</a>
+                </template>
+                <template v-slot:no-data v-if="isError">
+                  <div v-if="isError">{{ $t('common.errorMessage') }}</div>
+                </template>
+              </v-my-data-table>
+            </template>
+          </v-ajax-list-data-source>
         </v-card>
       </v-col>
     </v-row>
@@ -106,14 +157,33 @@ import NugetDependencies from './dependencies-views/NugetDependencies.vue';
 import ApplicationDependencies from "@/views/application-versions/dependencies-views/ApplicationDependencies.vue";
 import Endpoints from "@/views/application-versions/_Endpoints.vue";
 
+interface ApplicationVersionDetails {
+  id: string;
+  applicationId: string;
+}
+
 export default Vue.extend({
   data() {
     return {
+      dialog: false,
       id: this.$route.params.id,
       isLoading: true,
       isError: false,
-      item: {},
+      item: {} as ApplicationVersionDetails,
       captionTranslationKey: "applicationVersions.detailsHeader",
+      applicationSpecificationsHeaders: [
+        {
+          text: "Actions",
+          value: "actions",
+          sortable: false,
+          class: "actions",
+          filterable: false,
+          groupable: false,
+        },
+        {text: "Type", value: "type", groupable: true,  filterable: true,},
+        {text: "Name", value: "name", groupable: false, filterable: true,},
+        // {text: "Create date", value: "createDate", groupable: false, filterable: false},
+      ]
     };
   },
 
@@ -128,8 +198,11 @@ export default Vue.extend({
       return this.$t(this.captionTranslationKey, this.item).toString();
     },
     goBackUrl(): string {
-      return `/applications/${(this.item as any).applicationId}/details`
+      return `/applications/${this.item.applicationId}/details`
     },
+    applicationVersionSpecificationsPath(): string {
+      return HttpClient.getApplicationVersionSpecificationsPath(this.item.id);
+    }
   },
   methods: {
     async loadData() {
