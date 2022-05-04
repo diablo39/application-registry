@@ -85,7 +85,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
             return result;
         }
 
-        [HttpGet("{id}/specifications/swaggers/{idApplicationVersion}/text", Name = nameof(ApplicationVersionsController.GetSwaggerSpecyficationText))]
+        [HttpGet("{idApplicationVersion}/specifications/swaggers/{id}/text", Name = nameof(ApplicationVersionsController.GetSwaggerSpecyficationText))]
         public async Task<IActionResult> GetSwaggerSpecyficationText([FromRoute] Guid id, [FromRoute] Guid idApplicationVersion, [FromServices] IQueryHandler<ApplicationVersionSwaggerSpecificationTextQueryQuery, ApplicationVersionSwaggerSpecificationTextQueryQueryResult> handler)
         {
             var query = new ApplicationVersionSwaggerSpecificationTextQueryQuery
@@ -120,6 +120,7 @@ namespace ApplicationRegistry.Web.Areas.Api.Controllers
 
         [HttpGet("{id}/specifications", Name = nameof(ApplicationVersionsController.GetSpecifications))]
         [ProducesResponseType(typeof(ApplicationVersionsSpecificationsListQueryResult), StatusCodes.Status200OK)]
+        [Obsolete]
         public async Task<IActionResult> GetSpecifications(
             [FromServices] IQueryHandler<ApplicationVersionsSpecificationsListQuery, ApplicationVersionsSpecificationsListQueryResult> handler,
             [FromQuery] string sortBy = null,

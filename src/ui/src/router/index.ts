@@ -106,9 +106,9 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: "application-versions" */ '../views/application-versions/Details.vue'),
     },
     {
-        path: '/applications/:applicationId/application-versions/:applicationVersionId/swagger',
+        path: '/applications/:applicationId/application-versions/:applicationVersionId/swagger/:specificationId',
         name: 'ApplicationVersionSwagger',
-        component: () => import(/* webpackChunkName: "application-version-specification-swagger" */ '../views/application-versions/specyfications/SpecificationSwagger.vue'),
+        component: () => import(/* webpackChunkName: "application-version-specification-swagger" */ '../views/application-versions/specifications/SpecificationSwagger.vue'),
     },
 // VLAN
     {

@@ -2,17 +2,6 @@
   <v-container>
     <v-view-details-header :isError="isError" :isLoading="isLoading"></v-view-details-header>
     <v-view-details-toolbar v-if="dataLoaded" :caption="caption" :goBackUrl="goBackUrl">
-      <template slot="endButtons">
-        <router-link :disabled="!item.hasSwagger"
-                     :to="`/applications/${item.applicationId}/application-versions/${item.id}/swagger`"
-                     class="action-link mr-4">
-          <v-btn color="success" outlined :disabled="!item.hasSwagger">
-            <img src="@/assets/swagger.png" alt="Swagger"
-                 style="width: 17px; vertical-align: middle; margin-right: 5px;"/>
-            Swagger
-          </v-btn>
-        </router-link>
-      </template>
     </v-view-details-toolbar>
 
     <v-row v-if="dataLoaded">
@@ -93,6 +82,18 @@
                 <template v-slot:body.prepend="{ headers }">
                   <v-my-data-table-search-row :ds="ds" :headers="headers"/>
                 </template>
+                <template v-slot:item.actions="{ item }">
+                  <router-link
+                      :to="`/applications/${$data.item.applicationId}/application-versions/${$data.item.id}/swagger/${item.id}`"
+                      class="action-link mr-4">
+                    <v-btn color="success" outlined>
+                      <img src="@/assets/swagger.png" alt="Swagger"
+                           style="width: 17px; vertical-align: middle; margin-right: 5px;"/>
+                      Swagger
+                    </v-btn>
+                  </router-link>
+                </template>
+
                 <template v-slot:item.environmentId="{ item }">
                   <v-column-link-env :env="item.environmentId"></v-column-link-env>
                 </template>
@@ -160,6 +161,12 @@ import Endpoints from "@/views/application-versions/_Endpoints.vue";
 interface ApplicationVersionDetails {
   id: string;
   applicationId: string;
+  applicationName: string;
+  version: string;
+  environmentId: string;
+  frameworkVersion: string;
+  toolsVersion: string;
+  createDate: string;
 }
 
 export default Vue.extend({
@@ -180,7 +187,7 @@ export default Vue.extend({
           filterable: false,
           groupable: false,
         },
-        {text: "Type", value: "type", groupable: true,  filterable: true,},
+        {text: "Type", value: "type", groupable: true, filterable: true,},
         {text: "Name", value: "name", groupable: false, filterable: true,},
         // {text: "Create date", value: "createDate", groupable: false, filterable: false},
       ]
